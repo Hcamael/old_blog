@@ -1,0 +1,850 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-nnn">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.0"/>
+
+
+    <meta name="description" content="Blog" />
+
+
+
+	<meta name="keywords" content="Python," />
+
+  <title> python之itertools模块 // Hc1m1 </title>
+</head>
+
+<body>
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Hc1m1</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+
+  <ul id="menu" class="menu">
+    
+      
+      <li class="menu-item menu-item-home">
+        <a href="/">
+          <i class="menu-item-icon icon-home"></i> <br />
+          首页
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-categories">
+        <a href="/categories">
+          <i class="menu-item-icon icon-categories"></i> <br />
+          分类
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          归档
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          标签
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-about">
+        <a href="/about">
+          <i class="menu-item-icon icon-about"></i> <br />
+          关于
+        </a>
+      </li>
+    
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+            
+          
+
+          <div id="posts" class="posts-expand">
+            
+  
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              python之itertools模块
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          
+            发表于 2015-04-02
+          
+        </span>
+
+        
+          
+            <span class="post-category">
+              &nbsp; | &nbsp; 分类于
+              
+                <a href="/categories/H-blog/">H-blog</a>
+
+                
+                
+
+              
+            </span>
+          
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    
+      <div class="post-body">
+
+        
+        
+
+        
+          <p><strong>分析了一下itertools模块</strong></p>
+<a id="more"></a>
+<h2 id="0x0_Infinite_Iterators_//无限迭代器">0x0 Infinite Iterators //无限迭代器</h2><h4 id="0x00">0x00</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">count</span><span class="params">(start=<span class="number">0</span>, step=<span class="number">1</span>)</span>:</span></span><br><span class="line">    <span class="comment"># count(10) --&gt; 10 11 12 13 14 ...</span></span><br><span class="line">    <span class="comment"># count(2.5, 0.5) -&gt; 2.5 3.0 3.5 ...</span></span><br><span class="line">    n = start</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        <span class="keyword">yield</span> n</span><br><span class="line">        n += step</span><br><span class="line">//接受两个参数，第一个是开始的数，第二个是步数。从start开始无限循环</span><br></pre></td></tr></table></figure>
+<h4 id="0x01">0x01</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cycle</span><span class="params">(iterable)</span>:</span></span><br><span class="line">    <span class="comment"># cycle('ABCD') --&gt; A B C D A B C D A B C D ...</span></span><br><span class="line">    saved = []</span><br><span class="line">    <span class="keyword">for</span> element <span class="keyword">in</span> iterable:</span><br><span class="line">        <span class="keyword">yield</span> element</span><br><span class="line">        saved.append(element)</span><br><span class="line">    <span class="keyword">while</span> saved:</span><br><span class="line">        <span class="keyword">for</span> element <span class="keyword">in</span> saved:</span><br><span class="line">              <span class="keyword">yield</span> element</span><br><span class="line">//给定的数开始进行无限循环</span><br></pre></td></tr></table></figure>
+<h4 id="0x02">0x02</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">repeat</span><span class="params">(object, times=None)</span>:</span></span><br><span class="line">    <span class="comment"># repeat(10, 3) --&gt; 10 10 10</span></span><br><span class="line">    <span class="keyword">if</span> times <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">            <span class="keyword">yield</span> object</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> xrange(times):</span><br><span class="line">            <span class="keyword">yield</span> object</span><br><span class="line">//第一个参数(object)循环第二个参数(times)次</span><br></pre></td></tr></table></figure>
+<h2 id="0x1_Iterators_terminating_on_the_shortest_input_sequence_//其他迭代器">0x1 Iterators terminating on the shortest input sequence //其他迭代器</h2><h4 id="0x10">0x10</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">chain</span><span class="params">(*iterables)</span>:</span></span><br><span class="line">    <span class="comment"># chain('ABC', 'DEF') --&gt; A B C D E F</span></span><br><span class="line">    <span class="keyword">for</span> it <span class="keyword">in</span> iterables:</span><br><span class="line">        <span class="keyword">for</span> element <span class="keyword">in</span> it:</span><br><span class="line">            <span class="keyword">yield</span> element</span><br><span class="line">//连接迭代</span><br></pre></td></tr></table></figure>
+<h4 id="0x11">0x11</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ifilter</span><span class="params">(predicate, iterable)</span>:</span></span><br><span class="line">    <span class="comment"># ifilter(lambda x: x%2, range(10)) --&gt; 1 3 5 7 9</span></span><br><span class="line">    <span class="keyword">if</span> predicate <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">        predicate = bool</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> iterable:</span><br><span class="line">        <span class="keyword">if</span> predicate(x):</span><br><span class="line">            <span class="keyword">yield</span> x</span><br><span class="line">//参数iterable依次代入到predicate中，如果返回非<span class="number">0</span>,则输出</span><br></pre></td></tr></table></figure>
+<h4 id="0x12">0x12</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ifilterfalse</span><span class="params">(predicate, iterable)</span>:</span></span><br><span class="line">    <span class="comment"># ifilterfalse(lambda x: x%2, range(10)) --&gt; 0 2 4 6 8</span></span><br><span class="line">    <span class="keyword">if</span> predicate <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">        predicate = bool</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> iterable:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> predicate(x):</span><br><span class="line">            <span class="keyword">yield</span> x</span><br><span class="line">//同上，不过是返回<span class="number">0</span>输出</span><br></pre></td></tr></table></figure>
+<h4 id="0x13">0x13</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">izip</span><span class="params">(*iterables)</span>:</span></span><br><span class="line">    <span class="comment"># izip('ABCD', 'xy') --&gt; Ax By</span></span><br><span class="line">    iterators = map(iter, iterables)</span><br><span class="line">    <span class="keyword">while</span> iterators:</span><br><span class="line">        <span class="keyword">yield</span> tuple(map(next, iterators))</span><br><span class="line">//了解了两个内置函数，map&amp;iter，</span><br><span class="line">//字符串组合，以迭代的形式返回</span><br></pre></td></tr></table></figure>
+<h4 id="0x14">0x14</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ZipExhausted</span><span class="params">(Exception)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">izip_longest</span><span class="params">(*args, **kwds)</span>:</span></span><br><span class="line">    <span class="comment"># izip_longest('ABCD', 'xy', fillvalue='-') --&gt; Ax By C- D-</span></span><br><span class="line">    fillvalue = kwds.get(<span class="string">'fillvalue'</span>)</span><br><span class="line">    counter = [len(args) - <span class="number">1</span>]</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sentinel</span><span class="params">()</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> counter[<span class="number">0</span>]:</span><br><span class="line">            <span class="keyword">raise</span> ZipExhausted</span><br><span class="line">        counter[<span class="number">0</span>] -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">yield</span> fillvalue</span><br><span class="line">    fillers = repeat(fillvalue)</span><br><span class="line">    iterators = [chain(it, sentinel(), fillers) <span class="keyword">for</span> it <span class="keyword">in</span> args]</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">while</span> iterators:</span><br><span class="line">            <span class="keyword">yield</span> tuple(map(next, iterators))</span><br><span class="line">    <span class="keyword">except</span> ZipExhausted:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">//同上，区别在于多了一个fillvalue参数</span><br></pre></td></tr></table></figure>
+<h4 id="0x15">0x15</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compress</span><span class="params">(data, selectors)</span>:</span></span><br><span class="line">    <span class="comment"># compress('ABCDEF', [1,0,1,0,1,1]) --&gt; A C E F</span></span><br><span class="line">    <span class="keyword">return</span> (d <span class="keyword">for</span> d, s <span class="keyword">in</span> izip(data, selectors) <span class="keyword">if</span> s)</span><br><span class="line">//date参数为字符串，selectors参数为控制参数，与date相对应，如果为非<span class="number">0</span>则输出，为<span class="number">0</span>则不输出</span><br></pre></td></tr></table></figure>
+<h4 id="0x16">0x16</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dropwhile</span><span class="params">(predicate, iterable)</span>:</span></span><br><span class="line">    <span class="comment"># dropwhile(lambda x: x&lt;5, [1,4,6,4,1]) --&gt; 6 4 1</span></span><br><span class="line">    iterable = iter(iterable)</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> iterable:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> predicate(x):</span><br><span class="line">            <span class="keyword">yield</span> x</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> iterable:</span><br><span class="line">        <span class="keyword">yield</span> x</span><br><span class="line">//iterable参数依次代入到predicate中，直到返回false才开始返回iterable</span><br></pre></td></tr></table></figure>
+<h4 id="0x17">0x17</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">takewhile</span><span class="params">(predicate, iterable)</span>:</span></span><br><span class="line">    <span class="comment"># takewhile(lambda x: x&lt;5, [1,4,6,4,1]) --&gt; 1 4</span></span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> iterable:</span><br><span class="line">        <span class="keyword">if</span> predicate(x):</span><br><span class="line">            <span class="keyword">yield</span> x</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">//把iterable传入predicate，直到返回<span class="number">0</span>才不返回值</span><br></pre></td></tr></table></figure>
+<h4 id="0x18">0x18</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">islice</span><span class="params">(iterable, *args)</span>:</span></span><br><span class="line">    <span class="comment"># islice('ABCDEFG', 2) --&gt; A B</span></span><br><span class="line">    <span class="comment"># islice('ABCDEFG', 2, 4) --&gt; C D</span></span><br><span class="line">    <span class="comment"># islice('ABCDEFG', 2, None) --&gt; C D E F G</span></span><br><span class="line">    <span class="comment"># islice('ABCDEFG', 0, None, 2) --&gt; A C E G</span></span><br><span class="line">    s = slice(*args)</span><br><span class="line">    it = iter(xrange(s.start <span class="keyword">or</span> <span class="number">0</span>, s.stop <span class="keyword">or</span> sys.maxint, s.step <span class="keyword">or</span> <span class="number">1</span>))</span><br><span class="line">    nexti = next(it)</span><br><span class="line">    <span class="keyword">for</span> i, element <span class="keyword">in</span> enumerate(iterable):</span><br><span class="line">        <span class="keyword">if</span> i == nexti:</span><br><span class="line">            <span class="keyword">yield</span> element</span><br><span class="line">            nexti = next(it)</span><br><span class="line">//iterable参数为迭代变量，args输入一个，表示在哪停止(stop)，两个第一个是开始(start)，第二个是停止(stop)，三个参数分别是开始，停止，步数。。。因为这个函数中用了slice内置函数</span><br></pre></td></tr></table></figure>
+<h4 id="0x19">0x19</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">imap</span><span class="params">(function, *iterables)</span>:</span></span><br><span class="line">    <span class="comment"># imap(pow, (2,3,10), (5,2,3)) --&gt; 32 9 1000</span></span><br><span class="line">    iterables = map(iter, iterables)</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        args = [next(it) <span class="keyword">for</span> it <span class="keyword">in</span> iterables]</span><br><span class="line">        <span class="keyword">if</span> function <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">            <span class="keyword">yield</span> tuple(args)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">yield</span> function(*args)</span><br><span class="line">//第一个参数是输入一个函数，iterables为传入这个函数的参数。。</span><br></pre></td></tr></table></figure>
+<h4 id="0x1A">0x1A</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">starmap</span><span class="params">(function, iterable)</span>:</span></span><br><span class="line">    <span class="comment"># starmap(pow, [(2,5), (3,2), (10,3)]) --&gt; 32 9 1000</span></span><br><span class="line">    <span class="keyword">for</span> args <span class="keyword">in</span> iterable:</span><br><span class="line">        <span class="keyword">yield</span> function(*args)</span><br><span class="line">//作用同上，，不通之处在于传入参数的格式，具体看上面的示例</span><br></pre></td></tr></table></figure>
+<h4 id="0x1B">0x1B</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">tee</span><span class="params">(iterable, n=<span class="number">2</span>)</span>:</span></span><br><span class="line">    it = iter(iterable)</span><br><span class="line">    deques = [collections.deque() <span class="keyword">for</span> i <span class="keyword">in</span> range(n)]</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">gen</span><span class="params">(mydeque)</span>:</span></span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> mydeque:             <span class="comment"># when the local deque is empty</span></span><br><span class="line">                newval = next(it)       <span class="comment"># fetch a new value and</span></span><br><span class="line">                <span class="keyword">for</span> d <span class="keyword">in</span> deques:        <span class="comment"># load it to all the deques</span></span><br><span class="line">                    d.append(newval)</span><br><span class="line">            <span class="keyword">yield</span> mydeque.popleft()</span><br><span class="line">    <span class="keyword">return</span> tuple(gen(d) <span class="keyword">for</span> d <span class="keyword">in</span> deques)</span><br><span class="line">//返回n个iterble迭代。。默认n=<span class="number">2</span>。。</span><br></pre></td></tr></table></figure>
+<h4 id="0x1C">0x1C</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">groupby</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="comment"># [k for k, g in groupby('AAAABBBCCDAABBB')] --&gt; A B C D A B</span></span><br><span class="line">    <span class="comment"># [list(g) for k, g in groupby('AAAABBBCCD')] --&gt; AAAA BBB CC D</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, iterable, key=None)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> key <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">            key = <span class="keyword">lambda</span> x: x</span><br><span class="line">        self.keyfunc = key</span><br><span class="line">        self.it = iter(iterable)</span><br><span class="line">        self.tgtkey = self.currkey = self.currvalue = object()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">next</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">while</span> self.currkey == self.tgtkey:</span><br><span class="line">            self.currvalue = next(self.it)    <span class="comment"># Exit on StopIteration</span></span><br><span class="line">            self.currkey = self.keyfunc(self.currvalue)</span><br><span class="line">        self.tgtkey = self.currkey</span><br><span class="line">        <span class="keyword">return</span> (self.currkey, self._grouper(self.tgtkey))</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_grouper</span><span class="params">(self, tgtkey)</span>:</span></span><br><span class="line">        <span class="keyword">while</span> self.currkey == tgtkey:</span><br><span class="line">            <span class="keyword">yield</span> self.currvalue</span><br><span class="line">            self.currvalue = next(self.it)    <span class="comment"># Exit on StopIteration</span></span><br><span class="line">            self.currkey = self.keyfunc(self.currvalue)</span><br><span class="line">//把这放最后是因为不是很理解。。。</span><br></pre></td></tr></table></figure>
+<h2 id="0x2_Combinatoric_generators_//组合迭代器">0x2 Combinatoric generators //组合迭代器</h2><h4 id="0x20">0x20</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">product</span><span class="params">(*args, **kwds)</span>:</span></span><br><span class="line">    <span class="comment"># product('ABCD', 'xy') --&gt; Ax Ay Bx By Cx Cy Dx Dy</span></span><br><span class="line">    <span class="comment"># product(range(2), repeat=3) --&gt; 000 001 010 011 100 101 110 111</span></span><br><span class="line">    pools = map(tuple, args) * kwds.get(<span class="string">'repeat'</span>, <span class="number">1</span>)</span><br><span class="line">    result = [[]]</span><br><span class="line">    <span class="keyword">for</span> pool <span class="keyword">in</span> pools:</span><br><span class="line">        result = [x+[y] <span class="keyword">for</span> x <span class="keyword">in</span> result <span class="keyword">for</span> y <span class="keyword">in</span> pool]</span><br><span class="line">    <span class="keyword">for</span> prod <span class="keyword">in</span> result:</span><br><span class="line">        <span class="keyword">yield</span> tuple(prod)</span><br><span class="line">//args参数进行C(概率里面的那个C)组合，kwds参数中的repeat表示组合后的位数</span><br></pre></td></tr></table></figure>
+<h4 id="0x21">0x21</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">permutations</span><span class="params">(iterable, r=None)</span>:</span></span><br><span class="line">    <span class="comment"># permutations('ABCD', 2) --&gt; AB AC AD BA BC BD CA CB CD DA DB DC</span></span><br><span class="line">    <span class="comment"># permutations(range(3)) --&gt; 012 021 102 120 201 210</span></span><br><span class="line">    pool = tuple(iterable)</span><br><span class="line">    n = len(pool)</span><br><span class="line">    r = n <span class="keyword">if</span> r <span class="keyword">is</span> <span class="keyword">None</span> <span class="keyword">else</span> r</span><br><span class="line">    <span class="keyword">if</span> r &gt; n:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    indices = range(n)</span><br><span class="line">    cycles = range(n, n-r, -<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">yield</span> tuple(pool[i] <span class="keyword">for</span> i <span class="keyword">in</span> indices[:r])</span><br><span class="line">    <span class="keyword">while</span> n:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> reversed(range(r)):</span><br><span class="line">            cycles[i] -= <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> cycles[i] == <span class="number">0</span>:</span><br><span class="line">                indices[i:] = indices[i+<span class="number">1</span>:] + indices[i:i+<span class="number">1</span>]</span><br><span class="line">                cycles[i] = n - i</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                j = cycles[i]</span><br><span class="line">                indices[i], indices[-j] = indices[-j], indices[i]</span><br><span class="line">                <span class="keyword">yield</span> tuple(pool[i] <span class="keyword">for</span> i <span class="keyword">in</span> indices[:r])</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">//进行A(同样是概率中的A)组合，传参和上面的不同，这个看例子就知道了</span><br></pre></td></tr></table></figure>
+<h4 id="0x22">0x22</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">combinations</span><span class="params">(iterable, r)</span>:</span></span><br><span class="line">    <span class="comment"># combinations('ABCD', 2) --&gt; AB AC AD BC BD CD</span></span><br><span class="line">    <span class="comment"># combinations(range(4), 3) --&gt; 012 013 023 123</span></span><br><span class="line">    pool = tuple(iterable)</span><br><span class="line">    n = len(pool)</span><br><span class="line">    <span class="keyword">if</span> r &gt; n:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    indices = range(r)</span><br><span class="line">    <span class="keyword">yield</span> tuple(pool[i] <span class="keyword">for</span> i <span class="keyword">in</span> indices)</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> reversed(range(r)):</span><br><span class="line">            <span class="keyword">if</span> indices[i] != i + n - r:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        indices[i] += <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(i+<span class="number">1</span>, r):</span><br><span class="line">            indices[j] = indices[j-<span class="number">1</span>] + <span class="number">1</span></span><br><span class="line">        <span class="keyword">yield</span> tuple(pool[i] <span class="keyword">for</span> i <span class="keyword">in</span> indices)</span><br><span class="line">//进行C组合，其他同上</span><br></pre></td></tr></table></figure>
+<h4 id="0x23">0x23</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">combinations_with_replacement</span><span class="params">(iterable, r)</span>:</span></span><br><span class="line">    <span class="comment"># combinations_with_replacement('ABC', 2) --&gt; AA AB AC BB BC CC</span></span><br><span class="line">    pool = tuple(iterable)</span><br><span class="line">    n = len(pool)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> n <span class="keyword">and</span> r:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    indices = [<span class="number">0</span>] * r</span><br><span class="line">    <span class="keyword">yield</span> tuple(pool[i] <span class="keyword">for</span> i <span class="keyword">in</span> indices)</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> reversed(range(r)):</span><br><span class="line">            <span class="keyword">if</span> indices[i] != n - <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        indices[i:] = [indices[i] + <span class="number">1</span>] * (r - i)</span><br><span class="line">        <span class="keyword">yield</span> tuple(pool[i] <span class="keyword">for</span> i <span class="keyword">in</span> indices)</span><br><span class="line">//同上，不过相同的会组合</span><br></pre></td></tr></table></figure>
+        
+      </div>
+    
+
+    
+      <div class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Python/">
+                #Python
+              </a>
+            
+          </div>
+        
+
+        
+          <div class="post-nav">
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2015/04/05/0x1F/">python 查课表</a>
+              
+            </div>
+
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2015/03/20/0x1D/">python之多线程</a>
+              
+            </div>
+          </div>
+        
+
+        
+        
+      </div>
+    
+  </div>
+
+
+
+  
+    <div class="comments" id="comments">
+      
+    </div>
+  
+
+          </div>
+
+          
+        </div>
+
+        
+<div class="sidebar-toggle">
+  <div class="sidebar-toggle-line-wrap">
+    <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+    <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+    <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+  </div>
+</div>
+
+<div id="sidebar" class="sidebar">
+  <div class="sidebar-inner">
+
+    
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview">
+          站点概览
+        </li>
+      </ul>
+    
+
+    <div class="site-overview">
+      <div class="site-author motion-element">
+        <img class="site-author-image" src="/images/default_avatar.jpg" alt="Hc1m1" />
+        <p class="site-author-name">Hc1m1</p>
+      </div>
+      <p class="site-description motion-element">Blog</p>
+      <div class="site-state motion-element">
+        <div class="site-state-item site-state-posts">
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">日志</span>
+        </div>
+        <div class="site-state-item site-state-tags">
+            <span class="site-state-item-count">20</span>
+            <span class="site-state-item-name">标签</span>
+        </div>
+        <div class="site-state-item site-state-pages">
+            <span class="site-state-item-count">8</span>
+            <span class="site-state-item-name">页面</span>
+        </div>
+      </div>
+
+      
+        <div class="feed-link motion-element">
+          <a href="/atom.xml">
+            <i class="menu-item-icon icon-feed"></i>
+            RSS
+          </a>
+        </div>
+      
+
+      <div class="links-of-author motion-element">
+        
+      </div>
+
+      
+      
+
+    </div>
+
+    
+      <div class="post-toc-wrap sidebar-panel-active">
+        <div class="post-toc-indicator-top post-toc-indicator"></div>
+        <div class="post-toc">
+          
+          
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x0_Infinite_Iterators_//无限迭代器"><span class="nav-number">1.</span> <span class="nav-text">0x0 Infinite Iterators //无限迭代器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#0x00"><span class="nav-number">1.0.1.</span> <span class="nav-text">0x00</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x01"><span class="nav-number">1.0.2.</span> <span class="nav-text">0x01</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x02"><span class="nav-number">1.0.3.</span> <span class="nav-text">0x02</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x1_Iterators_terminating_on_the_shortest_input_sequence_//其他迭代器"><span class="nav-number">2.</span> <span class="nav-text">0x1 Iterators terminating on the shortest input sequence //其他迭代器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#0x10"><span class="nav-number">2.0.1.</span> <span class="nav-text">0x10</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x11"><span class="nav-number">2.0.2.</span> <span class="nav-text">0x11</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x12"><span class="nav-number">2.0.3.</span> <span class="nav-text">0x12</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x13"><span class="nav-number">2.0.4.</span> <span class="nav-text">0x13</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x14"><span class="nav-number">2.0.5.</span> <span class="nav-text">0x14</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x15"><span class="nav-number">2.0.6.</span> <span class="nav-text">0x15</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x16"><span class="nav-number">2.0.7.</span> <span class="nav-text">0x16</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x17"><span class="nav-number">2.0.8.</span> <span class="nav-text">0x17</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x18"><span class="nav-number">2.0.9.</span> <span class="nav-text">0x18</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x19"><span class="nav-number">2.0.10.</span> <span class="nav-text">0x19</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x1A"><span class="nav-number">2.0.11.</span> <span class="nav-text">0x1A</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x1B"><span class="nav-number">2.0.12.</span> <span class="nav-text">0x1B</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x1C"><span class="nav-number">2.0.13.</span> <span class="nav-text">0x1C</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x2_Combinatoric_generators_//组合迭代器"><span class="nav-number">3.</span> <span class="nav-text">0x2 Combinatoric generators //组合迭代器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#0x20"><span class="nav-number">3.0.1.</span> <span class="nav-text">0x20</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x21"><span class="nav-number">3.0.2.</span> <span class="nav-text">0x21</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x22"><span class="nav-number">3.0.3.</span> <span class="nav-text">0x22</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x23"><span class="nav-number">3.0.4.</span> <span class="nav-text">0x23</span></a></li></ol></li></ol></li></ol></div>
+          
+        </div>
+        <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+      </div>
+    
+
+  </div>
+</div>
+
+
+      </div>
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp; 
+  2015
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">Hc1m1</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $(".fancybox").fancybox();
+    });
+  </script>
+
+  <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+</script>
+
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" id="motion.global">
+  $(document).ready(function () {
+    var body = $('body');
+    var isSidebarVisible = false;
+    var sidebarToggle = $('.sidebar-toggle');
+    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
+    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
+    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
+    var sidebar = $('.sidebar');
+
+    var SIDEBAR_WIDTH = '320px';
+    var SIDEBAR_DISPLAY_DURATION = 300;
+
+    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
+
+    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
+    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
+
+    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
+    var sidebarToogleLine2ndStatusClose = {opacity: 0};
+
+    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
+    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
+
+    LogoAndMenuMotion();
+    sidebatToggleMotion();
+    postsListMotion();
+    backToTopMotion();
+
+
+    $(document)
+      .on('sidebar.isShowing', function () {
+        isDesktop() && body.velocity(
+          {paddingRight: SIDEBAR_WIDTH},
+          SIDEBAR_DISPLAY_DURATION
+        );
+        sidebarContentMotion();
+      })
+      .on('sidebar.isHiding', function () {});
+
+    function LogoAndMenuMotion() {
+      $.Velocity.RunSequence([
+        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
+        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
+        
+        { e: $('.logo-line-before i'), p: { translateX: "100%" }, o: { duration: 500, sequenceQueue: false } },
+        { e: $('.logo-line-after i'), p: { translateX: "-100%" }, o: { duration: 500, sequenceQueue: false } },
+        
+        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
+      ]);
+      $('.menu-item').velocity('transition.slideDownIn', {display: null});
+    }
+
+
+    function backToTopMotion () {
+      var b2top = $('.back-to-top');
+      b2top.on('click', function () {
+        body.velocity('scroll');
+      });
+    }
+
+    function sidebarShowMotion () {
+
+      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
+      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
+      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
+
+      sidebar.velocity({width: SIDEBAR_WIDTH}, {
+        display: 'block',
+        duration: SIDEBAR_DISPLAY_DURATION,
+        complete: function () {
+          sidebar.addClass('sidebar-active');
+          sidebar.trigger('sidebar.didShow');
+        }
+      });
+      sidebar.trigger('sidebar.isShowing');
+    }
+
+    function sidebarHideMotion () {
+      isDesktop() && body.velocity({paddingRight: 0});
+      sidebar.velocity('reverse');
+
+      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
+      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
+      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
+
+      sidebar.removeClass('sidebar-active');
+      sidebar.trigger('sidebar.isHiding');
+    };
+
+    function sidebarContentMotion () {
+      $('.sidebar .motion-element').velocity(
+        'transition.slideRightIn',
+        {stagger: 50, drag: true}
+      );
+    }
+
+    function postsListMotion () {
+      var postMotionOptions = window.postMotionOptions || {stagger: 300, drag: true};
+      $('.post').velocity('transition.slideDownIn', postMotionOptions);
+    }
+
+    function sidebatToggleMotion () {
+      sidebarToggle.on('click', function () {
+        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
+        isSidebarVisible = !isSidebarVisible;
+      });
+
+      sidebarToggle.hover(function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
+      }, function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
+      });
+    }
+  });
+
+</script>
+
+
+
+
+
+  
+  
+<script type="text/javascript" id="bootstrap.scrollspy.custom">
+  /* ========================================================================
+  * Bootstrap: scrollspy.js v3.3.2
+  * http://getbootstrap.com/javascript/#scrollspy
+  * ========================================================================
+  * Copyright 2011-2015 Twitter, Inc.
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  * ======================================================================== */
+
+  /**
+   * Custom by iissnan
+   *
+   * - Add a `clear.bs.scrollspy` event.
+   * - Esacpe targets selector.
+   */
+
+
+  +function ($) {
+    'use strict';
+
+    // SCROLLSPY CLASS DEFINITION
+    // ==========================
+
+    function ScrollSpy(element, options) {
+      this.$body          = $(document.body)
+      this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+      this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+      this.selector       = (this.options.target || '') + ' .nav li > a'
+      this.offsets        = []
+      this.targets        = []
+      this.activeTarget   = null
+      this.scrollHeight   = 0
+
+      this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+      this.refresh()
+      this.process()
+    }
+
+    ScrollSpy.VERSION  = '3.3.2'
+
+    ScrollSpy.DEFAULTS = {
+      offset: 10
+    }
+
+    ScrollSpy.prototype.getScrollHeight = function () {
+      return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+    }
+
+    ScrollSpy.prototype.refresh = function () {
+      var that          = this
+      var offsetMethod  = 'offset'
+      var offsetBase    = 0
+
+      this.offsets      = []
+      this.targets      = []
+      this.scrollHeight = this.getScrollHeight()
+
+      if (!$.isWindow(this.$scrollElement[0])) {
+        offsetMethod = 'position'
+        offsetBase   = this.$scrollElement.scrollTop()
+      }
+
+      this.$body
+        .find(this.selector)
+        .map(function () {
+          var $el   = $(this)
+          var href  = $el.data('target') || $el.attr('href')
+          var $href = /^#./.test(href) && $(escapeSelector(href)) // Need to escape selector.
+
+          return ($href
+            && $href.length
+            && $href.is(':visible')
+            && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+        })
+        .sort(function (a, b) { return a[0] - b[0] })
+        .each(function () {
+          that.offsets.push(this[0])
+          that.targets.push(this[1])
+        })
+
+
+    }
+
+    ScrollSpy.prototype.process = function () {
+      var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+      var scrollHeight = this.getScrollHeight()
+      var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+      var offsets      = this.offsets
+      var targets      = this.targets
+      var activeTarget = this.activeTarget
+      var i
+
+      if (this.scrollHeight != scrollHeight) {
+        this.refresh()
+      }
+
+      if (scrollTop >= maxScroll) {
+        return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+      }
+
+      if (activeTarget && scrollTop < offsets[0]) {
+        $(this.selector).trigger('clear.bs.scrollspy')  // Add a custom event.
+        this.activeTarget = null
+        return this.clear()
+      }
+
+      for (i = offsets.length; i--;) {
+        activeTarget != targets[i]
+          && scrollTop >= offsets[i]
+          && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+          && this.activate(targets[i])
+      }
+    }
+
+    ScrollSpy.prototype.activate = function (target) {
+      this.activeTarget = target
+
+      this.clear()
+
+      var selector = this.selector +
+        '[data-target="' + target + '"],' +
+        this.selector + '[href="' + target + '"]'
+
+      var active = $(selector)
+        .parents('li')
+        .addClass('active')
+
+      if (active.parent('.dropdown-menu').length) {
+        active = active
+          .closest('li.dropdown')
+          .addClass('active')
+      }
+
+      active.trigger('activate.bs.scrollspy')
+    }
+
+    ScrollSpy.prototype.clear = function () {
+      $(this.selector)
+        .parentsUntil(this.options.target, '.active')
+        .removeClass('active')
+    }
+
+
+    // SCROLLSPY PLUGIN DEFINITION
+    // ===========================
+
+    function Plugin(option) {
+      return this.each(function () {
+        var $this   = $(this)
+        var data    = $this.data('bs.scrollspy')
+        var options = typeof option == 'object' && option
+
+        if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+        if (typeof option == 'string') data[option]()
+      })
+    }
+
+    var old = $.fn.scrollspy
+
+    $.fn.scrollspy             = Plugin
+    $.fn.scrollspy.Constructor = ScrollSpy
+
+
+    // SCROLLSPY NO CONFLICT
+    // =====================
+
+    $.fn.scrollspy.noConflict = function () {
+      $.fn.scrollspy = old
+      return this
+    }
+
+
+    // SCROLLSPY DATA-API
+    // ==================
+
+    $(window).on('load.bs.scrollspy.data-api', function () {
+      $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this)
+        Plugin.call($spy, $spy.data())
+      })
+    })
+
+  }(jQuery);
+</script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0 && isDesktop()) {
+        setTimeout(function () {
+          $('.sidebar-toggle').trigger('click');
+        }, 800);
+      }
+    });
+  </script>
+
+
+
+
+  
+
+  
+  
+
+  
+
+
+  
+</body>
+</html>

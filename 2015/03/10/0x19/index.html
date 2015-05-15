@@ -1,0 +1,831 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-nnn">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.0"/>
+
+
+    <meta name="description" content="Blog" />
+
+
+
+	<meta name="keywords" content="Python," />
+
+  <title> python -- socket // Hc1m1 </title>
+</head>
+
+<body>
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Hc1m1</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+
+  <ul id="menu" class="menu">
+    
+      
+      <li class="menu-item menu-item-home">
+        <a href="/">
+          <i class="menu-item-icon icon-home"></i> <br />
+          首页
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-categories">
+        <a href="/categories">
+          <i class="menu-item-icon icon-categories"></i> <br />
+          分类
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          归档
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          标签
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-about">
+        <a href="/about">
+          <i class="menu-item-icon icon-about"></i> <br />
+          关于
+        </a>
+      </li>
+    
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+            
+          
+
+          <div id="posts" class="posts-expand">
+            
+  
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              python -- socket
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          
+            发表于 2015-03-10
+          
+        </span>
+
+        
+          
+            <span class="post-category">
+              &nbsp; | &nbsp; 分类于
+              
+                <a href="/categories/H-blog/">H-blog</a>
+
+                
+                
+
+              
+            </span>
+          
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    
+      <div class="post-body">
+
+        
+        
+
+        
+          <p>时常翻译些python英文文档，，一方面学习python，一方面加强自己英语水平．．．<br><a id="more"></a></p>
+<p><strong>socket是应用层与传输层的编程接口～</strong></p>
+<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br></pre></td><td class="code"><pre><span class="line">Help <span class="keyword">on</span> <span class="keyword">class</span> _socketobject <span class="keyword">in</span> <span class="keyword">module</span> socket:</span><br><span class="line"><span class="preprocessor">#在模块socket中_socketobject类帮助文档</span></span><br><span class="line"><span class="keyword">class</span> _socketobject(__builtin__.<span class="built_in">object</span>)</span><br><span class="line">	｜socket([family[, type[, proto]]]) -&gt; socket <span class="built_in">object</span> <span class="preprocessor">#socket对象，有三个参数</span></span><br><span class="line">	｜</span><br><span class="line">	｜Open a socket <span class="keyword">of</span> the given type.  The family argument specifies the</span><br><span class="line">	｜address family; it defaults <span class="keyword">to</span> AF_INET.  The type argument specifies</span><br><span class="line">	｜whether this <span class="keyword">is</span> a stream (SOCK_STREAM, this <span class="keyword">is</span> the <span class="keyword">default</span>)</span><br><span class="line">	｜<span class="keyword">or</span> datagram (SOCK_DGRAM) socket.  The protocol argument defaults <span class="keyword">to</span> <span class="number">0</span>,</span><br><span class="line">	｜specifying the <span class="keyword">default</span> protocol.  Keyword arguments are accepted.</span><br><span class="line">	｜<span class="preprocessor">#作为一个socket类型打开. family参数指定了地址族,默认值为AF_INET. type 参数指定了socket是数据流(SOCK_STREAM,默认值)还是数据报(SOCK_DGRAM). proto参数默认值为0, 指定了默认协议，关键词参数是可选的 </span></span><br><span class="line">	｜<span class="preprocessor">#PS:书上说family参数指定的是通信类型，我认为其实就是指定网络层协议，默认值AF_INET表示的是IPv4协议．．．type指定的是协议家族，我认为是指定传输层协议，数据流表示的是TCP协议，数据报表示的是UDP协议．．．</span></span><br><span class="line">	｜A socket <span class="built_in">object</span> represents one endpoint <span class="keyword">of</span> a network connection.</span><br><span class="line">	｜<span class="preprocessor">#一个socket对象代表一个网络连接的端点</span></span><br><span class="line">	｜Methods <span class="keyword">of</span> socket objects (keyword arguments <span class="keyword">not</span> allowed):</span><br><span class="line">	｜<span class="preprocessor">#下面为的socket对象的方法（关键词参数不被允许使用）</span></span><br><span class="line">	｜accept() -- accept a connection, returning <span class="keyword">new</span> socket <span class="keyword">and</span> client address <span class="preprocessor">#　等待接受一个新的连接，返回一个新的socket对象和客户端地址　都是在服务端使用该方法．</span></span><br><span class="line">　	｜bind(addr) -- bind the socket <span class="keyword">to</span> a local address　<span class="preprocessor">#绑定一个本地地址到socket，一般是在服务端使用，（也可以绑定端口，此为可选项）</span></span><br><span class="line">	｜close() -- close the socket　<span class="preprocessor">#关闭socket</span></span><br><span class="line">	｜connect(addr) -- connect the socket <span class="keyword">to</span> a remote address <span class="preprocessor">#socket连接到远程地址</span></span><br><span class="line">	｜connect_ex(addr) -- connect, <span class="keyword">return</span> an <span class="keyword">error</span> code instead <span class="keyword">of</span> an exception</span><br><span class="line">	｜dup() -- <span class="keyword">return</span> a <span class="keyword">new</span> socket <span class="built_in">object</span> identical <span class="keyword">to</span> the current one [*]</span><br><span class="line">	｜fileno() -- <span class="keyword">return</span> underlying file descriptor </span><br><span class="line">	｜getpeername() -- <span class="keyword">return</span> remote address [*]　<span class="preprocessor">#返回一个远程地址</span></span><br><span class="line">	｜getsockname() -- <span class="keyword">return</span> local address　<span class="preprocessor">#返回一个本地地址</span></span><br><span class="line">	｜getsockopt(level, optname[, buflen]) -- <span class="keyword">get</span> socket options</span><br><span class="line">	｜gettimeout() -- <span class="keyword">return</span> timeout <span class="keyword">or</span> None</span><br><span class="line">	｜listen(n) -- start listening <span class="keyword">for</span> incoming connections　<span class="preprocessor">#开始监听，用于服务器，传入一个参数n，指定了最大连接数</span></span><br><span class="line">	｜makefile([mode, [bufsize]]) -- <span class="keyword">return</span> a file <span class="built_in">object</span> <span class="keyword">for</span> the socket [*]　<span class="preprocessor">#返回一个文件对象</span></span><br><span class="line">	｜recv(buflen[, flags]) -- receive data　<span class="preprocessor">#接收数据</span></span><br><span class="line">	｜recv_into(buffer[, nbytes[, flags]]) -- receive datainto a buffer)</span><br><span class="line">	｜recvfrom(buflen[, flags]) -- receive data <span class="keyword">and</span> sender＇s address</span><br><span class="line">	｜recvfrom_into(buffer[, nbytes, [, flags])</span><br><span class="line">	｜		-- receive data <span class="keyword">and</span> sender＇s address (<span class="keyword">into</span> a buffer)</span><br><span class="line">	｜sendall(data[, flags]) -- send all data　<span class="preprocessor">#发送所以的数据</span></span><br><span class="line">	｜send(data[, flags]) -- send data, may <span class="keyword">not</span> send all <span class="keyword">of</span> it</span><br><span class="line">	｜sendto(data[, flags], addr) -- send data <span class="keyword">to</span> a given address</span><br><span class="line">	｜setblocking(<span class="number">0</span> | <span class="number">1</span>) -- <span class="keyword">set</span> <span class="keyword">or</span> clear the blocking I/O flag</span><br><span class="line">	｜setsockopt(level, optname, value) -- <span class="keyword">set</span> socket options</span><br><span class="line">	｜settimeout(None | float) -- <span class="keyword">set</span> <span class="keyword">or</span> clear the timeout</span><br><span class="line">	｜shutdown(how) -- shut down traffic <span class="keyword">in</span> one <span class="keyword">or</span> both directions</span><br><span class="line">	｜</span><br><span class="line">	｜	[*] <span class="keyword">not</span> available <span class="keyword">on</span> all platforms!　<span class="preprocessor">#出现[*]表示改方法不适用于所有平台</span></span><br><span class="line">	｜Methods defined here:</span><br><span class="line">	｜<span class="preprocessor">#下面是上面方法的定义</span></span><br><span class="line">	｜__init__(self, family=<span class="number">2</span>, type=<span class="number">1</span>, proto=<span class="number">0</span>, _sock=None)</span><br><span class="line">	｜accept(self)</span><br><span class="line">	｜		accept() -&gt; (socket <span class="built_in">object</span>, address info)</span><br><span class="line">	｜</span><br><span class="line">	｜		Wait <span class="keyword">for</span> an incoming connection.  <span class="keyword">Return</span> a <span class="keyword">new</span> socket representing the</span><br><span class="line">	｜		connection, <span class="keyword">and</span> the address <span class="keyword">of</span> the client.  <span class="keyword">For</span> IP sockets, the address</span><br><span class="line">	｜		info <span class="keyword">is</span> a pair (hostaddr, port).</span><br><span class="line">	｜  </span><br><span class="line">	｜bind(...)</span><br><span class="line">	｜		bind(address)</span><br><span class="line">	｜</span><br><span class="line">	｜		Bind the socket <span class="keyword">to</span> a local address.  <span class="keyword">For</span> IP sockets, the address <span class="keyword">is</span> a</span><br><span class="line">	｜		pair (host, port); the host must refer <span class="keyword">to</span> the local host. <span class="keyword">For</span> raw packet</span><br><span class="line">	｜		sockets the address <span class="keyword">is</span> a tuple (ifname, proto [,pkttype [,hatype]])</span><br><span class="line">	｜ </span><br><span class="line">	｜close(self, _closedsocket=&lt;<span class="keyword">class</span> <span class="comment">'socket._closedsocket'&gt;,_delegate_methods=('recv', 'recvfrom', 'recv_into', 'recvfrom_into', 'send', 'sendto'), setattr=<span class="xmlDocTag">&lt;built-in function setattr&gt;</span>)</span></span><br><span class="line">	｜		close()</span><br><span class="line">	｜		Close the socket.  It cannot be used after this <span class="keyword">call</span>.</span><br><span class="line">	｜connect(...)</span><br><span class="line">	｜		connect(address)</span><br><span class="line">	｜ </span><br><span class="line">	｜		Connect the socket <span class="keyword">to</span> a remote address.  <span class="keyword">For</span> IP sockets, the address</span><br><span class="line">	｜		<span class="keyword">is</span> a pair (host, port).</span><br><span class="line">	｜</span><br><span class="line">	｜connect_ex(...)</span><br><span class="line">	｜		connect_ex(address) -&gt; errno</span><br><span class="line">	｜</span><br><span class="line">	｜		This <span class="keyword">is</span> <span class="keyword">like</span> connect(address), but returns an <span class="keyword">error</span> code (the errno value)</span><br><span class="line">	｜		instead <span class="keyword">of</span> raising an exception <span class="keyword">when</span> an <span class="keyword">error</span> occurs.</span><br><span class="line">	｜</span><br><span class="line">	｜dup(self)</span><br><span class="line">	｜		dup() -&gt; socket <span class="built_in">object</span></span><br><span class="line">	｜</span><br><span class="line">	｜		<span class="keyword">Return</span> a <span class="keyword">new</span> socket <span class="built_in">object</span> connected <span class="keyword">to</span> the same system resource.</span><br><span class="line">	｜</span><br><span class="line">	｜fileno(...)</span><br><span class="line">	｜		fileno() -&gt; <span class="built_in">integer</span></span><br><span class="line">	｜		<span class="keyword">Return</span> the <span class="built_in">integer</span> file descriptor <span class="keyword">of</span> the socket.</span><br><span class="line">	｜</span><br><span class="line">	｜getpeername(...)</span><br><span class="line">	｜		getpeername() -&gt; address info</span><br><span class="line">	｜</span><br><span class="line">	｜		<span class="keyword">Return</span> the address <span class="keyword">of</span> the remote endpoint.  <span class="keyword">For</span> IP sockets, the address</span><br><span class="line">	｜		info <span class="keyword">is</span> a pair (hostaddr, port).</span><br><span class="line">	｜</span><br><span class="line">	｜getsockname(...)</span><br><span class="line">	｜		getsockname() -&gt; address info</span><br><span class="line">	｜ </span><br><span class="line">	｜		<span class="keyword">Return</span> the address <span class="keyword">of</span> the local endpoint.  <span class="keyword">For</span> IP sockets, the address</span><br><span class="line">	｜		info <span class="keyword">is</span> a pair (hostaddr, port).</span><br><span class="line">	｜</span><br><span class="line">	｜getsockopt(...)</span><br><span class="line">	｜		getsockopt(level, <span class="keyword">option</span>[, buffersize]) -&gt; value</span><br><span class="line">	｜		<span class="keyword">Get</span> a socket <span class="keyword">option</span>.  See the Unix manual <span class="keyword">for</span> level <span class="keyword">and</span> <span class="keyword">option</span>.</span><br><span class="line">	｜		<span class="keyword">If</span> a nonzero buffersize argument <span class="keyword">is</span> given, the <span class="keyword">return</span> value <span class="keyword">is</span> a</span><br><span class="line">	｜		<span class="built_in">string</span> <span class="keyword">of</span> that length; otherwise it <span class="keyword">is</span> an <span class="built_in">integer</span>.</span><br><span class="line">	｜</span><br><span class="line">	｜gettimeout(...)</span><br><span class="line">	｜		gettimeout() -&gt; timeout</span><br><span class="line">	｜ </span><br><span class="line"> 	｜		Returns the timeout <span class="keyword">in</span> seconds (float) associated <span class="keyword">with</span> socket </span><br><span class="line"> 	｜		operations. A timeout <span class="keyword">of</span> None indicates that timeouts <span class="keyword">on</span> socket </span><br><span class="line"> 	｜		operations are disabled.</span><br><span class="line">	｜</span><br><span class="line">	｜listen(...)</span><br><span class="line">	｜		listen(backlog)</span><br><span class="line">	｜     </span><br><span class="line"> 	｜		Enable a server <span class="keyword">to</span> accept connections.  The backlog argument must be at</span><br><span class="line"> 	｜		least <span class="number">0</span> (<span class="keyword">if</span> it <span class="keyword">is</span> lower, it <span class="keyword">is</span> <span class="keyword">set</span> <span class="keyword">to</span> <span class="number">0</span>); it specifies the number <span class="keyword">of</span></span><br><span class="line">	｜		unaccepted connections that the system will allow before refusing <span class="keyword">new</span></span><br><span class="line">	｜		connections.</span><br><span class="line">	｜</span><br><span class="line">	｜makefile(self, mode=<span class="comment">'r', bufsize=-1)</span></span><br><span class="line">	｜		makefile([mode[, bufsize]]) -&gt; file <span class="built_in">object</span></span><br><span class="line">	｜</span><br><span class="line">	｜		<span class="keyword">Return</span> a regular file <span class="built_in">object</span> corresponding <span class="keyword">to</span> the socket.  The mode</span><br><span class="line">	｜		<span class="keyword">and</span> bufsize arguments are <span class="keyword">as</span> <span class="keyword">for</span> the built-<span class="keyword">in</span> open() <span class="keyword">function</span>.</span><br><span class="line">	｜</span><br><span class="line">	｜sendall(...)</span><br><span class="line">	｜		sendall(data[, flags])</span><br><span class="line">	｜</span><br><span class="line">	｜		Send a data <span class="built_in">string</span> <span class="keyword">to</span> the socket.  <span class="keyword">For</span> the <span class="keyword">optional</span> flags</span><br><span class="line">	｜		argument, see the Unix manual.  This calls send() repeatedly</span><br><span class="line">	｜		<span class="keyword">until</span> all data <span class="keyword">is</span> sent.  <span class="keyword">If</span> an <span class="keyword">error</span> occurs, it＇s impossible</span><br><span class="line">	｜		<span class="keyword">to</span> tell how much data has been sent.</span><br><span class="line">	｜</span><br><span class="line">	｜setblocking(...)</span><br><span class="line">	｜		setblocking(flag)</span><br><span class="line">	｜</span><br><span class="line"> 	｜		<span class="keyword">Set</span> the socket <span class="keyword">to</span> blocking (flag <span class="keyword">is</span> <span class="literal">true</span>) <span class="keyword">or</span> non-blocking (<span class="literal">false</span>).</span><br><span class="line">	｜		setblocking(<span class="literal">True</span>) <span class="keyword">is</span> equivalent <span class="keyword">to</span> settimeout(None);</span><br><span class="line">	｜		setblocking(<span class="literal">False</span>) <span class="keyword">is</span> equivalent <span class="keyword">to</span> settimeout(<span class="number">0.0</span>).</span><br><span class="line">	｜</span><br><span class="line">	｜setsockopt(...)</span><br><span class="line">	｜		setsockopt(level, <span class="keyword">option</span>, value)</span><br><span class="line">	｜</span><br><span class="line">	｜		<span class="keyword">Set</span> a socket <span class="keyword">option</span>.  See the Unix manual <span class="keyword">for</span> level <span class="keyword">and</span> <span class="keyword">option</span>.</span><br><span class="line">	｜		The value argument can either be an <span class="built_in">integer</span> <span class="keyword">or</span> a <span class="built_in">string</span>.</span><br><span class="line">	｜</span><br><span class="line">	｜settimeout(...)</span><br><span class="line">	｜		settimeout(timeout)</span><br><span class="line">	｜</span><br><span class="line">	｜		<span class="keyword">Set</span> a timeout <span class="keyword">on</span> socket operations.  <span class="comment">'timeout' can be a float,</span></span><br><span class="line">	｜		giving <span class="keyword">in</span> seconds, <span class="keyword">or</span> None.  Setting a timeout <span class="keyword">of</span> None disables</span><br><span class="line">	｜		the timeout feature <span class="keyword">and</span> <span class="keyword">is</span> equivalent <span class="keyword">to</span> setblocking(<span class="number">1</span>).</span><br><span class="line">	｜		Setting a timeout <span class="keyword">of</span> zero <span class="keyword">is</span> the same <span class="keyword">as</span> setblocking(<span class="number">0</span>).</span><br><span class="line">	｜</span><br><span class="line">	｜shutdown(...)</span><br><span class="line">	｜		shutdown(flag)</span><br><span class="line">	｜</span><br><span class="line">	｜		Shut down the reading side <span class="keyword">of</span> the socket (flag == SHUT_RD), the writing side</span><br><span class="line">	｜		<span class="keyword">of</span> the socket (flag == SHUT_WR), <span class="keyword">or</span> both ends (flag == SHUT_RDWR).</span><br><span class="line">	｜－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－</span><br><span class="line">	｜Data descriptors defined here:</span><br><span class="line">	｜</span><br><span class="line">	｜__weakref__</span><br><span class="line">	｜list <span class="keyword">of</span> weak references <span class="keyword">to</span> the <span class="built_in">object</span> (<span class="keyword">if</span> defined)</span><br><span class="line">	｜</span><br><span class="line">	｜family</span><br><span class="line">	｜the socket family</span><br><span class="line">	｜</span><br><span class="line">	｜proto</span><br><span class="line">	｜the socket protocol</span><br><span class="line">	｜</span><br><span class="line">	｜recv</span><br><span class="line">	｜</span><br><span class="line">	｜recv_into</span><br><span class="line">	｜</span><br><span class="line">	｜recvfrom</span><br><span class="line">	｜</span><br><span class="line">	｜recvfrom_into</span><br><span class="line">	｜</span><br><span class="line">	｜send</span><br><span class="line">	｜</span><br><span class="line">	｜sendto</span><br><span class="line">	｜</span><br><span class="line">	｜type</span><br><span class="line">	｜the socket type</span><br></pre></td></tr></table></figure>
+        
+      </div>
+    
+
+    
+      <div class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Python/">
+                #Python
+              </a>
+            
+          </div>
+        
+
+        
+          <div class="post-nav">
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2015/03/12/0x1A/">Week5</a>
+              
+            </div>
+
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2015/03/08/0x18/">在移动硬盘中装多系统</a>
+              
+            </div>
+          </div>
+        
+
+        
+        
+      </div>
+    
+  </div>
+
+
+
+  
+    <div class="comments" id="comments">
+      
+    </div>
+  
+
+          </div>
+
+          
+        </div>
+
+        
+<div class="sidebar-toggle">
+  <div class="sidebar-toggle-line-wrap">
+    <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+    <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+    <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+  </div>
+</div>
+
+<div id="sidebar" class="sidebar">
+  <div class="sidebar-inner">
+
+    
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview">
+          站点概览
+        </li>
+      </ul>
+    
+
+    <div class="site-overview">
+      <div class="site-author motion-element">
+        <img class="site-author-image" src="/images/default_avatar.jpg" alt="Hc1m1" />
+        <p class="site-author-name">Hc1m1</p>
+      </div>
+      <p class="site-description motion-element">Blog</p>
+      <div class="site-state motion-element">
+        <div class="site-state-item site-state-posts">
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">日志</span>
+        </div>
+        <div class="site-state-item site-state-tags">
+            <span class="site-state-item-count">20</span>
+            <span class="site-state-item-name">标签</span>
+        </div>
+        <div class="site-state-item site-state-pages">
+            <span class="site-state-item-count">8</span>
+            <span class="site-state-item-name">页面</span>
+        </div>
+      </div>
+
+      
+        <div class="feed-link motion-element">
+          <a href="/atom.xml">
+            <i class="menu-item-icon icon-feed"></i>
+            RSS
+          </a>
+        </div>
+      
+
+      <div class="links-of-author motion-element">
+        
+      </div>
+
+      
+      
+
+    </div>
+
+    
+      <div class="post-toc-wrap sidebar-panel-active">
+        <div class="post-toc-indicator-top post-toc-indicator"></div>
+        <div class="post-toc">
+          
+          
+            <p class="post-toc-empty">此文章未包含目录</p>
+          
+        </div>
+        <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+      </div>
+    
+
+  </div>
+</div>
+
+
+      </div>
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp; 
+  2015
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">Hc1m1</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $(".fancybox").fancybox();
+    });
+  </script>
+
+  <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+</script>
+
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" id="motion.global">
+  $(document).ready(function () {
+    var body = $('body');
+    var isSidebarVisible = false;
+    var sidebarToggle = $('.sidebar-toggle');
+    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
+    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
+    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
+    var sidebar = $('.sidebar');
+
+    var SIDEBAR_WIDTH = '320px';
+    var SIDEBAR_DISPLAY_DURATION = 300;
+
+    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
+
+    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
+    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
+
+    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
+    var sidebarToogleLine2ndStatusClose = {opacity: 0};
+
+    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
+    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
+
+    LogoAndMenuMotion();
+    sidebatToggleMotion();
+    postsListMotion();
+    backToTopMotion();
+
+
+    $(document)
+      .on('sidebar.isShowing', function () {
+        isDesktop() && body.velocity(
+          {paddingRight: SIDEBAR_WIDTH},
+          SIDEBAR_DISPLAY_DURATION
+        );
+        sidebarContentMotion();
+      })
+      .on('sidebar.isHiding', function () {});
+
+    function LogoAndMenuMotion() {
+      $.Velocity.RunSequence([
+        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
+        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
+        
+        { e: $('.logo-line-before i'), p: { translateX: "100%" }, o: { duration: 500, sequenceQueue: false } },
+        { e: $('.logo-line-after i'), p: { translateX: "-100%" }, o: { duration: 500, sequenceQueue: false } },
+        
+        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
+      ]);
+      $('.menu-item').velocity('transition.slideDownIn', {display: null});
+    }
+
+
+    function backToTopMotion () {
+      var b2top = $('.back-to-top');
+      b2top.on('click', function () {
+        body.velocity('scroll');
+      });
+    }
+
+    function sidebarShowMotion () {
+
+      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
+      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
+      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
+
+      sidebar.velocity({width: SIDEBAR_WIDTH}, {
+        display: 'block',
+        duration: SIDEBAR_DISPLAY_DURATION,
+        complete: function () {
+          sidebar.addClass('sidebar-active');
+          sidebar.trigger('sidebar.didShow');
+        }
+      });
+      sidebar.trigger('sidebar.isShowing');
+    }
+
+    function sidebarHideMotion () {
+      isDesktop() && body.velocity({paddingRight: 0});
+      sidebar.velocity('reverse');
+
+      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
+      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
+      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
+
+      sidebar.removeClass('sidebar-active');
+      sidebar.trigger('sidebar.isHiding');
+    };
+
+    function sidebarContentMotion () {
+      $('.sidebar .motion-element').velocity(
+        'transition.slideRightIn',
+        {stagger: 50, drag: true}
+      );
+    }
+
+    function postsListMotion () {
+      var postMotionOptions = window.postMotionOptions || {stagger: 300, drag: true};
+      $('.post').velocity('transition.slideDownIn', postMotionOptions);
+    }
+
+    function sidebatToggleMotion () {
+      sidebarToggle.on('click', function () {
+        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
+        isSidebarVisible = !isSidebarVisible;
+      });
+
+      sidebarToggle.hover(function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
+      }, function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
+      });
+    }
+  });
+
+</script>
+
+
+
+
+
+  
+  
+<script type="text/javascript" id="bootstrap.scrollspy.custom">
+  /* ========================================================================
+  * Bootstrap: scrollspy.js v3.3.2
+  * http://getbootstrap.com/javascript/#scrollspy
+  * ========================================================================
+  * Copyright 2011-2015 Twitter, Inc.
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  * ======================================================================== */
+
+  /**
+   * Custom by iissnan
+   *
+   * - Add a `clear.bs.scrollspy` event.
+   * - Esacpe targets selector.
+   */
+
+
+  +function ($) {
+    'use strict';
+
+    // SCROLLSPY CLASS DEFINITION
+    // ==========================
+
+    function ScrollSpy(element, options) {
+      this.$body          = $(document.body)
+      this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+      this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+      this.selector       = (this.options.target || '') + ' .nav li > a'
+      this.offsets        = []
+      this.targets        = []
+      this.activeTarget   = null
+      this.scrollHeight   = 0
+
+      this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+      this.refresh()
+      this.process()
+    }
+
+    ScrollSpy.VERSION  = '3.3.2'
+
+    ScrollSpy.DEFAULTS = {
+      offset: 10
+    }
+
+    ScrollSpy.prototype.getScrollHeight = function () {
+      return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+    }
+
+    ScrollSpy.prototype.refresh = function () {
+      var that          = this
+      var offsetMethod  = 'offset'
+      var offsetBase    = 0
+
+      this.offsets      = []
+      this.targets      = []
+      this.scrollHeight = this.getScrollHeight()
+
+      if (!$.isWindow(this.$scrollElement[0])) {
+        offsetMethod = 'position'
+        offsetBase   = this.$scrollElement.scrollTop()
+      }
+
+      this.$body
+        .find(this.selector)
+        .map(function () {
+          var $el   = $(this)
+          var href  = $el.data('target') || $el.attr('href')
+          var $href = /^#./.test(href) && $(escapeSelector(href)) // Need to escape selector.
+
+          return ($href
+            && $href.length
+            && $href.is(':visible')
+            && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+        })
+        .sort(function (a, b) { return a[0] - b[0] })
+        .each(function () {
+          that.offsets.push(this[0])
+          that.targets.push(this[1])
+        })
+
+
+    }
+
+    ScrollSpy.prototype.process = function () {
+      var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+      var scrollHeight = this.getScrollHeight()
+      var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+      var offsets      = this.offsets
+      var targets      = this.targets
+      var activeTarget = this.activeTarget
+      var i
+
+      if (this.scrollHeight != scrollHeight) {
+        this.refresh()
+      }
+
+      if (scrollTop >= maxScroll) {
+        return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+      }
+
+      if (activeTarget && scrollTop < offsets[0]) {
+        $(this.selector).trigger('clear.bs.scrollspy')  // Add a custom event.
+        this.activeTarget = null
+        return this.clear()
+      }
+
+      for (i = offsets.length; i--;) {
+        activeTarget != targets[i]
+          && scrollTop >= offsets[i]
+          && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+          && this.activate(targets[i])
+      }
+    }
+
+    ScrollSpy.prototype.activate = function (target) {
+      this.activeTarget = target
+
+      this.clear()
+
+      var selector = this.selector +
+        '[data-target="' + target + '"],' +
+        this.selector + '[href="' + target + '"]'
+
+      var active = $(selector)
+        .parents('li')
+        .addClass('active')
+
+      if (active.parent('.dropdown-menu').length) {
+        active = active
+          .closest('li.dropdown')
+          .addClass('active')
+      }
+
+      active.trigger('activate.bs.scrollspy')
+    }
+
+    ScrollSpy.prototype.clear = function () {
+      $(this.selector)
+        .parentsUntil(this.options.target, '.active')
+        .removeClass('active')
+    }
+
+
+    // SCROLLSPY PLUGIN DEFINITION
+    // ===========================
+
+    function Plugin(option) {
+      return this.each(function () {
+        var $this   = $(this)
+        var data    = $this.data('bs.scrollspy')
+        var options = typeof option == 'object' && option
+
+        if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+        if (typeof option == 'string') data[option]()
+      })
+    }
+
+    var old = $.fn.scrollspy
+
+    $.fn.scrollspy             = Plugin
+    $.fn.scrollspy.Constructor = ScrollSpy
+
+
+    // SCROLLSPY NO CONFLICT
+    // =====================
+
+    $.fn.scrollspy.noConflict = function () {
+      $.fn.scrollspy = old
+      return this
+    }
+
+
+    // SCROLLSPY DATA-API
+    // ==================
+
+    $(window).on('load.bs.scrollspy.data-api', function () {
+      $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this)
+        Plugin.call($spy, $spy.data())
+      })
+    })
+
+  }(jQuery);
+</script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0 && isDesktop()) {
+        setTimeout(function () {
+          $('.sidebar-toggle').trigger('click');
+        }, 800);
+      }
+    });
+  </script>
+
+
+
+
+  
+
+  
+  
+
+  
+
+
+  
+</body>
+</html>

