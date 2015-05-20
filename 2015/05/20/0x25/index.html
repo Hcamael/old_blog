@@ -20,21 +20,9 @@
 
 
 
+	<meta name="keywords" content="CTF," />
 
-    <meta name="keywords" content="Hexo,next" />
-
-
-
-    <link rel="alternate" href="/atom.xml" title="Hc1m1" type="application/atom+xml" />
-
-
-
-    <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.0" />
-
-
-
-
-  <title> ddddd // Hc1m1 </title>
+  <title> 渗透题writeup // Hc1m1 </title>
 </head>
 
 <body>
@@ -123,7 +111,7 @@
           
           
             
-              ddddd
+              渗透题writeup
             
           
         </h1>
@@ -137,6 +125,17 @@
         </span>
 
         
+          
+            <span class="post-category">
+              &nbsp; | &nbsp; 分类于
+              
+                <a href="/categories/H-blog/">H-blog</a>
+
+                
+                
+
+              
+            </span>
           
         
 
@@ -153,13 +152,49 @@
         
 
         
-          
+          <p><strong>平台上两道渗透题writeup</strong><br><a id="more"></a></p>
+<h2 id="0x0_FuckMySQL1(Rank:300)">0x0 FuckMySQL1(Rank:300)</h2><blockquote>
+<p>Hint: 是渗透题！这是渗透题！虽然也有web的成分！但是这是渗透题！！！</p>
+</blockquote>
+<p>打开题目链接，会随机出现一张图片，图片库中有９张，就是说９张中随机出现一张（不过这些no egg use）</p>
+<p>这题我是用扫描器扫到一个admina.php文件，不过正规的思路应该是试着访问 ‘robots.txt’，然后从中发现admina.php</p>
+<p>然后是一个登录界面，，用户名是lightless，密码靠社工，或者爆破吧。６位纯数字密码，开头是9</p>
+<p>然后跳转到新页面，（这里我发现，如果用扫描器直接扫到这个页面，就可以跳过前面的登录界面。。）</p>
+<p>从　管理员的TODO LIST　中得知一个新页面信息，然后用的是vim编辑器</p>
+<p>跳到新页面，因为用的是vim，所以尝试php后面加~   成功下载当前页面的源码，然后就是代码审计了</p>
+<p>需要post给后台两个值：key1 &amp; key2。。。</p>
+<p>数据库中查询key1的值，因为并不知道key1是多少，所以这里用注入 ｀’=’’｀，</p>
+<p>需要返回一行数据，经过实验，表中只有一行数据，所以只要注入成功就好了，然后需要返回的key2值等于你输入的key2值，，但是我们并不知道key2值。。。所以这里需要黑魔法</p>
+<p>这里的黑魔法是 <code>group by xxx with rollup</code> ，，要是我自己，，怎么也想不到’with rollup’这鬼东西，，还是ak大神告诉我的。。。</p>
+<p>接着就是需要返回一行，而且是第二行的数据，用到limit，所以payload为: <code>key1=&#39;=&#39;&#39; group by key2 with rollup limit 1 offset 1%23&amp;key2=</code></p>
+<p>GET Flag!</p>
+<h2 id="0x0_FuckMySQL2(Rank:200)">0x0 FuckMySQL2(Rank:200)</h2><blockquote>
+<p>Hint: 是渗透题！这是渗透题！虽然也有web的成分！但是这是渗透题！！！</p>
+</blockquote>
+<p>上题flag下面有这题的提示，base32解密，然后得知前面的那张猫的图片有猫腻。。</p>
+<p>下载到本地，在linux系统中直接用命令<code>strings　图片</code>，，得到一个新页面</p>
+<p>然后是命令行注入，研究了半天，知道把空格过滤了。。可是我linux的修为还是太差了。。并不知道什么可以代替空格。。。</p>
+<p>然后又是ak大神告诉了我一个黑魔法’${IFS}’</p>
+<p>所以是<code>127.0.0.||ls${IFS}img</code></p>
+<p>看到img文件夹中又flag文件。</p>
+<p>然后就是<code>127.0.0.||cat${IFS}img/flag</code></p>
+<p>GET Flag~~</p>
+<p>Summary:两题渗透题，让我学到了三个东西<code>with rollup</code> &amp;&amp; <code>offset</code> &amp;&amp; <code>${IFS}</code></p>
+
         
       </div>
     
 
     
       <div class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/CTF/">
+                #CTF
+              </a>
+            
+          </div>
         
 
         
@@ -281,7 +316,7 @@
         <div class="post-toc">
           
           
-            <p class="post-toc-empty">此文章未包含目录</p>
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x0_FuckMySQL1(Rank:300)"><span class="nav-number">1.</span> <span class="nav-text">0x0 FuckMySQL1(Rank:300)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x0_FuckMySQL2(Rank:200)"><span class="nav-number">2.</span> <span class="nav-text">0x0 FuckMySQL2(Rank:200)</span></a></li></ol></div>
           
         </div>
         <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -297,7 +332,7 @@
     
   
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="2015/05/20/0x25/" data-title="ddddd" data-url="http://lazysheep.cc/2015/05/20/0x25/"></div>
+	<div class="ds-thread" data-thread-key="2015/05/20/0x25/" data-title="渗透题writeup" data-url="http://lazysheep.cc/2015/05/20/0x25/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
   <script type="text/javascript">

