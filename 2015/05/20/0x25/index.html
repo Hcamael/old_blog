@@ -163,12 +163,12 @@
 <p>从　管理员的TODO LIST　中得知一个新页面信息，然后用的是vim编辑器</p>
 <p>跳到新页面，因为用的是vim，所以尝试php后面加~   成功下载当前页面的源码，然后就是代码审计了</p>
 <p>需要post给后台两个值：key1 &amp; key2。。。</p>
-<p>数据库中查询key1的值，因为并不知道key1是多少，所以这里用注入 ｀’=’’｀，</p>
+<p>数据库中查询key1的值，因为并不知道key1是多少，所以这里用注入 <code>&#39;=&#39;</code>，</p>
 <p>需要返回一行数据，经过实验，表中只有一行数据，所以只要注入成功就好了，然后需要返回的key2值等于你输入的key2值，，但是我们并不知道key2值。。。所以这里需要黑魔法</p>
 <p>这里的黑魔法是 <code>group by xxx with rollup</code> ，，要是我自己，，怎么也想不到’with rollup’这鬼东西，，还是ak大神告诉我的。。。</p>
 <p>接着就是需要返回一行，而且是第二行的数据，用到limit，所以payload为: <code>key1=&#39;=&#39;&#39; group by key2 with rollup limit 1 offset 1%23&amp;key2=</code></p>
 <p>GET Flag!</p>
-<h2 id="0x0_FuckMySQL2(Rank:200)">0x0 FuckMySQL2(Rank:200)</h2><blockquote>
+<h2 id="0x1_FuckMySQL2(Rank:200)">0x1 FuckMySQL2(Rank:200)</h2><blockquote>
 <p>Hint: 是渗透题！这是渗透题！虽然也有web的成分！但是这是渗透题！！！</p>
 </blockquote>
 <p>上题flag下面有这题的提示，base32解密，然后得知前面的那张猫的图片有猫腻。。</p>
@@ -344,7 +344,7 @@
         <div class="post-toc">
           
           
-            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x0_FuckMySQL1(Rank:300)"><span class="nav-number">1.</span> <span class="nav-text">0x0 FuckMySQL1(Rank:300)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x0_FuckMySQL2(Rank:200)"><span class="nav-number">2.</span> <span class="nav-text">0x0 FuckMySQL2(Rank:200)</span></a></li></ol></div>
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x0_FuckMySQL1(Rank:300)"><span class="nav-number">1.</span> <span class="nav-text">0x0 FuckMySQL1(Rank:300)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x1_FuckMySQL2(Rank:200)"><span class="nav-number">2.</span> <span class="nav-text">0x1 FuckMySQL2(Rank:200)</span></a></li></ol></div>
           
         </div>
         <div class="post-toc-indicator-bottom post-toc-indicator"></div>
