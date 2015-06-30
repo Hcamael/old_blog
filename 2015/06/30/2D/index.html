@@ -20,9 +20,9 @@
 
 
 
-	<meta name="keywords" content="CTF,爆破," />
+	<meta name="keywords" content="python," />
 
-  <title> Week5 // Hc1m1 </title>
+  <title> 基于有道api的shell词典 // Hc1m1 </title>
 </head>
 
 <body>
@@ -111,7 +111,7 @@
           
           
             
-              Week5
+              基于有道api的shell词典
             
           
         </h1>
@@ -120,7 +120,7 @@
       <div class="post-meta">
         <span class="post-time">
           
-            发表于 2015-03-12
+            发表于 2015-06-30
           
         </span>
 
@@ -152,23 +152,18 @@
         
 
         
-          <p><strong>终于又有题做了，，不过这次只出了一题</strong><br><a id="more"></a></p>
-<h2 id="0x0D_EasyUser(Rank:200)">0x0D EasyUser(Rank:200)</h2><p>这题，打开一看，猜测是利用密码找回的漏洞，以前遇到过类似的题目，验证码是４位纯数字，使用爆破，不过这题是６位纯数字，爆破需要的时间会很久，所以没在第一时间去爆。。后面提示从500000开始爆，，，</p>
-<p>因为输入错误的验证码后会出现 <code>验证码错误！请10分钟后再次尝试！</code></p>
-<p>所以走入了误区，，，，以为需要加上邮箱，，，，，可是没爆出来，，，最后发现，，只要爆 <code>number</code>　参数就OK，，（神马１０分钟后重试都是骗人的。。。）</p>
-<p>爆出密码之后，发现用户名不是admin，，，后面就是脑洞的问题了，，随便猜些用户名尝试，后面根据 <code>peter@easyuser.me</code>　猜出用户名</p>
-<p>Get Flag！</p>
-<p>=================write time : 16/3 =======================</p>
-<p>昨天week5又出了一题，，算是杂项题，上次美国的CTF出现过这类的题目。。</p>
-<h2 id="0x0E_听说你们想玩其他类型的题目？(Rank_:_200)">0x0E 听说你们想玩其他类型的题目？(Rank : 200)</h2><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"><span class="string">'000000000000'</span>:<span class="string">' '</span>,</span><br><span class="line"><span class="string">'100000000000'</span>:<span class="string">'&amp;'</span>,</span><br><span class="line"><span class="string">'010000000000'</span>:<span class="string">'-'</span>,</span><br><span class="line"><span class="string">'001000000000'</span>:<span class="string">'0'</span>,</span><br><span class="line"><span class="string">'000100000000'</span>:<span class="string">'1'</span>,</span><br><span class="line"><span class="string">'000010000000'</span>:<span class="string">'2'</span>,</span><br><span class="line"><span class="string">'000001000000'</span>:<span class="string">'3'</span>,</span><br><span class="line"><span class="string">'000000100000'</span>:<span class="string">'4'</span>,</span><br><span class="line"><span class="string">'000000010000'</span>:<span class="string">'5'</span>,</span><br><span class="line"><span class="string">'000000001000'</span>:<span class="string">'6'</span>,</span><br><span class="line"><span class="string">'000000000100'</span>:<span class="string">'7'</span>,</span><br><span class="line"><span class="string">'000000000010'</span>:<span class="string">'8'</span>,</span><br><span class="line"><span class="string">'000000000001'</span>:<span class="string">'9'</span>,</span><br><span class="line"><span class="string">'100100000000'</span>:<span class="string">'a'</span>,</span><br><span class="line"><span class="string">'100010000000'</span>:<span class="string">'b'</span>,</span><br><span class="line"><span class="string">'100001000000'</span>:<span class="string">'c'</span>,</span><br><span class="line"><span class="string">'100000100000'</span>:<span class="string">'d'</span>,</span><br><span class="line"><span class="string">'100000010000'</span>:<span class="string">'e'</span>,</span><br><span class="line"><span class="string">'100000001000'</span>:<span class="string">'f'</span>,</span><br><span class="line"><span class="string">'100000000100'</span>:<span class="string">'g'</span>,</span><br><span class="line"><span class="string">'100000000010'</span>:<span class="string">'h'</span>,</span><br><span class="line"><span class="string">'100000000001'</span>:<span class="string">'i'</span>,</span><br><span class="line"><span class="string">'010100000000'</span>:<span class="string">'j'</span>,</span><br><span class="line"><span class="string">'010010000000'</span>:<span class="string">'k'</span>,</span><br><span class="line"><span class="string">'010001000000'</span>:<span class="string">'l'</span>,</span><br><span class="line"><span class="string">'010000100000'</span>:<span class="string">'m'</span>,</span><br><span class="line"><span class="string">'010000010000'</span>:<span class="string">'n'</span>,</span><br><span class="line"><span class="string">'010000001000'</span>:<span class="string">'o'</span>,</span><br><span class="line"><span class="string">'010000000100'</span>:<span class="string">'p'</span>,</span><br><span class="line"><span class="string">'010000000010'</span>:<span class="string">'q'</span>,</span><br><span class="line"><span class="string">'010000000001'</span>:<span class="string">'r'</span>,</span><br><span class="line"><span class="string">'001100000000'</span>:<span class="string">'/'</span>,</span><br><span class="line"><span class="string">'001010000000'</span>:<span class="string">'s'</span>,</span><br><span class="line"><span class="string">'001001000000'</span>:<span class="string">'t'</span>,</span><br><span class="line"><span class="string">'001000100000'</span>:<span class="string">'u'</span>,</span><br><span class="line"><span class="string">'001000010000'</span>:<span class="string">'v'</span>,</span><br><span class="line"><span class="string">'001000001000'</span>:<span class="string">'w'</span>,</span><br><span class="line"><span class="string">'001000000100'</span>:<span class="string">'x'</span>,</span><br><span class="line"><span class="string">'001000000010'</span>:<span class="string">'y'</span>,</span><br><span class="line"><span class="string">'001000000001'</span>:<span class="string">'z'</span>,</span><br><span class="line"><span class="string">'100001000010'</span>:<span class="string">'.'</span>,</span><br><span class="line"><span class="string">'100000010010'</span>:<span class="string">'('</span>,</span><br><span class="line"><span class="string">'010000010010'</span>:<span class="string">')'</span>,</span><br><span class="line"><span class="string">'000000010010'</span>:<span class="string">"'"</span>,</span><br><span class="line"><span class="string">'000010000010'</span>:<span class="string">':'</span>,</span><br><span class="line"><span class="string">'100000100010'</span>:<span class="string">'&lt;'</span>,</span><br><span class="line"><span class="string">'001000000110'</span>:<span class="string">'?'</span>,</span><br><span class="line"><span class="string">'000000001010'</span>:<span class="string">'='</span>,</span><br><span class="line"><span class="string">'010010000010'</span>:<span class="string">'!'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>那张图片对照着这个字典一个一个对就好了，，一竖代表一个字符，被涂黑的代表1。。。然后就一竖一竖对过去，，</p>
-<p>Get Flag !</p>
-<p>====================update time : 25/3======================</p>
-<h2 id="0x0F_上面那个太简单了(Rank_:_300)">0x0F 上面那个太简单了(Rank : 300)</h2><p>在ubuntu上，通过命令 <code>zipinfo -v misc300_31ba4d3f387ff3e09fd77eb244288b5e</code></p>
-<p>得到6个文件的CRC :<br>文件 ——————-&gt;  CRC<br>1.txt ——————-&gt;  e17b3765<br>2.txt ——————-&gt;  f30bdd6c<br>3.txt ——————-&gt; 371083d4<br>4.txt ——————-&gt;  71059cdb<br>5.txt ——————-&gt;  1268bf25<br>6.txt ——————-&gt;  0a4f8583</p>
-<p>先正向 : ‘hctf{‘ 的CRC 为 e17b3765 可知这6个文件的内容合在一起就是flag。。。通过百度，知道CRC和md5一样没法逆向解密，可知这题只能通过暴力破解了，而且一个文件只有5个字节。。所以自己写个脚本暴力破解:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="keyword">import</span> binascii,threading,string</span><br><span class="line">x = string.ascii_lowercase</span><br><span class="line">x += <span class="string">'0123456789'</span></span><br><span class="line"><span class="keyword">global</span> result</span><br><span class="line">result=[<span class="keyword">None</span>,<span class="keyword">None</span>,<span class="keyword">None</span>,<span class="keyword">None</span>,<span class="keyword">None</span>]</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">runcrc</span><span class="params">(threading.Thread)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,crr,num,fin=False)</span>:</span></span><br><span class="line">		threading.Thread.__init__(self)</span><br><span class="line">		self.crr = crr</span><br><span class="line">		self.fin = fin</span><br><span class="line">		self.num = num</span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">		<span class="keyword">for</span> y1 <span class="keyword">in</span> x:</span><br><span class="line">			<span class="keyword">for</span> y2 <span class="keyword">in</span> x:</span><br><span class="line">				<span class="keyword">for</span> y3 <span class="keyword">in</span> x:</span><br><span class="line">					<span class="keyword">for</span> y4 <span class="keyword">in</span> x:</span><br><span class="line">						<span class="keyword">if</span> <span class="keyword">not</span> self.fin:</span><br><span class="line">							<span class="keyword">for</span> y5 <span class="keyword">in</span> x:</span><br><span class="line">								yy = y1+y2+y3+y4+y5</span><br><span class="line">								ccc = binascii.crc32(yy) &amp; <span class="number">0xffffffff</span></span><br><span class="line">								<span class="keyword">if</span> ccc == self.crr:</span><br><span class="line">									result[self.num] = yy</span><br><span class="line">									<span class="keyword">break</span></span><br><span class="line">								</span><br><span class="line">						<span class="keyword">else</span>:</span><br><span class="line">							yy = y1+y2+y3+y4+<span class="string">'&#125;'</span></span><br><span class="line">							ccc = binascii.crc32(yy)</span><br><span class="line">							<span class="keyword">if</span> ccc == self.crr:</span><br><span class="line">									result[self.num] = yy</span><br><span class="line">									<span class="keyword">break</span></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">'__main__'</span>:</span><br><span class="line">	crcc = [<span class="number">0xf30bdd6c</span>,<span class="number">0x371083d4</span>,<span class="number">0x71059cdb</span>,<span class="number">0x1268bf25</span>]</span><br><span class="line">	<span class="keyword">for</span> h <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">		ddd = runcrc(crcc[h],h)</span><br><span class="line">		ddd.start()</span><br><span class="line">	f = runcrc(<span class="number">0x0a4f8583</span>,<span class="number">4</span>,<span class="keyword">True</span>)</span><br><span class="line">	f.start()</span><br><span class="line">	<span class="keyword">while</span>(f.isAlive() <span class="keyword">or</span> ddd.isAlive()):</span><br><span class="line">		<span class="keyword">pass</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">print</span> <span class="string">'hctf&#123;'</span>+<span class="string">''</span>.join(result)</span><br></pre></td></tr></table></figure>
-<p>Get Flag!</p>
+          <p><img src="/img/you.jpg" alt="youdao"><br><a id="more"></a><br>在github上下了一个用python写的shell词典 —&gt; ici</p>
+<p>不过用了几次后不太满意</p>
+<ol>
+<li><p>只能单向的英文翻译, 中文会报错.</p>
+</li>
+<li><p>词典不够强大, 貌似是金山词霸的api</p>
+</li>
+</ol>
+<p>所以我换成了有道的api, 自己写了一个版本. 然后修改ici, 搞了两个版本…</p>
+<p>都发到gitcate上吧(github太慢了..没办法.gitcate在国内比github快)</p>
+<p>下面上链接….</p>
+<p><a href="https://gitcafe.com/Hcamael/shell_translate" target="_blank" rel="external">https://gitcafe.com/Hcamael/shell_translate</a></p>
 
         
       </div>
@@ -179,12 +174,8 @@
         
           <div class="post-tags">
             
-              <a href="/tags/CTF/">
-                #CTF
-              </a>
-            
-              <a href="/tags/爆破/">
-                #爆破
+              <a href="/tags/python/">
+                #python
               </a>
             
           </div>
@@ -194,13 +185,11 @@
           <div class="post-nav">
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2015/03/13/0x1B/">Python练习(二)</a>
-              
             </div>
 
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2015/03/10/0x19/">python -- socket</a>
+                <a href="/2015/06/29/2C/">SVN命令小记</a>
               
             </div>
           </div>
@@ -230,7 +219,7 @@
     
   
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="2015/03/12/0x1A/" data-title="Week5" data-url="http://lazysheep.cc/2015/03/12/0x1A/"></div>
+	<div class="ds-thread" data-thread-key="2015/06/30/2D/" data-title="基于有道api的shell词典" data-url="http://lazysheep.cc/2015/06/30/2D/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
   <script type="text/javascript">
@@ -337,7 +326,7 @@
         <div class="post-toc">
           
           
-            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x0D_EasyUser(Rank:200)"><span class="nav-number">1.</span> <span class="nav-text">0x0D EasyUser(Rank:200)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x0E_听说你们想玩其他类型的题目？(Rank_:_200)"><span class="nav-number">2.</span> <span class="nav-text">0x0E 听说你们想玩其他类型的题目？(Rank : 200)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x0F_上面那个太简单了(Rank_:_300)"><span class="nav-number">3.</span> <span class="nav-text">0x0F 上面那个太简单了(Rank : 300)</span></a></li></ol></div>
+            <p class="post-toc-empty">此文章未包含目录</p>
           
         </div>
         <div class="post-toc-indicator-bottom post-toc-indicator"></div>

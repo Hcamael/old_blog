@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://lazysheep.cc/"/>
-  <updated>2015-06-29T01:58:54.000Z</updated>
+  <updated>2015-06-30T12:40:49.000Z</updated>
   <id>http://lazysheep.cc/</id>
   
   <author>
@@ -13,6 +13,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[基于有道api的shell词典]]></title>
+    <link href="http://lazysheep.cc/2015/06/30/2D/"/>
+    <id>http://lazysheep.cc/2015/06/30/2D/</id>
+    <published>2015-06-30T12:24:24.000Z</published>
+    <updated>2015-06-30T12:40:49.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="/img/you.jpg" alt="youdao"><br><a id="more"></a><br>在github上下了一个用python写的shell词典 —&gt; ici</p>
+<p>不过用了几次后不太满意</p>
+<ol>
+<li><p>只能单向的英文翻译, 中文会报错.</p>
+</li>
+<li><p>词典不够强大, 貌似是金山词霸的api</p>
+</li>
+</ol>
+<p>所以我换成了有道的api, 自己写了一个版本. 然后修改ici, 搞了两个版本…</p>
+<p>都发到gitcate上吧(github太慢了..没办法.gitcate在国内比github快)</p>
+<p>下面上链接….</p>
+<p><a href="https://gitcafe.com/Hcamael/shell_translate" target="_blank" rel="external">https://gitcafe.com/Hcamael/shell_translate</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="/img/you.jpg" alt="youdao"><br>]]>
+    
+    </summary>
+    
+      <category term="python" scheme="http://lazysheep.cc/tags/python/"/>
+    
+      <category term="H-blog" scheme="http://lazysheep.cc/categories/H-blog/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[SVN命令小记]]></title>
@@ -626,28 +656,6 @@
     </summary>
     
       <category term="系统" scheme="http://lazysheep.cc/tags/%E7%B3%BB%E7%BB%9F/"/>
-    
-      <category term="H-blog" scheme="http://lazysheep.cc/categories/H-blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Python练习 (一)]]></title>
-    <link href="http://lazysheep.cc/2015/03/05/0x17/"/>
-    <id>http://lazysheep.cc/2015/03/05/0x17/</id>
-    <published>2015-03-05T14:07:24.000Z</published>
-    <updated>2015-03-06T11:40:51.000Z</updated>
-    <content type="html"><![CDATA[<p>题目来源于这：<br><a href="https://github.com/Yixiaohan/show-me-the-code" target="_blank" rel="external">https://github.com/Yixiaohan/show-me-the-code</a><br>不过我并不是按顺序做的．．．<br><a id="more"></a></p>
-<h3 id="第_0004_题：任一个英文的纯文本文件，统计其中的单词出现的个数。">第 0004 题：任一个英文的纯文本文件，统计其中的单词出现的个数。</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment">#coding:utf-8</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line">gfile = sys.argv[<span class="number">1</span>]</span><br><span class="line">f = open(gfile)</span><br><span class="line">con = f.read()</span><br><span class="line">con = con.lower()</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> string.ascii_lowercase:</span><br><span class="line">	a = con.count(x)</span><br><span class="line">	<span class="keyword">print</span> x,<span class="string">'Have'</span>,a</span><br><span class="line"><span class="comment">#开始题目看错了，，，以为是统计字母出现的个数．．所以有个这个版本．．</span></span><br></pre></td></tr></table></figure>
-<p><em>下面的就是计算英文文本中单词的出现的次数了</em><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment">#coding:utf-8</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line">gfile = sys.argv[<span class="number">1</span>]</span><br><span class="line">al = string.ascii_lowercase</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">filt</span><span class="params">(li)</span>:</span></span><br><span class="line">	<span class="keyword">for</span> x <span class="keyword">in</span> li:</span><br><span class="line">		<span class="keyword">if</span> x <span class="keyword">not</span> <span class="keyword">in</span> al:</span><br><span class="line">			li.replace(x,<span class="string">''</span>)</span><br><span class="line">	<span class="keyword">return</span> li</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">aad</span><span class="params">(li)</span>:</span></span><br><span class="line">	<span class="keyword">if</span> li <span class="keyword">not</span> <span class="keyword">in</span> neew:</span><br><span class="line">		neew.append(li)</span><br><span class="line">f = open(gfile)</span><br><span class="line">con = f.read()</span><br><span class="line">con = con.lower()</span><br><span class="line">con2 = con.split()</span><br><span class="line">neew = []</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> con2:</span><br><span class="line">	<span class="keyword">if</span> <span class="keyword">not</span> x.isalpha():</span><br><span class="line">		fft = filt(x)</span><br><span class="line">		<span class="keyword">if</span> fft.isalpha():</span><br><span class="line">			aad(fft)</span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		aad(x)</span><br><span class="line"><span class="keyword">print</span> <span class="string">'This artical hava'</span>,neew.__len__(),<span class="string">'words.'</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> neew:</span><br><span class="line">	<span class="comment">#print '[%s] ==&gt; %s' %(x,con2.count(x))</span></span><br><span class="line"><span class="comment">#这个代码唯一让我不爽的是最后输出没法对齐．．．有强迫症的伤不起啊．．研究了半天还是没对齐．．．</span></span><br><span class="line">	amo = <span class="number">20</span> - x.__len__()</span><br><span class="line">	spa = [<span class="string">' '</span> <span class="keyword">for</span> y <span class="keyword">in</span> range(<span class="number">0</span>,amo)]</span><br><span class="line">	spa = <span class="string">''</span>.join(spa)</span><br><span class="line">	<span class="keyword">print</span> <span class="string">'[%s]%s======&gt; %s'</span> %(x,spa,con2.count(x))</span><br><span class="line"><span class="comment">#这样爽多了～～～效果为下第一张图</span></span><br><span class="line">	<span class="comment">#还有一种简单的方法，效果为下面第二张图</span></span><br><span class="line">	<span class="comment">#print '-' * 28</span></span><br><span class="line">	<span class="comment">#print '%-14s | %9s |' %(x,con2.count(x))</span></span><br></pre></td></tr></table></figure></p>
-<p>附张效果图：<br>[   图１  ]<br><img src="/img/0004.png" alt="效果图1"><br>[  图２  ]<br><img src="/img/0014.png" alt="效果图2"></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>题目来源于这：<br><a href="https://github.com/Yixiaohan/show-me-the-code">https://github.com/Yixiaohan/show-me-the-code</a><br>不过我并不是按顺序做的．．．<br>]]>
-    
-    </summary>
-    
-      <category term="Python" scheme="http://lazysheep.cc/tags/Python/"/>
     
       <category term="H-blog" scheme="http://lazysheep.cc/categories/H-blog/"/>
     
