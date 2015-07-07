@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://lazysheep.cc/"/>
-  <updated>2015-07-07T03:55:09.000Z</updated>
+  <updated>2015-07-07T03:58:57.000Z</updated>
   <id>http://lazysheep.cc/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://lazysheep.cc/2015/07/06/2E/"/>
     <id>http://lazysheep.cc/2015/07/06/2E/</id>
     <published>2015-07-06T15:46:04.000Z</published>
-    <updated>2015-07-07T03:55:09.000Z</updated>
+    <updated>2015-07-07T03:58:57.000Z</updated>
     <content type="html"><![CDATA[<p><img src="/img/cookie.jpg" alt="cookie"><br><a id="more"></a><br>看了些关于cookie与session机制的文章..这里写下我看完后自己对这两者的理解…</p>
 <p>作用:<br>  两者的作用都是用来识别用户身份, 区别在于储存的地点不同, session存在服务器上, cookie在客户端…</p>
 <p>由于cookie是存在客户端的浏览器或硬盘上, 所以通过软件可以很容易的进行查看修改, 而xss的主要目的就是获取到用户的cookie. 所以, cookie相对来说更不安全.</p>
@@ -32,7 +32,7 @@
 <p>所以, cookie与session的结合才是目前的主流…</p>
 <hr>
 <p>当cookie没设置存活时间时, 默认的是会话, 意思是浏览器打开的期间, 可以自己实验下, 对于那些存活时间是会话的cookie, 关闭浏览器, 然后在打开该网站, cookie就会变动..</p>
-<p>当用php启用session的时候, 服务器将会set一个cookie到服务器, 默认是PHPSESSION,(可以在session_start()之前通过session_name()进行设置) 值就是改用户session的id. 服务器就是用该id来识别该用户是服务器的哪个session. session的默认生命周期结束于一个销毁的函数(比如php用<code>session_destroy()</code>),或者服务器关闭. 服务器也可以对session上面说的内容进行设置. </p>
+<p>当用php启用session的时候, 服务器将会set一个cookie到服务器, 默认是PHPSESSION,(可以在session_start()之前通过session_name()进行设置) 值就是改用户session的id. 服务器就是用该id来识别该用户是服务器的哪个session. session的默认生命周期结束于一个销毁的函数(比如php用<code>session_destroy()</code>),或者24min. 服务器也可以对session上面说的内容进行设置. </p>
 <p>然而我却发现一个问题, PHPSESSION的值是session_id的, 如果没把该值设为onlyhttp, 那该值被x走了后, 不就相当于session被X了?</p>
 <p>而cookie 和 session如何使用才最合理. 目前我仍在摸索之中…..</p>
 <hr>
