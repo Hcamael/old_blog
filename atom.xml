@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://lazysheep.cc/"/>
-  <updated>2015-06-30T12:40:49.000Z</updated>
+  <updated>2015-07-07T02:39:59.000Z</updated>
   <id>http://lazysheep.cc/</id>
   
   <author>
@@ -13,6 +13,43 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[WEB的cookie & session mechanism]]></title>
+    <link href="http://lazysheep.cc/2015/07/06/2E/"/>
+    <id>http://lazysheep.cc/2015/07/06/2E/</id>
+    <published>2015-07-06T15:46:04.000Z</published>
+    <updated>2015-07-07T02:39:59.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="/img/cookie.jpg" alt="cookie"><br><a id="more"></a><br>看了些关于cookie与session机制的文章..这里写下我看完后自己对这两者的理解…</p>
+<p>作用:<br>  两者的作用都是用来识别用户身份, 区别在于储存的地点不同, session存在服务器上, cookie在客户端…</p>
+<p>由于cookie是存在客户端的浏览器或硬盘上, 所以通过软件可以很容易的进行查看修改, 而xss的主要目的就是获取到用户的cookie. 所以, cookie相对来说更不安全.</p>
+<p>因此, 要使用cookie的话, </p>
+<ol>
+<li>识别用户身份的cookie不能被找出规律. </li>
+<li>重要的cookie最好加上onlyhttp. 防止站点存在xss的情况下重要cookie被盗.</li>
+</ol>
+<p>而存储在服务器上的session相对来说就安全多了…但是却有一个致命的弱点,就是它存在服务器上. 一个站点, 客户端只需要连接该站点的服务器, 而服务器却要接收所有连接该服务器的客户端请求. 所以当访问量很大的情况下, session将会造成服务器巨大的负荷.  这就是cookie至今没被淘汰的理由..</p>
+<p>所以, cookie与session的结合才是目前的主流…</p>
+<hr>
+<p>当cookie没设置存活时间时, 默认的是会话, 意思是浏览器打开的期间, 可以自己实验下, 对于那些存活时间是会话的cookie, 关闭浏览器, 然后在打开该网站, cookie就会变动..</p>
+<p>当用php启用session的时候, 服务器将会set一个cookie到服务器, 默认是PHPSESSION, 值就是改用户session的id. 服务器就是用该id来识别该用户是服务器的哪个session. session的默认生命周期结束于一个销毁的函数(比如php用<code>session_destroy()</code>),或者服务器关闭. 服务器也可以对session上面说的内容进行设置. </p>
+<p>然而我却发现一个问题, PHPSESSION的值是session_id的, 如果没把该值设为onlyhttp, 那该值被x走了后, 不就相当于session被X了?</p>
+<p>而cookie 和 session如何使用才最合理. 目前我仍在摸索之中…..</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="/img/cookie.jpg" alt="cookie"><br>]]>
+    
+    </summary>
+    
+      <category term="WEB" scheme="http://lazysheep.cc/tags/WEB/"/>
+    
+      <category term="cookie" scheme="http://lazysheep.cc/tags/cookie/"/>
+    
+      <category term="session" scheme="http://lazysheep.cc/tags/session/"/>
+    
+      <category term="H-blog" scheme="http://lazysheep.cc/categories/H-blog/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[基于有道api的shell词典]]></title>
@@ -624,38 +661,6 @@
     </summary>
     
       <category term="Python" scheme="http://lazysheep.cc/tags/Python/"/>
-    
-      <category term="H-blog" scheme="http://lazysheep.cc/categories/H-blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[在移动硬盘中装多系统]]></title>
-    <link href="http://lazysheep.cc/2015/03/08/0x18/"/>
-    <id>http://lazysheep.cc/2015/03/08/0x18/</id>
-    <published>2015-03-08T07:10:34.000Z</published>
-    <updated>2015-03-08T08:10:45.000Z</updated>
-    <content type="html"><![CDATA[<p>最近搞到一个1TB的硬盘．．．然后就有了把系统装在移动硬盘上的想法．．．今天折腾了一天．．基本算是成功吧．．．<br><a id="more"></a></p>
-<p>我装的是kali linux　和 backbox．．．相当与是装debian　和 ubuntu ．．．<br>我认为在硬盘上装系统，只会有两点困难．．<em>分区</em> and　<em>启动引导</em></p>
-<p>由于这两种系统都属于做渗透测试的系统．．．就各分了100G挂载在 <code>/</code>..这个时候问题就来了,,我是先装的kali linux，分完区后，会提示修改的分区和格式化的分区，在格式化的分区底下除了我本身分出的100G主分区，，还多了电脑本地硬盘的swap分区，（我电脑本身是ubuntu和win7双系统），接着我就返回，在移动硬盘上又多分了一个4G的swap分区，然后下一步，要格式化的分区中就没有本地硬盘的分区了．．</p>
-<p>后面装backbox就不一样了，分了一个100G主分区，4G swap分区．要格式化的分区却出现了4个：主分区,swap(本地硬盘上的),swap(前面装kali分的),swap(现在分的)．．．如果这次不分swap，，需格式化的分区仍然还有3个，也就是说，会格式化能读到的硬盘中的所有的swap分区，百度了 <em>＇linux格式化swap会怎么样＇</em>  ….没百度出来，只度到一个说是ubuntu格式化swap后不能休眠，，就更不敢格式化，，后来根据一个学长的建议在bios屏蔽本地硬盘，，可惜在华硕的bios界面没找到，度娘也不造，，</p>
-<p>最后我在安装的分区界面发现了，可以把swap改为不使用此分区，．．然后．就没有然后了．．．在移动硬盘上分两个swap让我看着有点不爽，然后在度娘上看到了有人说debian可以不需要swap分区，，所以移动硬盘上就一个swap．．目前我对系统研究不是很深，，所以也不清楚现在是kali和backbox共用一个swap分区．还是只是backbox用这个swap分区．</p>
-<p>PS:另外电脑本身的ubuntu系统是我平时要用的．．所以没有为科学献身的勇气去尝试格式化swap后到底会如何．．．有勇气的同志可以去试试．．．</p>
-<p>接着是启动引导的问题，启动引导可以装到本地硬盘，也可以是移动硬盘上．．我选择是装在移动硬盘上，有两个原因，</p>
-<ol>
-<li>移动硬盘插到别的电脑上仍然可以启动，<br>2.　kali装到本地硬盘装失败了</li>
-</ol>
-<p>在安装启动引导这，，我认为backbox更好，kali需要你自己填写安装的地址，举的例子也都是 <code>/dev/sda</code>　本地硬盘的例子，后面还是去问度娘才知道移动硬盘的是 <code>/dev/sdb</code> (sdb开始我以为是属于常识性的，，移动硬盘都是sdb，，可是后面却看见有的移动硬盘却不是．．)<br>而backbox确实提供选项的，可以直接选择自己的移动硬盘(后面的标识的确是/dev/sdb)</p>
-<p>＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝</p>
-<p>写在最后的吐槽：<br><img src="/img/zj.gif" alt="/zj">backbox死坑的，刚下的4.1最新版，还要更新400MB+..浪费我1h<br>启动速度也没kali快．．．grub引导界面也丑爆了，，触摸板驱动也没有</p>
-<p>其他的等待试用</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>最近搞到一个1TB的硬盘．．．然后就有了把系统装在移动硬盘上的想法．．．今天折腾了一天．．基本算是成功吧．．．<br>]]>
-    
-    </summary>
-    
-      <category term="系统" scheme="http://lazysheep.cc/tags/%E7%B3%BB%E7%BB%9F/"/>
     
       <category term="H-blog" scheme="http://lazysheep.cc/categories/H-blog/"/>
     
